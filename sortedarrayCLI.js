@@ -20,7 +20,7 @@ function add_array() {
 
             for (let i = 0; i < array.length; i++) {
                 
-               if (!uniArray.includes(array[i])) {
+               if (!uniArray.includes(array[i]) && array[i] == "") {
 
                   uniArray.push(array[i]);
 
