@@ -4,7 +4,7 @@ var readline = require('readline'),
         output: process.stdout
     });
     
-    console.log("Enter in some portion of the alphabet, the output will be the letters missing between the starting letter and ending letter\n Example sequence: abde  Output: 'c'\n_____________________________________\n");
+    console.log("Enter in some portion of the alphabet or the decimal system, the output will be the characters missing between the starting character of the sequence and ending character\n Example sequence: abde  Output: 'c' OR input: 134 , output: 2\n_____________________________________\n");
     
 
 rl.question("Your sequence: ", (sequence) => {
@@ -38,7 +38,16 @@ rl.question("Your sequence: ", (sequence) => {
             
         }
        
-        
+        if (nums.test(sequence) && alpha.test(sequence)) {
+            
+        } else if (nums.test(sequence)) {
+
+        } else if (alpha.test(sequence)) {
+
+        } else {
+            console.log('your string did not include numbers or letters');
+            
+        }
             
         console.log(`\n------------------------\nYour sequence started with ${sequence[0]}, and ended with ${sequence[sequence.length - 1]}\nYou were missing ${missing.length} characters of the alphabet; ${missing}`);
         
