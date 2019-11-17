@@ -9,11 +9,19 @@ var readline = require('readline'),
 
 rl.question("Your sequence: ", (sequence) => {
         sequence = sequence.trim().toLowerCase().split("");
-        var alpha = /[a-z]/, nums = /[0-9]/, missing = [];
+        var alpha = /[a-z]/, nums = /[0-9]/, missing = [], numEnd;
 
         sequence.sort();
         console.log(sequence);
+        for (let i = 0; i < sequence.length; i++) {
+            if (nums.test(sequence[i]) && alpha.test(sequence[i+1])) {
+                console.log(sequence[i]);
+                numEnd = i;
+            }
+            
+        }
         sequence = sequence.join("");
+
 
         for (let i = sequence.charCodeAt(0); i < sequence.charCodeAt(sequence.length - 1); i++) {
                 //for numbers
@@ -30,7 +38,7 @@ rl.question("Your sequence: ", (sequence) => {
             
         }
        
-         
+        
             
         console.log(`\n------------------------\nYour sequence started with ${sequence[0]}, and ended with ${sequence[sequence.length - 1]}\nYou were missing ${missing.length} characters of the alphabet; ${missing}`);
         
