@@ -22,17 +22,28 @@ rl.question('enter a number, the output will be the sum of all prime numbers upt
         
         rl.question(`What opperation would you like to preform on the prime numbers between 0 and ${number}?\nAddition + (add), Subtraction - (sub), Multiplication x (mult), or Division / (div) ?\nInput: `, 
         (input) => {  input = input.trim().toLowerCase().substring(0,1);
-            switch (key) {
+
+            let answer;
+
+            switch (input) {
                 case 'a':
+
+                    answer = primeNums.reduce((a,b) => a + b);
                     
                     break;
                 case 's':
+
+                    answer = primeNums.reduce((a,b) => a - b);
                     
                     break;
                 case 'm':
+
+                    answer = primeNums.reduce((a,b) => a * b);
                     
                     break;
                 case 'd':
+
+                    answer = primeNums.reduce((a,b) => a / b);
                     
                     break;
             
@@ -41,7 +52,7 @@ rl.question('enter a number, the output will be the sum of all prime numbers upt
                     rl.close()
                     break;
             }
-            console.log(input);
+            console.log(answer);
             rl.close()
             
         })
