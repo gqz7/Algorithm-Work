@@ -3,11 +3,14 @@ var readline = require('readline'),
         input: process.stdin,
         output: process.stdout
     });
-function isitpalindrome(params) 
-{rl.question('Enter a string and we will return if it is a palindrome or not', (string) => {
+
+isitpalindrome()
+
+function isitpalindrome() {
+    rl.question('Enter a string and we will return if it is a palindrome or not\nInput: ', (string) => {
       string = string.replace(/ |\_|\.|\,|\\|\/|\-|\(|\)|\:/g, '').toLowerCase();  
 
-      reversedString = string.split('').reverse().join();
+     let reversedString = string.split('').reverse().join();
 
       if (string === reversedString) {
           console.log('Your string is a palindrome');
@@ -17,11 +20,11 @@ function isitpalindrome(params)
           
       }
 
-      rl.question('Would you like to try another word?', (yon) => {
+      rl.question('Would you like to try another word?(y/n)\nInput: ', (yon) => {
           yon = yon.trim().toLowerCase().substring(0,1);
           if (yon == 'y') {
-              console.log(Great! you will enter another word);
-              
+              console.log('Great! you will enter another word');
+              isitpalindrome();
           } else {
               console.log('Thank you for using the program');
               rl.close()
