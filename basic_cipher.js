@@ -1,4 +1,5 @@
 function rot13(str) { // LBH QVQ VG!
+str = str.toUpperCase();
 let alpha = /[A-Z]/, decoded = '';
   
   for (var i = 0; i < str.length; i++) {
@@ -20,8 +21,8 @@ let alpha = /[A-Z]/, decoded = '';
       }
   }
   console.log(decoded)
-  return str;
+  return decoded;
 }
 
 // Change the inputs below to test
-rot13("SERR CVMMN!");
+rot13("uryyb zl anzr vf tnoevry furezna naq v perngrq guvf pbqr gb grfg zl novyvgl gb perngr n ebg13 pvcure");
