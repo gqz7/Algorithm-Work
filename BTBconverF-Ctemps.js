@@ -22,13 +22,16 @@ function convertTemp() {
             newTempType = 'Celsius';
 
         } else {
-            console.log('You did not specify the temperature type correctly, please try again.');
+            console.log('\nYou did not specify the temperature type correctly, please try again.\n\n');
             convertTemp();
+            return
 
         }
 
             tempIn = parseInt(tempIn.replace(/[a-z]/g, ''));
-
+            console.log(tempIn);
+            
+        if (!isNaN(tempIn)) {
             if (tempType = 'Fahrenheit') {
                 newTemp = (tempIn - 32)* (5/9);
                 newTemp = Math.round(newTemp * 10)/10;
@@ -38,16 +41,25 @@ function convertTemp() {
                 newTemp = Math.round(newTemp * 10)/10;    
                 
             }
+        } else {
+            console.log('\nYou did not specify the temperature correctly, please try again.\n Example: 32 F Output: "Your temperature in Celsius is 0."  \n\n');
+            convertTemp();
+            return
+            
+        }
+            
 
             console.log(`\n______________________________________________\nYour temperature in ${newTempType} is ${newTemp}.\n______________________________________________\n`);
 
-        rl.question('Do you want to try again?\(\'no\' to exit\)', (yon) => {
+        rl.question('Do you want to try again?\(\'no\' to exit\): ', (yon) => {
             if (yon == 'no') {
                 console.log('\nThe program will not end...');
                 rl.close()
+
             } else {
                 console.log('The program will run once more...\n\n');
                 convertTemp();
+
             }
         });
         
