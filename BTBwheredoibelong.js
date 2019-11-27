@@ -12,6 +12,8 @@ function add_to_list() {
 
         if (addto == 'done') {
             find_placement()
+            return
+
         } else {
             addto = parseInt(addto);
         }
@@ -30,10 +32,8 @@ function add_to_list() {
 
 function find_placement() {
 
-
-    // console.log(`\n____________________________________________________\n\n${listOfNumbers}\n____________________________________________________\n`);
-    rl.question('Enter a number and we will find its place in the list\nNumber: ', (placementNum) => {
-        let isItANum = (placementNum);
+    rl.question('\nEnter a number and we will find its place in the list\nNumber: ', (placementNum) => {
+        let isItANum = placementNum;
             isItANum = parseInt(isItANum);
 
         if (!isNaN(isItANum)) {
@@ -60,12 +60,12 @@ function result() {
 
         if (answer == 'd') {
 
-            console.log(`(your new number is highlighted in green)\nYour New Array;\n____________________________________________________________\n\n`, listOfNumbers, `\n____________________________________________________________`);
+            console.log(`\n(your new number is the one NOT highlighted)\nYour New Array;\n____________________________________________________________\n\n`, ...listOfNumbers, `\n____________________________________________________________\n\n`);
             result()
 
         } else if (answer == 'i') {
 
-            console.log(`Your new number was at index ${index}!`);
+            console.log(`\n______________________________\n\nYour new number was placed at index ${index}!\n______________________________\n`);
             result()
 
         } else if (answer == 'e') {
