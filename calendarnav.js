@@ -11,8 +11,8 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
     document.getElementById('nxtmonth').addEventListener('click', next_month);
     document.getElementById('prvmonth').addEventListener('click', previous_month);
     //year
-    document.getElementById('prvday').addEventListener('click', previous_day);
-    document.getElementById('prvday').addEventListener('click', previous_day);
+    document.getElementById('nxtyear').addEventListener('click', next_year);
+    document.getElementById('prvyear').addEventListener('click', previous_year);
 
 //functions
     window.onload = () => {
@@ -55,7 +55,7 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
             yyyy = (parseInt(yyyy) + 1);
             mm = '01';
             dd = '01';
-        } else if (parseInt(dd) + 1 <= daysInMonth[mm-1]) {
+        } else if ( + 1 <= daysInMonth[mm-1]) {
 
             if ((parseInt(dd) + 1 < 10)) {
                 dd = "0" + (parseInt(dd) + 1);
@@ -63,7 +63,7 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
                 dd = (parseInt(dd) + 1);
             }
            
-        }
+        }parseInt(dd)
 
         set_date()
 
@@ -75,11 +75,15 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
 
     function next_month(){
 
-        if (mm < 9) {
-            mm = "0" + (parseInt(mm)+1);
-        } else {
+        if (parseInt(mm) + 1 > 12) {
+            yyyy = (parseInt(yyyy) + 1);
+            mm = '01';
+            
+        } else if (parseInt(mm) + 1 <= 12 && parseInt(mm) + 1 > 9) {
             mm = (parseInt(mm)+1);
-        }
+        } else {
+            mm = "0" + (parseInt(mm)+1);
+        } 
 
         set_date()
 
@@ -90,6 +94,10 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
     }
 
     function next_year(){
+
+        yyyy = (parseInt(yyyy) + 1);
+
+        set_date()
         
     }
 
