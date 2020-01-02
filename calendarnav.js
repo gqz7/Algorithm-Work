@@ -18,10 +18,10 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
     window.onload = () => {
 
         computerDate = new Date(),
-        dd = '28',
+        dd = '04',
         //String(computerDate.getDate()).padStart(2, '0'),
 
-        mm = '08',
+        mm = '01',
         // String(computerDate.getMonth() + 1).padStart(2, '0'), //January is 0 so add 1 to .getMonth()
         
         yyyy =  '2000',
@@ -35,6 +35,9 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
 
     
     function set_date() {
+
+        console.log("test");
+
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById('date').innerText = today;
     }
@@ -43,37 +46,66 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
     // document.getElementById('prvday').addEventListener('click', previous_day);
 
 
-    function next_day() {
-
-        console.log(daysInMonth[mm-1]);
+    function next_day() { //WORKING
        
         if (parseInt(dd) + 1 > daysInMonth[mm-1] && mm < 12) {
+
             mm = mm < 9 ? "0" + (parseInt(mm)+1) : (parseInt(mm)+1);
             dd = "01";
+
         } else if (parseInt(dd) + 1 > daysInMonth[mm-1] && mm == 12) {
-            // today = (parseInt(yyyy) + 1) + '-' + 01 + '-' + '01';
+            
             yyyy = (parseInt(yyyy) + 1);
             mm = '01';
             dd = '01';
+
         } else if ( + 1 <= daysInMonth[mm-1]) {
 
             if ((parseInt(dd) + 1 < 10)) {
                 dd = "0" + (parseInt(dd) + 1);
+
             } else {
                 dd = (parseInt(dd) + 1);
+
             }
            
-        }parseInt(dd)
+        }
 
         set_date()
 
     }
 
-    function previous_day() {
+    function previous_day() { //WORKING
+
+        if (parseInt(dd) - 1 === 0 && mm > 1) {
+
+            mm = mm < 9 ? "0" + (parseInt(mm)-1) : (parseInt(mm)-1);
+            dd = daysInMonth[mm-1];
+            console.log(daysInMonth[mm-1]);
+            
+        } else if (parseInt(dd) - 1 === 0 && mm == 1) {
+
+            yyyy = (parseInt(yyyy) - 1);
+            mm = '12';
+            dd = '31';
+
+        } else if ( + 1 <= daysInMonth[mm-1]) {
+
+            if ((parseInt(dd) - 1 < 10)) {
+                dd = "0" + (parseInt(dd) - 1);
+
+            } else {
+                dd = (parseInt(dd) - 1);
+
+            }
+           
+        }parseInt(dd)
+
+        set_date()
         
     }
 
-    function next_month(){
+    function next_month(){ //WORKING
 
         if (parseInt(mm) + 1 > 12) {
             yyyy = (parseInt(yyyy) + 1);
