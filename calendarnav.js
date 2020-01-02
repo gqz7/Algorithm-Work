@@ -8,8 +8,8 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
     document.getElementById('nxtday').addEventListener('click', next_day);
     document.getElementById('prvday').addEventListener('click', previous_day);
     //month
-    document.getElementById('prvday').addEventListener('click', previous_day);
-    document.getElementById('prvday').addEventListener('click', previous_day);
+    document.getElementById('nxtmonth').addEventListener('click', next_month);
+    document.getElementById('prvmonth').addEventListener('click', previous_month);
     //year
     document.getElementById('prvday').addEventListener('click', previous_day);
     document.getElementById('prvday').addEventListener('click', previous_day);
@@ -39,8 +39,8 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
         document.getElementById('date').innerText = today;
     }
 
-    document.getElementById('nxtday').addEventListener('click', next_day);
-    document.getElementById('prvday').addEventListener('click', previous_day);
+    // document.getElementById('nxtday').addEventListener('click', next_day);
+    // document.getElementById('prvday').addEventListener('click', previous_day);
 
 
     function next_day() {
@@ -48,7 +48,7 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
         console.log(daysInMonth[mm-1]);
        
         if (parseInt(dd) + 1 > daysInMonth[mm-1] && mm < 12) {
-            mm = next_month(mm);
+            mm = mm < 9 ? "0" + (parseInt(mm)+1) : (parseInt(mm)+1);
             dd = "01";
         } else if (parseInt(dd) + 1 > daysInMonth[mm-1] && mm == 12) {
             // today = (parseInt(yyyy) + 1) + '-' + 01 + '-' + '01';
@@ -73,13 +73,15 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
         
     }
 
-    function next_month(mm){
+    function next_month(){
 
         if (mm < 9) {
-            return "0" + (parseInt(mm)+1);
+            mm = "0" + (parseInt(mm)+1);
         } else {
-            return (parseInt(mm)+1);
+            mm = (parseInt(mm)+1);
         }
+
+        set_date()
 
     }
 
