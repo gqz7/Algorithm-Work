@@ -122,6 +122,18 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
     }
 
     function previous_month(){
+
+        if (parseInt(mm) - 1 < 1) {
+            yyyy = (parseInt(yyyy) - 1);
+            mm = '12';
+            
+        } else if (parseInt(mm) - 1 >= 1 && parseInt(mm) - 1 > 9) {
+            mm = (parseInt(mm)-1);
+        } else {
+            mm = "0" + (parseInt(mm)-1);
+        } 
+
+        set_date()
         
     }
 
