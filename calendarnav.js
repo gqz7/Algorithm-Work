@@ -146,6 +146,10 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
     }
 
     function previous_year(){
+
+        yyyy = (parseInt(yyyy) - 1);
+
+        set_date()
         
     }
 
