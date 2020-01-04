@@ -13,6 +13,8 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
     //year
     document.getElementById('nxtyear').addEventListener('click', next_year);
     document.getElementById('prvyear').addEventListener('click', previous_year);
+    //current date
+    document.getElementById('curdate').addEventListener('click', current_date);
 
 //functions
     window.onload = () => {
@@ -21,7 +23,7 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
         dd = String(computerDate.getDate()).padStart(2, '0'), //gets all the neccecary data from the new Date obj
         mm = String(computerDate.getMonth() + 1).padStart(2, '0'), //January is 0 so add 1 to .getMonth()
         yyyy =  computerDate.getFullYear(), 
-        currentDate = yyyy + '-' + mm + '-' + dd; //stores the current date and this will not be changed unless the page is reloaded
+        currentDate = {'year': yyyy, 'month': mm, 'day': dd}; //stores the current date and this will not be changed unless the page is reloaded
         set_date()
 
     }
@@ -140,5 +142,12 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
 
         set_date() //sets the date with changed values
         
+    }
+
+    function current_date() {
+        yyyy = currentDate.year;
+        mm = currentDate.month;
+        dd = currentDate.day; 
+        set_date() //sets the date with changed values
     }
 
