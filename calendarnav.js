@@ -20,9 +20,12 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
     window.onload = () => {
 
         computerDate = new Date(), //creates a date objects when the screen loads
-        dd = String(computerDate.getDate()).padStart(2, '0'), //gets all the neccecary data from the new Date obj
-        mm = String(computerDate.getMonth() + 1).padStart(2, '0'), //January is 0 so add 1 to .getMonth()
-        yyyy =  computerDate.getFullYear(), 
+        dd = '23';
+        //String(computerDate.getDate()).padStart(2, '0'), //gets all the neccecary data from the new Date obj
+        mm = '02';
+        //String(computerDate.getMonth() + 1).padStart(2, '0'), //January is 0 so add 1 to .getMonth()
+        yyyy = '2020';
+        //computerDate.getFullYear(), 
         currentDate = {'year': yyyy, 'month': mm, 'day': dd}; //stores the current date and this will not be changed unless the page is reloaded
         set_date()
 
@@ -33,11 +36,20 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
 
         // console.log("test");
 
+        if (yyyy % 4 != 0 && dd == 29 && mm == 2) { //if the date is 02/29 on a non-leapyear then the day goes back one
+            dd = '28';
+        }
+
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById('date').innerText = today;
     }
 
     function next_day() { //WORKING
+        
+        check_leap_year()
+
+        console.log(parseInt(yyyy) % 4);
+        
        
         if (parseInt(dd) + 1 > daysInMonth[mm-1] && mm < 12) { //if its going into the next month, but within the same year
 
@@ -67,6 +79,8 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
     }
 
     function previous_day() { //WORKING
+
+        check_leap_year()
 
         if (parseInt(dd) - 1 === 0 && mm > 1) { //if it is the first of the month, the next day back will be the last day of the previous month
 
@@ -149,5 +163,13 @@ const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
         mm = currentDate.month;
         dd = currentDate.day; 
         set_date() //sets the date with changed values
+    }
+
+    function check_leap_year() {
+        if (parseInt(yyyy) % 4 == 0) {
+            daysInMonth[1] = 29;
+        } else {
+            daysInMonth[1] = 28;
+        }
     }
 
