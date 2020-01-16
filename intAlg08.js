@@ -1,5 +1,6 @@
 //dna pairing
 
+//global variables
 const readline = require('readline'),
       rl = readline.createInterface({
           input: process.stdin,
@@ -14,7 +15,7 @@ console.log('\nYour input will be two characters seperated by a comma or a singl
 console.log('\n --- NOTE all alphabet characters will be converted to UPPERCASE no lowercase characters will be present in the final sequence ---');
 console.log('\nThose characters will be paired when creating you sequence, so whenever a character is detected, its pair will be ajoined.');
 
-//the user must have at least one rule to create a squence, therefore the first step for them is to create one rule
+//the user must have at least one rule to create a squence, therefore the first step for them is to create the first rule
 set_rules()
 
 
@@ -24,7 +25,7 @@ set_rules()
 //NAVIGATION MENU
 function navigation() {
 
-    rl.question('\nWould you like to add a new rule, or create your squence\n(rule/squence)\nInput: ', (answer) => {
+    rl.question('\nWould you like to add a new rule, or create your sequence\n(rule/sequence)\nInput: ', (answer) => {
         answer = answer.substring(0,1).toLowerCase();
 
         if (answer == 'r') {
@@ -41,7 +42,26 @@ function navigation() {
     
 }
 
-function nav_after_squence() {
+function nav_after_sequence() {
+
+    rl.question('\nWould you like to...\n add a new rule, display another sequence w/ same rules or EXIT the program\n(rule/sequence/exit)\nInput: ', (answer) => {
+        answer = answer.substring(0,1).toLowerCase();
+
+        if (answer == 'r') {
+            set_rules()
+        } else if (answer == 's') {
+            create_sequence()
+        } else if (answer == 'e') {
+
+            rl.close()
+
+        } else {
+            console.log('That was not a vaild response, try again...\n');
+
+            nav_after_sequence()
+            
+        }
+    })
     
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,12 +156,9 @@ function create_sequence() {
         
         console.log(`Your sequence is...\n${sequence}`);
         
-        nav_after_squence()
+        nav_after_sequence()
 
     })
 
-
-    
-    
 }
 
