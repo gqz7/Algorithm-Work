@@ -52,7 +52,7 @@ function select_filter() {
     console.log('Would you like to filter out some of the fibonacci numbers?\nYour choices:');
     
 
-    rl.question('\n1. Filter out even\n2. Filter out odd\n3. Filter out primes\n4. Filter out non-primes\nNumber Selection: ',
+    rl.question('\n1. Filter out even\n2. Filter out odd\n3. Filter out primes\n4. Filter out non-primes\n5. No filter\nNumber Selection: ',
         (num) => {
 
             num = parseInt(num);
@@ -76,11 +76,13 @@ function select_filter() {
                     case 4:
                         
                         break;
+                    case 5:
+                        break;
                 
                 }
 
                 console.log(fibArr);
-                
+                select_operation()
                 
             } else {
 
@@ -89,15 +91,71 @@ function select_filter() {
 
             }
 
-            select_operation()
+           
 
         })
 }
 
 function select_operation() {
+
+    console.log(`Your fibonacci sequence:\n\n${fibArr}\n________________________________________________________________________________________`);
+
+    console.log('What operation would you like to preform on the remaining numbers in your fibonacci sequence?');
+    
+    rl.question('\n1. Sum of all numbers\n2. Diffrence\n3. Product\n4. Quotent (starting from largest)\nNumber Selection: ',
+
+    (num) => {
+
+        num = parseInt(num);
+
+        if (!isNaN(num)) {
+
+            let finalAnswer;
+
+            switch (num) {
+                case 1: //SUM
+    
+                    finalAnswer = fibArr.reduce((a,b) => {return a+b})
+
+                    break;
+            
+                case 2: //Diffrence 
+    
+                    finalAnswer = fibArr.reduce((a,b) => {return a+b})
+                                    
+                    break;
+    
+                case 3: //Product
+
+                    finalAnswer = fibArr.reduce((a,b) => {return a*b})
+                                
+                    break;
+               
+                case 4: //Quotent
+                    let tmpfibArr = fibArr.reverse();
+
+                    finalAnswer = tmpfibArr.reduce((a,b) => {return a/b})
+    
+                    break;
+            }
+
+            console.log('The final answer is', finalAnswer);
+
+            nav()
+            
+            
+        } else {
+
+            console.log('That was not a vaild number entry, try again');
+            
+        }
+
+    })
     
 }
 
 function nav() {
+
+    rl.close()
     
 }
