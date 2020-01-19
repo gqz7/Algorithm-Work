@@ -9,9 +9,12 @@ const readline  = require('readline'),
 
       lb = '_____________________________';
 
-let fibArr = [];
+let fibArr = [], filteredArray = [];
 
+//first function call to start the program
 select_range()
+
+// this will set the max value that can be in our fibonacci sequence
 
 function select_range() {
 
@@ -49,6 +52,8 @@ function select_range() {
     
 }
 
+//select a filter to apply to the original fibonacci sequence, called after a max number in the fib sequence is selected
+
 function select_filter() {
 
     console.log('Would you like to filter out some of the fibonacci numbers?\nYour choices:');
@@ -64,12 +69,12 @@ function select_filter() {
                 switch (num) {
                     case 1:
 
-                        fibArr = fibArr.filter(num => {return num % 2 != 0})
+                        filteredArray = fibArr.filter(num => {return num % 2 != 0})
                         
                         break;
                     case 2:
 
-                        fibArr = fibArr.filter(num => {return num % 2 == 0})
+                        filteredArray = fibArr.filter(num => {return num % 2 == 0})
                         
                         break;
                     case 3:
@@ -83,7 +88,7 @@ function select_filter() {
                 
                 }
 
-                // console.log(fibArr);
+                console.log(fibArr);
                 select_operation()
                 
             } else {
@@ -98,13 +103,15 @@ function select_filter() {
         })
 }
 
+//select operation to do upon the filtered array, called after the filter is selected or from the nav menu
+
 function select_operation() {
 
-    console.log(`Your fibonacci sequence:\n\n${fibArr}\n${lb.repeat(4)}`);
+    console.log(`Your fibonacci sequence:\n\n${filteredArray}\n${lb.repeat(4)}`);
 
     console.log('What operation would you like to preform on the remaining numbers in your fibonacci sequence?');
     
-    rl.question('\n1. Sum of all numbers\n2. Diffrence\n3. Product\n4. Quotent (starting from largest)\nNumber Selection: ',
+    rl.question('\n1. Sum of all numbers\n2. Diffrence (starting from the last)\n3. Product\n4. Quotent (starting from the last)\n5. Reverse the sequence (and select again)\nNumber Selection: ',
 
     (num) => {
 
@@ -117,7 +124,7 @@ function select_operation() {
             switch (num) {
                 case 1: //SUM
     
-                    finalAnswer = fibArr.reduce((a,b) => {return a+b})
+                    finalAnswer = filteredArray.reduce((a,b) => {return a+b})
 
                     operation = '+'
 
@@ -125,7 +132,7 @@ function select_operation() {
             
                 case 2: //Diffrence 
     
-                    finalAnswer = fibArr.reduce((a,b) => {return a-b})
+                    finalAnswer = filteredArray.reduce((a,b) => {return a-b})
 
                     operation = '-'
                                     
@@ -133,34 +140,37 @@ function select_operation() {
     
                 case 3: //Product
 
-                    finalAnswer = fibArr.reduce((a,b) => {return a*b})
+                    finalAnswer = filteredArray.reduce((a,b) => {return a*b});
 
-                    operation = 'x'
+                    operation = 'x';
                                 
                     break;
                
                 case 4: //Quotent
-                    let tmpfibArr = fibArr.reverse();
 
-                    finalAnswer = tmpfibArr.reduce((a,b) => {return a/b})
+                    finalAnswer = filteredArray.reduce((a,b) => {return a/b});
 
-                    operation = '/'
+                    operation = '/';
     
                     break;
+                case 5:
+                    filteredArray.reverse()
+                    select_operation()
+                    return
+
             }
 
-            for (let i = 0; i < fibArr.length; i++) {
-                if (i < fibArr.length - 1) {
+            for (let i = 0; i < filteredArray.length; i++) {
+                if (i < filteredArray.length - 1) {
 
-                    operationString += `${fibArr[i]} ${operation} `;
+                    operationString += `${filteredArray[i]} ${operation} `;
                 } else {
-                    operationString += `${fibArr[i]} = `;
+                    operationString += `${filteredArray[i]} = `;
                 }
                 
             }
 
             console.log(`\n\n${lb.repeat(4)}\nResult\n${operationString}${finalAnswer}`);
-            
 
             console.log('\nYour final answer is', finalAnswer);
 
@@ -177,8 +187,47 @@ function select_operation() {
     
 }
 
+//Navigation function, called after operation is selected
+
 function nav() {
 
-    rl.close()
+    console.log('\n\nWould you like to...\n');
+    
+    rl.question('1. Create a new Fibonacci sequence\n2. Select a diffrent operation\n3. Select a diffrent filter\n4. Exit the program\nNumber Selection: ', (num) => {
+
+        switch (num) {
+            case '1':
+
+                fibArr = [];
+                select_range()
+
+            break;
+
+            case '2':
+
+                select_operation()
+
+            break;
+
+            case '3':
+
+                select_filter()
+
+            break
+
+            case '4':
+
+                console.log('Thank you for using this program...');
+                rl.close()
+
+            break;
+
+            default:
+                console.log('That was not a vaild entry, try again...');
+                nav()
+                
+        }
+
+    })
     
 }
