@@ -30,14 +30,13 @@ function select_range() {
                 
                 fib1 = fib2
 
-                console.log(fib2);
+                // console.log(fib2);
                 
             }
 
-            console.log(fibArr);
-            
-                
-        
+            // console.log(fibArr);
+
+            select_filter()
             
         } else {
             console.log('That was not a vaild number, try again');
@@ -46,6 +45,53 @@ function select_range() {
         }
     })
     
+}
+
+function select_filter() {
+
+    console.log('Would you like to filter out some of the fibonacci numbers?\nYour choices:');
+    
+
+    rl.question('\n1. Filter out even\n2. Filter out odd\n3. Filter out primes\n4. Filter out non-primes\nNumber Selection: ',
+        (num) => {
+
+            num = parseInt(num);
+
+            if (!isNaN(num)) {
+
+                switch (num) {
+                    case 1:
+
+                        fibArr = fibArr.filter(num => {return num % 2 != 0})
+                        
+                        break;
+                    case 2:
+
+                        fibArr = fibArr.filter(num => {return num % 2 == 0})
+                        
+                        break;
+                    case 3:
+                        
+                        break;
+                    case 4:
+                        
+                        break;
+                
+                }
+
+                console.log(fibArr);
+                
+                
+            } else {
+
+                console.log('This is not a vaild number selection, try again...\n\n');
+                select_filter()
+
+            }
+
+            select_operation()
+
+        })
 }
 
 function select_operation() {
