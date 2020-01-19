@@ -5,7 +5,9 @@ const readline  = require('readline'),
       rl = readline.createInterface({
           input: process.stdin,
           output: process.stdout
-      });
+      }),
+
+      lb = '_____________________________';
 
 let fibArr = [];
 
@@ -81,7 +83,7 @@ function select_filter() {
                 
                 }
 
-                console.log(fibArr);
+                // console.log(fibArr);
                 select_operation()
                 
             } else {
@@ -98,7 +100,7 @@ function select_filter() {
 
 function select_operation() {
 
-    console.log(`Your fibonacci sequence:\n\n${fibArr}\n________________________________________________________________________________________`);
+    console.log(`Your fibonacci sequence:\n\n${fibArr}\n${lb.repeat(4)}`);
 
     console.log('What operation would you like to preform on the remaining numbers in your fibonacci sequence?');
     
@@ -110,24 +112,30 @@ function select_operation() {
 
         if (!isNaN(num)) {
 
-            let finalAnswer;
+            let finalAnswer, operationString = '', operation;
 
             switch (num) {
                 case 1: //SUM
     
                     finalAnswer = fibArr.reduce((a,b) => {return a+b})
 
+                    operation = '+'
+
                     break;
             
                 case 2: //Diffrence 
     
-                    finalAnswer = fibArr.reduce((a,b) => {return a+b})
+                    finalAnswer = fibArr.reduce((a,b) => {return a-b})
+
+                    operation = '-'
                                     
                     break;
     
                 case 3: //Product
 
                     finalAnswer = fibArr.reduce((a,b) => {return a*b})
+
+                    operation = 'x'
                                 
                     break;
                
@@ -135,11 +143,26 @@ function select_operation() {
                     let tmpfibArr = fibArr.reverse();
 
                     finalAnswer = tmpfibArr.reduce((a,b) => {return a/b})
+
+                    operation = '/'
     
                     break;
             }
 
-            console.log('The final answer is', finalAnswer);
+            for (let i = 0; i < fibArr.length; i++) {
+                if (i < fibArr.length - 1) {
+
+                    operationString += `${fibArr[i]} ${operation} `;
+                } else {
+                    operationString += `${fibArr[i]} = `;
+                }
+                
+            }
+
+            console.log(`\n\n${lb.repeat(4)}\nResult\n${operationString}${finalAnswer}`);
+            
+
+            console.log('\nYour final answer is', finalAnswer);
 
             nav()
             
