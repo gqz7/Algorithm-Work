@@ -5,7 +5,9 @@ const readline  = require('readline'),
       rl = readline.createInterface({
           input: process.stdin,
           output: process.stdout
-      });
+      }),
+
+      lb = '_____________________________';
 
 let primes = [];
 
@@ -42,8 +44,8 @@ function prime_range() {
                 
             }
 
-            console.log(primes);
-            
+            //go to next function
+            select_operation()
             
         } else {
             console.log('That is not a vaild input, try again...');
@@ -52,4 +54,69 @@ function prime_range() {
         
     })
     
+}
+
+function select_operation() {
+
+    console.log(`\nYour current list of primes...\n${lb.repeat(3)}\n${primes}\n${lb.repeat(3)}\n\n Select an operation to preform on the list of primes`);
+    
+    
+    rl.question('1. Addition\n2. Subtraction(smallest 1st)\n3. Subtraction(largest 1st)\n4. Multiplication\n5. Division(smallest 1st)\n6. Division(largest 1st)\n\nNumber Selection: ', 
+    (num) => {
+
+        let finalAnswer, operation;
+
+        switch (num) {
+            case '1':
+
+                operation = '+';
+
+                finalAnswer = primes.reduce((a,b) => {return a+b})
+
+                
+                break;
+            case '2':
+
+                operation = '-';
+
+                finalAnswer = primes.reduce((a,b) => {return a-b})
+            
+                break;
+            case '3':
+
+                operation = '-';
+
+                finalAnswer = primes.reverse().reduce((a,b) => {return a-b})
+        
+                break;
+            case '4':
+
+                operation = 'x';
+
+                finalAnswer = primes.reduce((a,b) => {return a*b})
+    
+                break;
+            case '5':
+
+                operation = '/';
+
+                finalAnswer = primes.reduce((a,b) => {return a/b})
+            
+                break;
+            case '6':
+
+                operation = '/';
+
+                finalAnswer = primes.reverse().reduce((a,b) => {return a/b})
+        
+                break;
+                                           
+            default:
+                break;
+        }
+
+        console.log(finalAnswer);
+        
+
+    })
 }
