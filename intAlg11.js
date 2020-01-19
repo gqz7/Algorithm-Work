@@ -18,7 +18,7 @@ select_range()
 
 function select_range() {
 
-    rl.question('\nEnter an endpoint for your fibonacci sequence.\nNumber: ', (num) => {
+    rl.question('\nEnter an endpoint (max value) for your fibonacci sequence.\nNumber: ', (num) => {
 
         num = parseInt(num.trim())
 
@@ -57,50 +57,84 @@ function select_range() {
 function select_filter() {
 
     console.log('Would you like to filter out some of the fibonacci numbers?\nYour choices:');
-    
 
     rl.question('\n1. Filter out even\n2. Filter out odd\n3. Filter out primes\n4. Filter out non-primes\n5. No filter\nNumber Selection: ',
-        (num) => {
 
-            num = parseInt(num);
+    (num) => {
 
-            if (!isNaN(num)) {
+        num = parseInt(num);
 
-                switch (num) {
-                    case 1:
+        if (!isNaN(num)) {
 
-                        filteredArray = fibArr.filter(num => {return num % 2 != 0})
-                        
-                        break;
-                    case 2:
+            switch (num) {
+                case 1:
 
-                        filteredArray = fibArr.filter(num => {return num % 2 == 0})
-                        
-                        break;
-                    case 3:
-                        
-                        break;
-                    case 4:
-                        
-                        break;
-                    case 5:
-                        break;
-                
-                }
+                    filteredArray = fibArr.filter(num => {return num % 2 != 0})
+                    
+                    break;
+                case 2:
 
-                console.log(fibArr);
-                select_operation()
-                
-            } else {
+                    filteredArray = fibArr.filter(num => {return num % 2 == 0})
+                    
+                    break;
+                case 3:
 
-                console.log('This is not a vaild number selection, try again...\n\n');
-                select_filter()
+                    filteredArray = fibArr.filter(num => {
 
+                        if (num == 1) {
+                            return true
+                        }
+
+                        for (let i = 2; i < Math.ceil(Math.sqrt(num)); i++) {
+                            
+                            if (num % i == 0) {
+                                return true
+                            }
+                            
+                        } 
+                        return false
+                    })
+                    
+                    break;
+                case 4:
+
+                    filteredArray = fibArr.filter(num => {
+
+                        if (num == 1) {
+                            return false
+                        }
+
+                        for (let i = 2; i < Math.ceil(Math.sqrt(num)); i++) {
+                            
+                            if (num % i == 0) {
+                                return false
+                            }
+                            
+                        } 
+                        return true
+                    })
+                    
+                    break;
+                case 5:
+
+                    filteredArray = fibArr;
+
+                    break;
+            
             }
 
-           
+            // console.log(fibArr);
+            select_operation()
+            
+        } else {
 
-        })
+            console.log('This is not a vaild number selection, try again...\n\n');
+            select_filter()
+
+        }
+
+    })
+
 }
 
 //select operation to do upon the filtered array, called after the filter is selected or from the nav menu
@@ -111,7 +145,7 @@ function select_operation() {
 
     console.log('What operation would you like to preform on the remaining numbers in your fibonacci sequence?');
     
-    rl.question('\n1. Sum of all numbers\n2. Diffrence (starting from the last)\n3. Product\n4. Quotent (starting from the last)\n5. Reverse the sequence (and select again)\nNumber Selection: ',
+    rl.question('\n1. Sum of all numbers\n2. Diffrence\n3. Product\n4. Quotent\n5. Reverse the sequence (and select again)\n\nNumber Selection: ',
 
     (num) => {
 
@@ -164,6 +198,7 @@ function select_operation() {
                 if (i < filteredArray.length - 1) {
 
                     operationString += `${filteredArray[i]} ${operation} `;
+
                 } else {
                     operationString += `${filteredArray[i]} = `;
                 }
@@ -193,7 +228,7 @@ function nav() {
 
     console.log('\n\nWould you like to...\n');
     
-    rl.question('1. Create a new Fibonacci sequence\n2. Select a diffrent operation\n3. Select a diffrent filter\n4. Exit the program\nNumber Selection: ', (num) => {
+    rl.question('1. Select a diffrent max value\n2. Select a diffrent operation\n3. Select a diffrent filter\n4. Exit the program\nNumber Selection: ', (num) => {
 
         switch (num) {
             case '1':
