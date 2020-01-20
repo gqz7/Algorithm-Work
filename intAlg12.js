@@ -115,8 +115,26 @@ function select_operation() {
                 break;
         }
 
-        console.log(finalAnswer);
+        let operationString = '';
+
+        for (let i = 0; i < primes.length; i++) {
+            if (i < primes.length - 1) {
+
+                operationString += `${primes[i]} ${operation} `;
+
+            } else {
+                operationString += `${primes[i]} = `;
+            }
+            
+        }
+
+        console.log(`\n\n${lb.repeat(4)}\nResult\n${operationString}${finalAnswer}`);
+
+        console.log('\nYour final answer is', finalAnswer);
+
+        console.log('Thank you for using this program, it will now close...');
         
+        rl.close()
 
     })
 }
