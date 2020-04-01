@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calendar</title>
+    <link rel="stylesheet" type="text/css" href="calnav.css">
+</head>
+<body>
+
+    <!-- This will be the changing element on the page, controlled by button input -->
+    <div class="date">
+        <h2 id="date">Today</h2> 
+    </div>
+
+    <!-- button class is created for styling, each button's purpose is clearly labled-->
+    <div class="buttons">
+        <button id="prvday" style="flex: auto;">Previous Day</button>
+        <button id="nxtday" style="flex: auto;">Next Day</button>
+        <button id="prvmonth" style="flex: auto;">Previous Month</button>
+        <button id="nxtmonth" style="flex: auto;">Next Month</button>
+        <button id="prvyear" style="flex: auto;">Previous Year</button>
+        <button id="nxtyear" style="flex: auto;">Next Year</button>
+        <button id="curdate" style="flex: auto;">Current Date</button>
+    </div>
+    <!-- gets the script that does all the changing of the Date element -->
+    <script src="calendarnav.js"></script>
+    
+</body>
+</html>

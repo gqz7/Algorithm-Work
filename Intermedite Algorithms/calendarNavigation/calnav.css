@@ -1,0 +1,10 @@
+.buttons {
+    display: flex;
+    justify-content:center;
+}
+.date {
+    font-size: xx-large;
+    display: flex;
+    justify-content:center;
+
+}
