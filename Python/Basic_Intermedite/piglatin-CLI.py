@@ -2,8 +2,19 @@ welcomeMsg = "\nWelcome to the Pig-Latin CLI\n\nYou will enter a word or phrase 
 invalidMsg = "\nThat's Not A Valid Entry, Try Again.\n"
 
 def init():
-    int1 = input("Enter A Word Or Phrase\nInput: ")
+    userInput = input("Enter A Word Or Phrase\nInput: ")
 
+    if userInput.strip() == "":
+      print(invalidMsg)
+      init()
+    
+    stringList = userInput.split()
+
+    for word in stringList:
+      newWord = toPigLatin(word) 
+
+def toPigLatin(str):
+  print(str)
 
 print(welcomeMsg)
 init()
