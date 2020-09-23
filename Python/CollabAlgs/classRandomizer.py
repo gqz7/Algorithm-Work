@@ -1,7 +1,7 @@
 # classRandomizer.py
 import random
 
-listOfNames = ['george', 'jim', 'bill', 'ted', 'sarah', 'jannet']
+listOfNames = ['A', 'Che', 'Cu', 'G', 'H', 'J', 'M', 'S', 'W', 'Chr']
 newList = []
 
 def randomizer (nList):
@@ -62,4 +62,4 @@ def stackRandomizer (list):
   return newList
 
 
-print(stackRandomizer(listOfNames))
+# print(stackRandomizer(listOfNames))
