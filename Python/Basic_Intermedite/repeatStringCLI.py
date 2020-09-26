@@ -1,5 +1,3 @@
-import re
-
 welcomeMsg = "\nWelcome to the String Repeater CLI\n\nYou will enter a word or phrase and how many times you want it repeated\n"
 invalidMsg = "\nThat's Not A Valid Entry, Try Again.\n"
 tryAginMsg = '\nWould you like to try again? (y/n)\nInput: '
@@ -19,7 +17,7 @@ def init():
 
     newPhrase = repeater(userInput, int(times))
 
-    print(f'\nYour New Phrase Is:\n\n{newPhrase}')
+    print(f'\nYour Original String Was \n\'{userInput}\'\n Your String Repeated {times} times to produce...\n\n{newPhrase}')
     tryAgain()
 
 def repeater(string, num):
