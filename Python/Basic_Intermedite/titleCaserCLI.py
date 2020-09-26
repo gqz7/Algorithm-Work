@@ -16,19 +16,9 @@ def init():
     tryAgain()
 
 def titleCaseSentence(text): #add args
-  
   strList = text.split()
-  answer = ''
-  # print(strList)
-
-  for word in strList:
-    answer += titleCaseWord(word) + ' '
-    # print(word, titleCaseWord(word))
-
+  answer = ' '.join(map(lambda word: word[0].upper() + word[1:].lower(), strList))
   return answer
-
-def titleCaseWord(word):
-  return word[0].upper() + word[1:].lower() 
 
 def tryAgain():
   ta = input(tryAginMsg)[0].lower()
