@@ -24,14 +24,16 @@ def stringToBinary(string):
     utf8Num = ord(char) 
     base=8
     biStr = ''
-    while utf8Num > 1 and base > -1:
+    while base > -1:
       if utf8Num - (2 ** base) > 0:
         utf8Num-=2**base
-        print(utf8Num, base, 2**base) 
-      # print(utf8Num, base, 2**base)
+        # print(utf8Num, base, 2**base) 
+        biStr = '1'+biStr
+      else:
+        biStr = '0'+biStr
       base-=1
 
-
+    binary += biStr + ' ' 
 
   return binary
 
