@@ -25,12 +25,12 @@ def stringToBinary(string):
     base=8
     biStr = ''
     while base > -1:
-      if utf8Num - (2 ** base) > 0:
+      if utf8Num - (2 ** base) >= 0:
         utf8Num-=2**base
         # print(utf8Num, base, 2**base) 
-        biStr = '1'+biStr
+        biStr = biStr+'1'
       else:
-        biStr = '0'+biStr
+        biStr = biStr+'0'
       base-=1
 
     binary += biStr + ' ' 
