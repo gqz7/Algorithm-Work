@@ -10,15 +10,18 @@ def init():
     if not userInput.isnumeric():
       print(invalidMsg)
       init()
+    else:
+      userInput = int(userInput)
 
-    userInput = int(userInput)
+      result = fib(userInput) #enter user input as param
 
-    result = fib(userInput) #enter user input as param
+      number = result[1]
+      place = result[0]
+      # [str(element) for element in a_list]
+      ordinal = getOrdinal(str(place))
 
-    # [str(element) for element in a_list]
-
-    print(f'\nThe first Fibonacci number with {userInput} digits is {result[1]}.\nIt is in the {result[0]}th round of the Fibonacci sequence.')
-    tryAgain()
+      print(f'\nThe first Fibonacci number with {userInput} digits is {number}.\nIt is the {place}{ordinal} number of the Fibonacci  sequence.')
+      tryAgain()
 
 def fib(digits): 
   
@@ -32,11 +35,26 @@ def fib(digits):
     fib = num1 + num2
     num1 = num2
     num2 = fib
-    # print(fib)
+    # print(fib)a 
 
   answer = [count, fib]
 
   return answer
+
+def getOrdinal(numStr):
+  ones = int(numStr[-1])
+  tens = int(numStr[-2]) if len(numStr) > 1 else None
+
+  print(ones, tens)
+
+  if ones == 1 and not tens == 1 :
+    return 'st'
+  elif ones == 1 and not tens == 2 :
+    return 'nd'
+  elif ones == 1 and not tens == 3 :
+    return 'rd'
+  else:
+    return 'th'
 
 
 def tryAgain():
