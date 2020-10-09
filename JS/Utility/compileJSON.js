@@ -25,3 +25,14 @@ const compileJson = ({path, fileName, key, start, limit, outFileName}) => {
     fs.writeFileSync( ofPath, outFileData)
 
   }
+
+const request = {
+  path: '',      //path to directory
+  fileName: '', //the base file name for the number files
+  key: '',     //key of object that contains array
+  start: 0,   //start number for file numbering
+  limit: 0,  //how many number files are include in compliation
+  outFileName: 'compiled' //name of file created from complied array
+}
+
+compileJson(request)
