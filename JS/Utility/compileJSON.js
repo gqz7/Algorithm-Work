@@ -18,5 +18,10 @@ const compileJson = ({path, fileName, key, start, limit, outFileName}) => {
       }
     }
 
-    console.log(finalArr.length);
-}
+    const 
+      ofPath = `${__dirname}\\${outFileName}.json`,
+      outFileData = JSON.stringify(finalArr);
+
+    fs.writeFileSync( ofPath, outFileData)
+
+  }
