@@ -14,8 +14,18 @@ public class Main {
         String sentence = scanner.nextLine();
         String titleCased = "";
 
-        String array1[]= sentence.split("/");
+        String sentenceArr[]= sentence.split(" ");
 
+        for ( int i = 0; i < sentenceArr.length; i++) {
+            String word = sentenceArr[i];
+            String titleCasedWord = Character.toUpperCase( word.charAt(0) ) + word.substring(1).toLowerCase();
+            // System.out.println(titleCasedWord);
+            if (i != 0) {
+                titleCased += " ";
+            }
+            titleCased += titleCasedWord;
+
+        }
 
         System.out.println("\nYour Title Cased Sentence Is: \n" + titleCased);
 
