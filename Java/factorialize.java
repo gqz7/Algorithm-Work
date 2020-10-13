@@ -20,7 +20,7 @@ public class Main {
           count++;
         }
 
-        System.out.println("\nThe Factorial Of " + number + ' is ' + factorial);
+        System.out.println("\nThe Factorial Of " + number + " is " + factorial);
 
     }
 }
