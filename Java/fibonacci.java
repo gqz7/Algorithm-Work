@@ -17,33 +17,32 @@ public class Main
 
         try {
             int number = scanner.nextInt();
+            String finalFib = "";
+
+            while ( i < number ) {
+
+                String fib = new Integer(prev).toString();
+                String msg = fib;
+
+                if (i != number-1) {
+                    msg += ", ";
+                } else {
+                    finalFib = fib;
+                }
+
+                System.out.print(msg);
+
+                next = prev + cur;
+                prev = cur;
+                cur = next;
+
+                i++;
+            }
+
+            System.out.println("\n\nThe " + number + " Number In The Fibonacci Sequence Is " + finalFib);
+
         } catch (Exception e) {
             System.out.println("You must enter an Integer for this program");
         }
-
-        String finalFib = "";
-
-        while ( i < number ) {
-
-            String fib = new Integer(prev).toString();
-            String msg = fib;
-
-            if (i != number-1) {
-                msg += ", ";
-            } else {
-                finalFib = fib;
-            }
-
-            System.out.print(msg);
-
-            next = prev + cur;
-            prev = cur;
-            cur = next;
-
-            i++;
-        }
-
-        System.out.println("\n\nThe " + number + " Number In The Fibonacci Sequence Is " + finalFib);
-
     }
 }
