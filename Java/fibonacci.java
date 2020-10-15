@@ -14,7 +14,12 @@ public class Main
         int next = 1;
 
         System.out.print("Enter an integer for the number of rounds through the fibonacci sequence to calculate\nInt: ");
-        int number = scanner.nextInt();
+
+        try {
+            int number = scanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("You must enter an Integer for this program");
+        }
 
         String finalFib = "";
 
