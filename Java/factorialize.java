@@ -11,16 +11,20 @@ public class Main {
         final Scanner scanner = new Scanner(System.in);
         
         System.out.print("Enter an integer to be factorialized\nInt: ");
-        int number = scanner.nextInt();
+        try {
+            int number = scanner.nextInt();
+            int factorial = 1, count = 1;
 
-        int factorial = 1, count = 1;
+            while (count <= number) {
+              factorial *= count;
+              count++;
+            }
 
-        while (count <= number) {
-          factorial *= count;
-          count++;
+            System.out.println("\nThe Factorial Of " + number + " is " + factorial);
+
+        } catch (Exception e) {
+            System.out.println("You must enter an Integer for this program");
         }
-
-        System.out.println("\nThe Factorial Of " + number + " is " + factorial);
-
+        
     }
 }
