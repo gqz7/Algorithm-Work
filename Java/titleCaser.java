@@ -11,23 +11,28 @@ public class Main {
         final Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter an sentence to be Title Cased\nString: ");
-        String sentence = scanner.nextLine();
-        String titleCased = "";
 
-        String sentenceArr[]= sentence.split(" ");
+        try {
+            String sentence = scanner.nextLine();
+            String titleCased = "";
 
-        for ( int i = 0; i < sentenceArr.length; i++) {
-            String word = sentenceArr[i];
-            String titleCasedWord = Character.toUpperCase( word.charAt(0) ) + word.substring(1).toLowerCase();
-            // System.out.println(titleCasedWord);
-            if (i != 0) {
-                titleCased += " ";
+            String sentenceArr[]= sentence.split(" ");
+
+            for ( int i = 0; i < sentenceArr.length; i++) {
+                String word = sentenceArr[i];
+                String titleCasedWord = Character.toUpperCase( word.charAt(0) ) + word.substring(1).toLowerCase();
+                // System.out.println(titleCasedWord);
+                if (i != 0) {
+                    titleCased += " ";
+                }
+                titleCased += titleCasedWord;
+
             }
-            titleCased += titleCasedWord;
 
+            System.out.println("\nYour Title Cased Sentence Is: \n" + titleCased);
+        }catch (Exception e) {
+            System.out.println("You must enter an String for this program");
         }
-
-        System.out.println("\nYour Title Cased Sentence Is: \n" + titleCased);
 
     }
 }
