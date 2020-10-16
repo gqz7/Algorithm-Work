@@ -4,27 +4,35 @@ import java.text.NumberFormat;
 import java.util.Scanner;
 
 public class Main {
-/*
-Principal: how much of a loan
-Annual Interest: percentage each year
-Period (Years taken as months): how long to pay off loan
- */
+    /*
+    Principal: how much of a loan
+    Annual Interest: percentage each year
+    Period (Years taken as months): how long to pay off loan
+     */
     public static void main(String[] args) {
         final Scanner scanner = new Scanner(System.in);
         final int MONTHS_IN_YEAR = 12, PERCENT = 100;
 
         try {
             //Principal is the total loan in $USD
-            System.out.print("How much do you want to take out on your loan?\nUSD: $");
-            float principal = scanner.nextFloat();
+            float principal = 0;
+            while (principal < 500 || principal >10000000) {
 
-            System.out.print("\nWhat is the yearly interest rate on your loan?\nPercent: ");
-            //Percentage is the interest rate on each 12 month period
-            float percentage = scanner.nextFloat();
-
-            System.out.print("\nHow many months until you repay the loan?\nMonths: ");
-            //Period will be the number of months the loan is being taken out
-            float months  = scanner.nextFloat();
+                System.out.print("How much do you want to take out on your loan? ($500 - 10,000,000)\nUSD: $");
+                principal = scanner.nextFloat();
+            }
+            float percentage = 0;
+            while (percentage < 30 || percentage > 100) {
+                System.out.print("\nWhat is the yearly interest rate on your loan? (30 - 100)\nPercent: ");
+                //Percentage is the interest rate on each 12 month period
+                percentage = scanner.nextFloat();
+            }
+            float months  = 0;
+            while (months < 1 || months > 700) {
+                System.out.print("\nHow many months until you repay the loan? (1-700)\nMonths: ");
+                //Period will be the number of months the loan is being taken out
+                months = scanner.nextFloat();
+            }
 
             float numberOfPayments = months*MONTHS_IN_YEAR;
             float rate = percentage/PERCENT/MONTHS_IN_YEAR;
