@@ -51,12 +51,13 @@ public class Main {
         final Scanner scanner = new Scanner(System.in);
 
         try {
-            while (inputValue < min || inputValue > max) {
+            while (true) {
                 System.out.print(question);
                 inputValue = scanner.nextFloat();
-                if (inputValue < min || inputValue > max) {
-                    System.out.print("\nWARNING\nYou did not enter a number in the range of "+min+" to "+max+"\n\n");
+                if (inputValue >= min && inputValue <= max) {
+                    break;
                 }
+                System.out.print("\nWARNING\nYou did not enter a number in the range of "+min+" to "+max+"\n\n");
             }
             return inputValue;
         } catch (Exception e) {
