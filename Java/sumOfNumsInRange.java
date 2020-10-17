@@ -7,31 +7,56 @@ public class Main {
       User enters two number and gets the range of numbers between them
      */
     public static void main(String[] args) {
-      try {
-          final Scanner scanner = new Scanner(System.in);
+        final Scanner scanner = new Scanner(System.in);
 
-          int number1 = scanner.nextInt();
-          int number2 = scanner.nextInt();
+        String numberQuestion = "Enter A Number Between 1 and 1,000,000,000\nNumber: ";
 
-          int min = 0;
-          int max = 0;
-          if ( number1 > number2 ) {
-            min = number2;
-            max = number1;
-          } else {
-            min = number1;
-            max = number2;
-          }
+        long number1 = askQuestion(numberQuestion, 1, 1000000000);
+        long number2 = askQuestion(numberQuestion, 1, 1000000000);
 
-          int total = 0;
+        sumOfRanges(number1, number2);
 
-          for ( int i = min; i <=  max; i++) {
-              total += i;
-          }
-
-          System.out.println("The total sum of all numbers between " + min + " and " + max + " is " + total);
-      } catch (Exception e) {
-          System.out.println("You must enter an Integer for this program");
-      }
     }
+
+    private static void sumOfRanges( long num1, long num2) {
+        long min = 0;
+        long max = 0;
+        if ( num1 > num2 ) {
+            min = num2;
+            max = num1;
+        } else {
+            min = num1;
+            max = num2;
+        }
+
+        long total = 0;
+
+        for ( long i = min; i <=  max; i++) {
+            total += i;
+        }
+
+        System.out.println("The total sum of all numbers between " + min + " and " + max + " is " + total);
+
+    }
+
+    private static long askQuestion(String question, long min, long max) {
+        long inputValue = 0;
+        final Scanner scanner = new Scanner(System.in);
+
+        try {
+            while (true) {
+                System.out.print(question);
+                inputValue = scanner.nextLong();
+                if (inputValue >= min && inputValue <= max) {
+                    break;
+                }
+                System.out.print("\nWARNING\nYou did not enter a number in the range of "+min+" to "+max+"\n\n");
+            }
+            return inputValue;
+        } catch (Exception e) {
+            System.out.println("\nYou must correct data types");
+            return askQuestion(question, min, max);
+        }
+    };
+
 }
