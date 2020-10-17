@@ -1,30 +1,54 @@
 package com.astralprojection;
 
-import java.text.NumberFormat;
 import java.util.Scanner;
 
 public class Main {
-/*
-  User enters number and gets the factorial of it
- */
+    /*
+      User enters number and gets the factorial of it
+     */
     public static void main(String[] args) {
-        final Scanner scanner = new Scanner(System.in);
-        
-        System.out.print("Enter an integer to be factorialized\nInt: ");
         try {
-            int number = scanner.nextInt();
-            int factorial = 1, count = 1;
+            String factorialQuestion = "Enter an integer to factorialize (0 - 20)\nInt: ";
 
-            while (count <= number) {
-              factorial *= count;
-              count++;
-            }
-
+            long number = askQuestion(factorialQuestion, 0, 20);
+            long factorial = calcFactorial(number);
             System.out.println("\nThe Factorial Of " + number + " is " + factorial);
 
         } catch (Exception e) {
-            System.out.println("You must enter an Integer for this program");
+            System.out.println("An unexpected error occured!");
         }
-        
+
     }
+
+    private static long calcFactorial(long num) {
+        long factorial = 1, count = 1;
+
+        while (count <= num) {
+            factorial *= count;
+            System.out.println(factorial + " count " + count);
+            count++;
+        }
+        return factorial;
+    }
+
+    private static long askQuestion(String question, long min, long max) {
+        long inputValue = 0;
+        final Scanner scanner = new Scanner(System.in);
+
+        try {
+            while (true) {
+                System.out.print(question);
+                inputValue = scanner.nextLong();
+                if (inputValue >= min && inputValue <= max) {
+                    break;
+                }
+                System.out.print("\nWARNING\nYou did not enter a number in the range of "+min+" to "+max+"\n\n");
+            }
+            return inputValue;
+        } catch (Exception e) {
+            System.out.println("\nYou must correct data types");
+            return askQuestion(question, min, max);
+        }
+    };
+
 }
