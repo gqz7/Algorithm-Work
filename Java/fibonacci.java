@@ -1,5 +1,6 @@
 package com.astralprojection;
 import java.util.Scanner;
+import java.text.MessageFormat;
 
 public class Main
 {
@@ -11,7 +12,7 @@ public class Main
             long number = askQuestion(fibQuestion, 0, 93);
             String finalFib = fibCalculation(number);
 
-            System.out.println("\n\nThe " + number + " Number In The Fibonacci Sequence Is " + finalFib);
+            System.out.println(MessageFormat.format("\n\nThe {0} Number In The Fibonacci Sequence Is {1}", number, finalFib));
 
         } catch (Exception e) {
             System.out.println("An unexpected error occured in the program!");
@@ -60,7 +61,7 @@ public class Main
                 if (inputValue >= min && inputValue <= max) {
                     break;
                 }
-                System.out.print("\nWARNING\nYou did not enter a number in the range of "+min+" to "+max+"\n\n");
+                System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
             }
             return inputValue;
         } catch (Exception e) {
