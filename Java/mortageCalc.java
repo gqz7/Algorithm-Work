@@ -10,31 +10,37 @@ public class Main {
     Annual Interest: percentage each year
     Period (Years taken as months): how long to pay off loan
      */
+    //CONTANTS
+    final static int MONTHS_IN_YEAR = 12, PERCENT = 100;
 
     public static void main(String[] args) {
-        collectData();
+        mortgageCalculator();
     }
 
-    private static void collectData() {
+    private static void mortgageCalculator() {
 
         //GET INPUT FOR PRINCIPAL/LOAN AMMOUNT
         String principleQues = "How much do you want to take out on your loan? ($500 - 10,000,000)\nUSD: $";
-        float princeAmount = askQuestion( principleQues, 500, 10000000);
+        float princeAmount = numberQuestion( principleQues, 500, 10000000);
 
         //GET INPUT FOR PERCENTAGE/INTEREST RATE
         String interestQues = "\nWhat is the yearly interest rate on your loan? (1 - 100)\nPercent: ";
-        float interestAmount = askQuestion( interestQues, 1, 100);
+        float yearlyInterest = numberQuestion( interestQues, 1, 100);
+        float monthlyInterest = yearlyInterest / PERCENT / MONTHS_IN_YEAR;
 
         //GET INPUT FOR MONTHS
-        String monthsQues = "\nHow many months until you repay the loan? (1-700)\nMonths: ";
-        float monthsAmount = askQuestion( monthsQues, 1, 700);
+        String yearsQuestion = "\nIn How many years will you repay the loan? (1-100)\nYears: ";
+        float yearsAmount = numberQuestion( yearsQuestion, 1, 100);
+        float totalMonths = yearsAmount*MONTHS_IN_YEAR;
 
-        calculateMortgage(princeAmount, monthsAmount, interestAmount);
+        //CALCULATE MONTHLY MORTGAGE
+        float monthlyMortgage = calculateMortgage(princeAmount, yearsAmount, yearlyInterest);
+
+        //DISPLAY A PAYMENT SCHEDULE FOR USER
+        displayPaymentSchedual(princeAmount, totalMonths, monthlyMortgage, monthlyInterest);
     };
 
-    private static void calculateMortgage(float principal, float months, float percentage) {
-        //CONTANTS
-        final int MONTHS_IN_YEAR = 12, PERCENT = 100;
+    private static float calculateMortgage(float principal, float months, float percentage) {
 
         //CALCULATE MORTGAGE
         float numberOfPayments = months*MONTHS_IN_YEAR;
@@ -45,9 +51,33 @@ public class Main {
         String finalMortgage = NumberFormat.getCurrencyInstance().format(mortgage);
 
         System.out.println("\nYour annual mortgage will be: " + finalMortgage);
+
+        return mortgage;
     };
 
-    private static float askQuestion(String question, int min, int max) {
+    private static void displayPaymentSchedual(float principal, float totalMonths, float monthlyPay, float interest) {
+        String lineSeparator = "_______________________________________________________________";
+        String monthlyPayFormatted = NumberFormat.getCurrencyInstance().format(monthlyPay);
+        System.out.println(MessageFormat.format("\nYour loan of ${0} will be paid off in {1} monthly payments of {2}\n{3}\n\n", principal, totalMonths, monthlyPayFormatted, lineSeparator));
+
+        int currentMonth = 0;
+        while (currentMonth <= totalMonths) {
+            double ownedMoney = calculateBalanceOwned(principal, totalMonths, interest, currentMonth);
+            String ownedMoneyFormatted = NumberFormat.getCurrencyInstance().format(ownedMoney);
+            System.out.println(MessageFormat.format("Month {0}: Money Owned - {1}", currentMonth, ownedMoneyFormatted));
+            currentMonth += 1;
+        }
+        System.out.println("\nYour debts are now paid off!");
+    };
+
+    private static double calculateBalanceOwned(float principal, float totalPayments, float interest, int currentMonth) {
+        double balance = principal
+                * (Math.pow( 1+interest, totalPayments ) - Math.pow( 1+interest, currentMonth ))
+                / (Math.pow( 1+interest, totalPayments) - 1);
+        return balance;
+    }
+
+    private static float numberQuestion(String question, int min, int max) {
         float inputValue = 0;
         final Scanner scanner = new Scanner(System.in);
 
@@ -63,7 +93,7 @@ public class Main {
             return inputValue;
         } catch (Exception e) {
             System.out.println("\nYou must correct data types");
-            return askQuestion(question, min, max);
+            return numberQuestion(question, min, max);
         }
     };
 }
