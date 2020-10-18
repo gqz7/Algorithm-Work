@@ -2,6 +2,7 @@ package com.astralprojection;
 
 import java.text.NumberFormat;
 import java.util.Scanner;
+import java.text.MessageFormat;
 
 public class Main {
     /*
@@ -57,7 +58,7 @@ public class Main {
                 if (inputValue >= min && inputValue <= max) {
                     break;
                 }
-                System.out.print("\nWARNING\nYou did not enter a number in the range of "+min+" to "+max+"\n\n");
+                System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
             }
             return inputValue;
         } catch (Exception e) {
