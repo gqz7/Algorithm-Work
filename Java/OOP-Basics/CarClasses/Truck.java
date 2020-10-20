@@ -6,6 +6,7 @@ public class Truck extends Car {
     private float currentLoad;
 
     Truck ( int loadWeight ) {
+        super(80, "black", "Truck");
         maxLoad = loadWeight;
         currentLoad = 0;
     }
