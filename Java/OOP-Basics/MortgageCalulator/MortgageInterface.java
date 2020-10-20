@@ -21,69 +21,36 @@ public class MortgageInterface {
 
     public static MortgageAccount createAccount() {
 
+        String accountName = MortgageInterface.askName();
         float inputPrinciple = MortgageInterface.askPrinciple();
         float inputInterest = MortgageInterface.askInterest();
         byte inputPeriod = MortgageInterface.askPeriod();
 
-        return new MortgageAccount(inputPrinciple, inputInterest, inputPeriod);
+        return new MortgageAccount(accountName, inputPrinciple, inputInterest, inputPeriod);
     }
 
     private static float askPrinciple() {
         String principleQues = MessageFormat.format("How much do you want to take out on your loan? (${0} - {1})\nUSD: $", PRINCIPLE_MIN, PRINCIPLE_MAX);
-        float princeAmount = MortgageInterface.numberFloatQuestion( principleQues, PRINCIPLE_MIN, PRINCIPLE_MAX);
+        float princeAmount = CommandLineInterface.numberFloatQuestion( principleQues, PRINCIPLE_MIN, PRINCIPLE_MAX);
         return princeAmount;
     }
 
     private static byte askPeriod() {
         String periodQuestion = MessageFormat.format("\nIn How many years will you repay the loan? ({0}-{1})\nYears: ", PERIOD_MIN, PERIOD_MAX);
-        byte periodInYears = MortgageInterface.numberByteQuestion( periodQuestion, PERIOD_MIN, PERIOD_MAX);
+        byte periodInYears = CommandLineInterface.numberByteQuestion( periodQuestion, PERIOD_MIN, PERIOD_MAX);
         return periodInYears;
     }
 
     private static float askInterest() {
         String interestQues = MessageFormat.format("\nWhat is the yearly interest rate on your loan? ({0} - {1})\nPercent: ", INTEREST_MIN, INTEREST_MAX);
-        float interestAmount = MortgageInterface.numberFloatQuestion( interestQues, INTEREST_MIN, INTEREST_MAX);
+        float interestAmount = CommandLineInterface.numberFloatQuestion( interestQues, INTEREST_MIN, INTEREST_MAX);
         return interestAmount;
     }
 
-    private static float numberFloatQuestion(String question, int min, int max) {
-        float inputValue = 0;
-        final Scanner scanner = new Scanner(System.in);
-
-        try {
-            while (true) {
-                System.out.print(question);
-                inputValue = scanner.nextFloat();
-                if (inputValue >= min && inputValue <= max) {
-                    break;
-                }
-                System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
-            }
-            return inputValue;
-        } catch (Exception e) {
-            System.out.println("\nYou must correct data types");
-            return numberFloatQuestion(question, min, max);
-        }
-    };
-
-    private static byte numberByteQuestion(String question, int min, int max) {
-        byte inputValue = 0;
-        final Scanner scanner = new Scanner(System.in);
-
-        try {
-            while (true) {
-                System.out.print(question);
-                inputValue = scanner.nextByte();
-                if (inputValue >= min && inputValue <= max) {
-                    break;
-                }
-                System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
-            }
-            return inputValue;
-        } catch (Exception e) {
-            System.out.println("\nYou must correct data types");
-            return numberByteQuestion(question, min, max);
-        }
-    };
+    private static String askName() {
+        String nameQues = "Please Enter A Name For This Mortgage Account.\nName: ";
+        String accountName = CommandLineInterface.stringQuestion( nameQues );
+        return  accountName;
+    }
 
 }
