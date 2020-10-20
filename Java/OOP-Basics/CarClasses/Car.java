@@ -1,5 +1,6 @@
 package com.company;
 
+import java.text.MessageFormat;
 
 //        Create a car class and at least two child classes that inherit from the car class.
 //
@@ -11,8 +12,17 @@ package com.company;
 public class Car {
 
     float xPosition = 0;
+    String color;
+    String name;
+    int topSpeed;
     boolean movingForward = true;
     boolean isDriving = false;
+
+    Car (int topSpeed, String color, String name) {
+        this.color = color;
+        this.name = name;
+        this.topSpeed = topSpeed;
+    }
 
     public void moveForward ( int velocity ) {
         if (this.movingForward) {
@@ -30,4 +40,9 @@ public class Car {
         this.movingForward = !this.movingForward;
     }
 
+    @Override
+    public String toString() {
+        String carString = MessageFormat.format("\nCar Details\n________________\nColor: {0}\nName: {1}\nX-Position: {2}\nTop-Speed: {3}", color, name, xPosition, topSpeed);
+        return carString;
+    }
 }
