@@ -5,6 +5,7 @@ public class SportsCar extends Car {
     String engineType;
 
     SportsCar ( boolean spoiler, String engineType ) {
+        super(150, "red", "SportsCar");
         this.hasSpoiler = spoiler;
         this.engineType = engineType;
     }
