@@ -7,7 +7,7 @@ public class Main {
         TextBox inputName = new TextBox();
 //        System.out.println(inputName.isEnabled());
 
-        UIControl testControl = new UIControl(false);
+//        UIControl testControl = new UIControl(false); //after making this class abstract it can not be instantiated
 
         inputName.setText("Billy Jean"); //sets the innerText field of the text box
 //        System.out.println(inputName); //because the toString method has been overridden this should return the innerText field of the TextBox

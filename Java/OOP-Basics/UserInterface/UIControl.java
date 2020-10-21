@@ -1,6 +1,6 @@
 package com.company;
 
-public class UIControl {
+public abstract class UIControl {
 
     private boolean isEnabled;
 
@@ -15,9 +15,7 @@ public class UIControl {
         isEnabled = false;
     }
 
-    public void render() {
-
-    }
+    public abstract void render();
 
     public void toggleEnabled () {
         isEnabled = !isEnabled;

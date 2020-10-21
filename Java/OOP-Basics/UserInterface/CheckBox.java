@@ -1,6 +1,6 @@
 package com.company;
 
-public class CheckBox extends UIControl {
+public final class CheckBox extends UIControl { //because this class is final there can be no class that extends (is a child of) the CheckBox class
     private boolean isChecked=false;
     public CheckBox(boolean isEnabled) {
         super(isEnabled);
