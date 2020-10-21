@@ -4,9 +4,10 @@ import java.text.MessageFormat;
 import java.util.Scanner;
 
 public class CommandLineInterface {
+    final static Scanner scanner = new Scanner(System.in);
+
     public static float numberFloatQuestion(String question, int min, int max) {
         float inputValue = 0;
-        final Scanner scanner = new Scanner(System.in);
 
         try {
             while (true) {
@@ -24,9 +25,22 @@ public class CommandLineInterface {
         }
     };
 
+    public static float numberFloatQuestion(String question) {
+        float inputValue = 0;
+
+        try {
+            System.out.print(question);
+            inputValue = scanner.nextFloat();
+  
+            return inputValue;
+        } catch (Exception e) {
+            System.out.println("\nYou must correct data types");
+            return numberFloatQuestion(question, min, max);
+        }
+    };
+
     public static byte numberByteQuestion(String question, int min, int max) {
         byte inputValue = 0;
-        final Scanner scanner = new Scanner(System.in);
 
         try {
             while (true) {
@@ -44,9 +58,22 @@ public class CommandLineInterface {
         }
     };
 
+    public static byte numberByteQuestion(String question) {
+        byte inputValue = 0;
+
+        try {
+            System.out.print(question);
+            inputValue = scanner.nextByte();
+            
+            return inputValue;
+        } catch (Exception e) {
+            System.out.println("\nYou must correct data types");
+            return numberByteQuestion(question, min, max);
+        }
+    };
+
     public static String stringQuestion(String question) {
         String inputValue = "";
-        final Scanner scanner = new Scanner(System.in);
 
         try {
             while (true) {
