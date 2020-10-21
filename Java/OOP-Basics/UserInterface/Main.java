@@ -20,6 +20,17 @@ public class Main {
 
         for (var control : allControls)
             control.render();
+
+        //Interfaces & dependency injection
+
+        //constructor injection / poor man's dep. injection
+        Calculator2020 cal = new Calculator2020();
+        CalculaorReport report = new CalculaorReport(cal);
+
+        //setter injection
+        //this approach is good if you need to change the dependencies of a class through the lifetime of an application
+        Calculator2020 newCalculator = new Calculator2020();
+        report.setCalculator(newCalculator);
     }
 
     public static void castingObj ( UIControl obj) {
@@ -29,4 +40,7 @@ public class Main {
         System.out.println(obj);
 
     }
+
+
+
 }
