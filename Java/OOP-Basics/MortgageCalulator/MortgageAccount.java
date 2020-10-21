@@ -10,9 +10,10 @@ public class MortgageAccount {
     private float principle;
     private float yearlyInterest;
     private float monthlyInterest;
-    public float monthlyMortgage;
+    private float monthlyMortgage;
     private byte yearPeriod;
     private short monthPeriod;
+    private short monthsPaidOff;
 
     MortgageAccount(
             String name,
@@ -24,20 +25,20 @@ public class MortgageAccount {
        principle = total;
        yearlyInterest = interest;
        yearPeriod = period;
+       monthsPaidOff = 0;
 
        monthlyInterest = yearlyInterest / PERCENT / MONTHS_IN_YEAR;
        monthPeriod = (short) (yearPeriod * MONTHS_IN_YEAR);
 
-       monthlyMortgage = calculateMortgage(principle, yearPeriod, yearlyInterest);
+       monthlyMortgage = calculateMortgage();
     }
 
-    private float calculateMortgage(float principal, float months, float percentage) {
+    private float calculateMortgage() {
 
         //CALCULATE MORTGAGE
-        float numberOfPayments = months*MONTHS_IN_YEAR;
-        float rate = percentage/PERCENT/MONTHS_IN_YEAR;
-
-        float mortgage = (float) (principal * rate * Math.pow(1+rate, numberOfPayments)/(Math.pow(1+rate, numberOfPayments)-1) );
+        float mortgage = (float) (principle
+                * monthlyInterest * Math.pow(1+monthlyInterest, monthPeriod)
+                /(Math.pow(1+monthlyInterest, monthPeriod)-1) );
 
         //String finalMortgage = NumberFormat.getCurrencyInstance().format(mortgage);
         //System.out.println("\nYour annual mortgage will be: " + finalMortgage);
@@ -48,19 +49,19 @@ public class MortgageAccount {
     public void displayPaymentSchedule() {
 
         String lineSeparator = "_______________________________________________________________";
-        String monthlyPayFormatted = NumberFormat.getCurrencyInstance().format(this.monthlyMortgage);
+        String monthlyPayFormatted = NumberFormat.getCurrencyInstance().format(monthlyMortgage);
         System.out.println(MessageFormat.format(
-                "\nThank you for using our service {4}.\nYour loan of ${0} will be paid off in {1} monthly payments of roughly {2}\n{3}\n\n",
-                this.principle,
-                this.monthPeriod,
+                "\nThank you for using our service {0}.\nYour loan of ${1} will be paid off in {2} monthly payments of roughly {3}\n{4}\n\n",
+                accountHolder,
+                principle,
+                monthPeriod,
                 monthlyPayFormatted,
-                lineSeparator,
-                accountHolder
-        ));
+                lineSeparator
 
+        ));
         int currentMonth = 0;
-        while (currentMonth <= this.monthPeriod) {
-            double ownedMoney = calculateBalanceOwned(this.principle, this.monthPeriod, this.monthlyInterest, currentMonth);
+        while (currentMonth <= monthPeriod) {
+            double ownedMoney = calculateBalanceOwned( currentMonth);
             String ownedMoneyFormatted = NumberFormat.getCurrencyInstance().format(ownedMoney);
             System.out.println(MessageFormat.format("Month {0}: Money Owned - {1}", currentMonth, ownedMoneyFormatted));
             currentMonth += 1;
@@ -68,10 +69,10 @@ public class MortgageAccount {
         System.out.println("\nYour debts are now paid off!");
     };
 
-    private static double calculateBalanceOwned(float principal, float totalPayments, float interest, int currentMonth) {
-        double balance = principal
-                * (Math.pow(1 + interest, totalPayments) - Math.pow(1 + interest, currentMonth))
-                / (Math.pow(1 + interest, totalPayments) - 1);
+    private double calculateBalanceOwned( int currentMonth ) {
+        double balance = principle
+                * (Math.pow(1 + monthlyInterest, monthPeriod) - Math.pow(1 + monthlyInterest, currentMonth))
+                / (Math.pow(1 + monthlyInterest, monthPeriod) - 1);
         return balance;
     }
 }
