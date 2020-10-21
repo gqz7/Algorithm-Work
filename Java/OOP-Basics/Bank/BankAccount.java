@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class BankAccount {
 
-    private static int ACCOUNT_CHAR_LIMIT = 1_000_000_000;
-    private static int ACC_LENGTH = 10;
+    private static final int ACCOUNT_CHAR_LIMIT = 1_000_000_000;
+    private static final int ACC_LENGTH = 10;
 
     private String accountHolderFirstName;
     private String accountHolderLastName;
@@ -28,6 +28,10 @@ public class BankAccount {
         balance = 0;
     }
 
+    public int getBalance () {
+        return balance;
+    }
+
     private static String genAccountNumber () {
         //Ensure there are no repeats by comparing to list of all account numbers
         String randomNumber = formatAccountNumber(Integer.toString((int) Math.round(Math.random() * ACCOUNT_CHAR_LIMIT)));
@@ -46,7 +50,7 @@ public class BankAccount {
     }
 
     public void withdraw ( int amount ) {
-        if (amount > 0) {
+        if (amount > 0 && balance - amount >= 0) {
             balance -= amount;
         }
     }
@@ -62,7 +66,7 @@ public class BankAccount {
     }
 
     public void getAccountBalance () {
-        System.out.println("Your Account Balance is: " + NumberFormat.getCurrencyInstance().format(balance));
+        System.out.println("Your Account Balance is: " + NumberFormat.getCurrencyInstance().format((double) (balance)/100));
     }
 
     public static void showAllNumbers () {
