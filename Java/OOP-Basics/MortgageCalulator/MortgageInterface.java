@@ -4,12 +4,6 @@ import java.text.MessageFormat;
 import java.util.Scanner;
 
 public class MortgageInterface {
-
-    /*
-        Principal: how much of a loan
-        Annual Interest: percentage each year
-        Period (Years taken as months): how long to pay off loan
-    */
     //CONSTANTS
     final static int
             PRINCIPLE_MIN = 500,

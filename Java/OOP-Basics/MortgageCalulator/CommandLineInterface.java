@@ -31,11 +31,11 @@ public class CommandLineInterface {
         try {
             System.out.print(question);
             inputValue = scanner.nextFloat();
-  
+
             return inputValue;
         } catch (Exception e) {
             System.out.println("\nYou must correct data types");
-            return numberFloatQuestion(question, min, max);
+            return numberFloatQuestion(question);
         }
     };
 
@@ -64,11 +64,11 @@ public class CommandLineInterface {
         try {
             System.out.print(question);
             inputValue = scanner.nextByte();
-            
+
             return inputValue;
         } catch (Exception e) {
             System.out.println("\nYou must correct data types");
-            return numberByteQuestion(question, min, max);
+            return numberByteQuestion(question);
         }
     };
 
