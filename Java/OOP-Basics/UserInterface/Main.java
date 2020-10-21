@@ -24,17 +24,17 @@ public class Main {
         //Interfaces & dependency injection
 
         //constructor injection / poor man's dep. injection
-        Calculator2020 cal = new Calculator2020();
-        CalculatorReport report = new CalculatorReport(cal);
+//        Calculator2020 cal = new Calculator2020();
+//        CalculatorReport report = new CalculatorReport(cal);
 
         //setter injection
         //this approach is good if you need to change the dependencies of a class through the lifetime of an application
-        Calculator2020 newCalculator = new Calculator2020();
-        report.setCalculator(newCalculator);
+//        Calculator2020 newCalculator = new Calculator2020();
+//        report.setCalculator(newCalculator);
         // report.useCalculator(); //if method injection wasnt being used a parameter would not need to be passed
 
         //method dependency injection, simply inject the dependency as a param
-        report.useCalculator(newCalculator);
+//        report.useCalculator(newCalculator);
 
     }
 
