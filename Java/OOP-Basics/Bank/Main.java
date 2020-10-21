@@ -11,7 +11,16 @@ public class Main {
 //        }
 //
 //        BankAccount.showAllNumbers();
-            var myAccount = new BankAccount("Test first", "Test last");
-            myAccount.getAccountBalance();
+//            var myAccount = new BankAccount("Test first", "Test last");
+//            myAccount.getAccountBalance();
+
+        var mySavings = new SavingsAccount("bill", "blue");
+        mySavings.deposit(100_000_000);
+        for (int i = 0; i < 7; i++) {
+            mySavings.withdraw(115);
+            mySavings.getAccountBalance();
+            System.out.println(mySavings.getBalance());
+        }
+
     }
 }
