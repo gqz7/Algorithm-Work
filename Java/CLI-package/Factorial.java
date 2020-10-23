@@ -1,15 +1,16 @@
 package com.company;
 import java.text.MessageFormat;
 
-public class Factorial extends Algorithm {
+public class Factorial implements Algorithm {
 
-    String question = "Enter an integer to factorialize (0 - 20)\nInt: ";
+    private String START_QUESTION = "Enter an integer to factorialize (0 - 20)\nInt: ";
+    private String FINAL_MESSAGE = "\nThe Factorial Of {0} is {1}";
 
     @Override
     public void run () {
-        long number = CLI.numberLongQuestion( question, 0, 20);
+        long number = CLI.numberLongQuestion( START_QUESTION, 0, 20);
         long factorial = calculate(number);
-        System.out.println(MessageFormat.format( "\nThe Factorial Of {0} is {1}", number, factorial ));
+        System.out.println(MessageFormat.format( FINAL_MESSAGE, number, factorial ));
     }
 
     private long calculate(long num) {
