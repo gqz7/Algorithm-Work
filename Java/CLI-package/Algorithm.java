@@ -1,9 +1,7 @@
 package com.company;
 
-abstract public class Algorithm {
+public interface Algorithm {
 
-    private String question;
-
-    abstract public void run();
+    void run();
 
 }
