@@ -2,6 +2,7 @@ package com.company;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,6 +40,19 @@ public class FirstExceptions {
                     exception.printStackTrace();
                 }
             }
+        }
+    }
+
+    public void exceptionHandlingWithResources ( String inFileName,  String outFileName ) {
+        try (
+                FileReader reader = new FileReader(inFileName);
+                FileWriter writer = new FileWriter(outFileName);
+        ) {
+            var fileValue = reader.read();
+            //do something with file contents
+            writer.write(fileValue);
+        } catch ( IOException exception ) {
+            System.out.println("Could Not Read/Write File");
         }
     }
 
