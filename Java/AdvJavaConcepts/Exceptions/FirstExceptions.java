@@ -2,6 +2,9 @@ package com.company;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class FirstExceptions {
 
@@ -27,7 +30,7 @@ public class FirstExceptions {
         } catch (IOException exception) {
             System.out.println("Could not read file's data");
         } catch (ParseException exception) {
-            e.printStackTrace();
+            exception.printStackTrace();
             System.out.println("Parsing Error Occured");
         }
     }
