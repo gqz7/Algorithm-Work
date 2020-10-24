@@ -17,6 +17,9 @@ public class Main {
         //this will log a helpful error message to the client
         exceptionThrower.errorWithHandler("aRandomFile.txt");
 
+        //this method examples catching more than one exception
+        exceptionThrower.multipleExceptionsHandled("anotherFileThatDoesntExist.txt");
+
         /*
             Common Runtime Exceptions
 
