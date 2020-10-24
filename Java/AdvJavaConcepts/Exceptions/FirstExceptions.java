@@ -21,17 +21,24 @@ public class FirstExceptions {
     }
 
     public void multipleExceptionsHandled ( String fileName ) {
+        FileReader reader = null;
         try {
-            FileReader reader = new FileReader(fileName);
+            reader = new FileReader(fileName);
             var textValue = reader.read();
             new SimpleDateFormat().parse("");
-        } catch (FileNotFoundException exception) {
-            System.out.println("File does not exist");
-        } catch (IOException exception) {
+        }catch (IOException exception) {
             System.out.println("Could not read file's data");
         } catch (ParseException exception) {
             exception.printStackTrace();
             System.out.println("Parsing Error Occured");
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            }
         }
     }
 
