@@ -28,10 +28,15 @@ public class Main {
         //this method will throw an exception of IllegalArgument if the value is checked and it is negative.
         //since a positive value is being passed nothing will go wrong and an output will log in the console
         try {
-            exceptionThrower.throwingExceptionsManually( 100 );
+            exceptionThrower.throwingExceptionsManually( -100 );
         } catch ( IOException exception ) {
             System.out.println("An unexpected error occurred");
         }
+
+
+        //catching and throwing custom exceptions
+        exceptionThrower.catchingCustomExceptions( -23 );
+
         /*
             Common Runtime Exceptions
 
