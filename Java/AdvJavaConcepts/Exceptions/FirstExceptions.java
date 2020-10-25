@@ -59,13 +59,29 @@ public class FirstExceptions {
     public void throwingExceptionsManually (int value) throws IOException {
         Account myAccount = new Account();
         try {
-            myAccount.deposit(-1);
+            myAccount.deposit(value);
         } catch (IOException exception) {
-//            exception.printStackTrace(); //this would give info to devs as to where to look in the code for the reason for the error
-//            System.out.println("An Error Occurred Depositing"); //this is where a detailed message could go to give the the user
-            throw exception; // this will make the exception need to be handled by the caller of this method
+            //this would give info to devs as to where to look in the code for the reason for the error
+            //exception.printStackTrace();
+
+            //this is where a detailed message could go to give the the user
+            //System.out.println("An Error Occurred Depositing");
+
+            // this will make the exception need to be handled by the caller of this method
+            throw exception;
         }
     }
+
+    public void catchingCustomExceptions (int value) {
+        Account myAccount = new Account();
+        try {
+            myAccount.withdraw(value);
+        } catch ( InsufficientFundsException exception) {
+            //this will display the default message for this type of exception because withdraw does not pass a custom message to this exception class
+            System.out.println(exception.getMessage());
+        }
+    }
+
 
     public static void sayHello( String name ) {
         System.out.println(name.toUpperCase());
