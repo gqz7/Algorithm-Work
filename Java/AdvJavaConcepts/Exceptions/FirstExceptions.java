@@ -56,6 +56,11 @@ public class FirstExceptions {
         }
     }
 
+    public void throwingExceptionsManually (int value) {
+        Account myAccount = new Account();
+        myAccount.deposit(value);
+    }
+
     public static void sayHello( String name ) {
         System.out.println(name.toUpperCase());
     }
