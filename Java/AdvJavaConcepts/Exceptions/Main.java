@@ -21,8 +21,11 @@ public class Main {
         exceptionThrower.multipleExceptionsHandled("anotherFileThatDoesntExist.txt");
 
         //example new exceptions try with resources
-        exceptionThrower.exceptionHandlingWithResources("somefile.txt");
+        exceptionThrower.exceptionHandlingWithResources("infile.txt", "outfile.json");
 
+        //this method will throw an exception of IllegalArgument if the value is checked and it is negative.
+        //since a positive value is being passed nothing will go wrong and an output will log in the console
+        exceptionThrower.throwingExceptionsManually( 100 );
         /*
             Common Runtime Exceptions
 
