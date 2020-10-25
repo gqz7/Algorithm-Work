@@ -20,6 +20,9 @@ public class Main {
         //this method examples catching more than one exception
         exceptionThrower.multipleExceptionsHandled("anotherFileThatDoesntExist.txt");
 
+        //example new exceptions try with resources
+        exceptionThrower.exceptionHandlingWithResources("somefile.txt");
+
         /*
             Common Runtime Exceptions
 
