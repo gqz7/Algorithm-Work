@@ -1,6 +1,8 @@
 package com.company;
 
+import javax.imageio.IIOException;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class Main {
 
@@ -25,7 +27,11 @@ public class Main {
 
         //this method will throw an exception of IllegalArgument if the value is checked and it is negative.
         //since a positive value is being passed nothing will go wrong and an output will log in the console
-        exceptionThrower.throwingExceptionsManually( 100 );
+        try {
+            exceptionThrower.throwingExceptionsManually( 100 );
+        } catch ( IOException exception ) {
+            System.out.println("An unexpected error occurred");
+        }
         /*
             Common Runtime Exceptions
 

@@ -56,9 +56,15 @@ public class FirstExceptions {
         }
     }
 
-    public void throwingExceptionsManually (int value) {
+    public void throwingExceptionsManually (int value) throws IOException {
         Account myAccount = new Account();
-        myAccount.deposit(value);
+        try {
+            myAccount.deposit(-1);
+        } catch (IOException exception) {
+//            exception.printStackTrace(); //this would give info to devs as to where to look in the code for the reason for the error
+//            System.out.println("An Error Occurred Depositing"); //this is where a detailed message could go to give the the user
+            throw exception; // this will make the exception need to be handled by the caller of this method
+        }
     }
 
     public static void sayHello( String name ) {
