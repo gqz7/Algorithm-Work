@@ -10,121 +10,162 @@ public class CLI {
     public static float numberFloatQuestion(String question, int min, int max) {
         float inputValue = 0;
 
-        try {
-            while (true) {
+        while (true) {
+            try {
                 System.out.print(question);
                 inputValue = scanner.nextFloat();
-                if (inputValue >= min && inputValue <= max) {
+                if (inputValue < min || inputValue > max) {
+                    System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
+                } else {
                     break;
                 }
-                System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
+            } catch (Exception e) {
+                scanner.next();
+                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
             }
-            return inputValue;
-        } catch (Exception e) {
-            System.out.println("\nYou must correct data types");
-            return numberFloatQuestion(question, min, max);
         }
+        return inputValue;
     };
 
     public static float numberFloatQuestion(String question) {
         float inputValue = 0;
-
-        try {
-            System.out.print(question);
-            inputValue = scanner.nextFloat();
-
-            return inputValue;
-        } catch (Exception e) {
-            System.out.println("\nYou must correct data types");
-            return numberFloatQuestion(question);
+        while (true) {
+            try {
+                System.out.print(question);
+                inputValue = scanner.nextFloat();
+                break;
+            } catch (Exception e) {
+                scanner.next();
+                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+            }
         }
+        return inputValue;
     };
 
     public static long numberLongQuestion(String question) {
         long inputValue = 0;
-
-        try {
-            System.out.print(question);
-            inputValue = scanner.nextLong();
-
-            return inputValue;
-        } catch (Exception e) {
-            System.out.println("\nYou must correct data types");
-            return numberLongQuestion(question);
+        while (true) {
+            try {
+                System.out.print(question);
+                inputValue = scanner.nextLong();
+                break;
+            } catch (Exception e) {
+                scanner.next();
+                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+            }
         }
+        return inputValue;
     };
 
     public static long numberLongQuestion(String question, int min, int max) {
         long inputValue = 0;
 
-        try {
-            while (true) {
+        while (true) {
+            try {
                 System.out.print(question);
-                inputValue = scanner.nextByte();
-                if (inputValue >= min && inputValue <= max) {
+                inputValue = scanner.nextLong();
+                if (inputValue < min || inputValue > max) {
+                    System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
+                } else {
                     break;
                 }
-                System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
+            } catch (Exception e) {
+                scanner.next();
+                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
             }
-
-            return inputValue;
-        } catch (Exception e) {
-            System.out.println("\nYou must correct data types");
-            return numberLongQuestion(question);
         }
+        return inputValue;
     };
 
     public static byte numberByteQuestion(String question, int min, int max) {
         byte inputValue = 0;
 
-        try {
-            while (true) {
+        while (true) {
+            try {
                 System.out.print(question);
                 inputValue = scanner.nextByte();
-                if (inputValue >= min && inputValue <= max) {
+                if (inputValue < min || inputValue > max) {
+                    System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
+                } else {
                     break;
                 }
-                System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
+            } catch (Exception e) {
+                scanner.next();
+                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
             }
-            return inputValue;
-        } catch (Exception e) {
-            System.out.println("\nYou must correct data types");
-            return numberByteQuestion(question, min, max);
         }
+        return inputValue;
     };
 
     public static byte numberByteQuestion(String question) {
         byte inputValue = 0;
-
-        try {
-            System.out.print(question);
-            inputValue = scanner.nextByte();
-
-            return inputValue;
-        } catch (Exception e) {
-            System.out.println("\nYou must correct data types");
-            return numberByteQuestion(question);
+        while (true) {
+            try {
+                System.out.print(question);
+                inputValue = scanner.nextByte();
+                break;
+            } catch (Exception e) {
+                scanner.next();
+                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+            }
         }
+        return inputValue;
+    };
+
+    public static int numberIntQuestion(String question, int min, int max) {
+        int inputValue = 0;
+
+        while (true) {
+            try {
+                System.out.print(question);
+                inputValue = scanner.nextInt();
+                if (inputValue < min || inputValue > max) {
+                    System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
+                scanner.next();
+                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+            }
+        }
+        return inputValue;
+    };
+
+    public static int numberIntQuestion(String question) {
+        int inputValue = 0;
+        while (true) {
+            try {
+                System.out.print(question);
+                inputValue = scanner.nextInt();
+                break;
+            } catch (Exception e) {
+                scanner.next();
+                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+            }
+        }
+        return inputValue;
     };
 
     public static String stringQuestion(String question) {
         String inputValue = "";
 
-        try {
-            while (true) {
+        while (true) {
+            try {
                 System.out.print(question);
                 inputValue = scanner.nextLine();
-                if (inputValue.trim() != "") {
+                if (inputValue.trim() == "") {
+                    System.out.print("\nWARNING\nYou Can Not Enter An Empty String");
+                } else {
                     break;
                 }
-                System.out.print("\nWARNING\nYou Can Not Enter An Empty String");
+            } catch (Exception e) {
+                scanner.next();
+                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
             }
-            return inputValue;
-        } catch (Exception e) {
-            System.out.println("\nYou must correct data types");
-            return stringQuestion(question);
         }
-    };
 
+        return inputValue;
+    };
 
 }
