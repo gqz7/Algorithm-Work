@@ -14,6 +14,7 @@ public class CLI {
             try {
                 System.out.print(question);
                 inputValue = scanner.nextFloat();
+                scanner.nextLine(); //this is to grab the left over new-line char
                 if (inputValue < min || inputValue > max) {
                     System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
                 } else {
@@ -21,7 +22,7 @@ public class CLI {
                 }
             } catch (Exception e) {
                 scanner.next();
-                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+                printDataErrMsg();
             }
         }
         return inputValue;
@@ -33,10 +34,11 @@ public class CLI {
             try {
                 System.out.print(question);
                 inputValue = scanner.nextFloat();
+                scanner.nextLine(); //this is to grab the left over new-line char
                 break;
             } catch (Exception e) {
                 scanner.next();
-                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+                printDataErrMsg();
             }
         }
         return inputValue;
@@ -48,10 +50,11 @@ public class CLI {
             try {
                 System.out.print(question);
                 inputValue = scanner.nextLong();
+                scanner.nextLine(); //this is to grab the left over new-line char
                 break;
             } catch (Exception e) {
                 scanner.next();
-                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+                printDataErrMsg();
             }
         }
         return inputValue;
@@ -64,6 +67,7 @@ public class CLI {
             try {
                 System.out.print(question);
                 inputValue = scanner.nextLong();
+                scanner.nextLine(); //this is to grab the left over new-line char
                 if (inputValue < min || inputValue > max) {
                     System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
                 } else {
@@ -71,7 +75,7 @@ public class CLI {
                 }
             } catch (Exception e) {
                 scanner.next();
-                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+                printDataErrMsg();
             }
         }
         return inputValue;
@@ -84,6 +88,7 @@ public class CLI {
             try {
                 System.out.print(question);
                 inputValue = scanner.nextByte();
+                scanner.nextLine(); //this is to grab the left over new-line char
                 if (inputValue < min || inputValue > max) {
                     System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
                 } else {
@@ -91,7 +96,7 @@ public class CLI {
                 }
             } catch (Exception e) {
                 scanner.next();
-                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+                printDataErrMsg();
             }
         }
         return inputValue;
@@ -103,10 +108,11 @@ public class CLI {
             try {
                 System.out.print(question);
                 inputValue = scanner.nextByte();
+                scanner.nextLine(); //this is to grab the left over new-line char
                 break;
             } catch (Exception e) {
                 scanner.next();
-                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+                printDataErrMsg();
             }
         }
         return inputValue;
@@ -119,6 +125,7 @@ public class CLI {
             try {
                 System.out.print(question);
                 inputValue = scanner.nextInt();
+                scanner.nextLine(); //this is to grab the left over new-line char
                 if (inputValue < min || inputValue > max) {
                     System.out.print(MessageFormat.format("\nWARNING\nYou did not enter a number in the range of {0} to {1}\n\n", min, max));
                 } else {
@@ -126,7 +133,7 @@ public class CLI {
                 }
             } catch (Exception e) {
                 scanner.next();
-                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+                printDataErrMsg();
             }
         }
         return inputValue;
@@ -138,10 +145,11 @@ public class CLI {
             try {
                 System.out.print(question);
                 inputValue = scanner.nextInt();
+                scanner.nextLine(); //this is to grab the left over new-line char
                 break;
             } catch (Exception e) {
                 scanner.next();
-                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+                printDataErrMsg();
             }
         }
         return inputValue;
@@ -157,15 +165,20 @@ public class CLI {
                 if (inputValue.trim() == "") {
                     System.out.print("\nWARNING\nYou Can Not Enter An Empty String");
                 } else {
+
                     break;
                 }
             } catch (Exception e) {
                 scanner.next();
-                System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+                printDataErrMsg();
             }
         }
 
         return inputValue;
     };
+    
+    private static void printDataErrMsg() {
+        System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
+    }
 
 }
