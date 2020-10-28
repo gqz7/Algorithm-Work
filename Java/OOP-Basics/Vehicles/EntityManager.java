@@ -15,4 +15,16 @@ public class EntityManager {
         allOccupants = new ArrayList<>();
 
     }
+
+    public void addEntity ( Entity newEntity) {
+        allEntities.add( newEntity );
+    }
+
+    public void addVehicle ( Vehicle newEntity) {
+        allVehicles.add( newEntity );
+    }
+
+    public void addOccupant ( Occupant newEntity) {
+        allOccupants.add( newEntity );
+    }
 }
