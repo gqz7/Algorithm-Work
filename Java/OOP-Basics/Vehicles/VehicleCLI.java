@@ -10,9 +10,9 @@ public class VehicleCLI {
             case 1:
                 return createLandVehicle();
             case 2:
-                return createWaterVehicle();
-            case 3:
                 return createAirVehicle();
+            case 3:
+                return createWaterVehicle();
             case 4:
                 return null;
             default:
