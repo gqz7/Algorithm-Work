@@ -29,4 +29,8 @@ public abstract class Vehicle extends Entity {
             System.out.println("You can not add anymore passengers to this vehicle.");
         }
     }
+
+    public int getMaxPassengers() {
+        return maxPassengers;
+    }
 }
