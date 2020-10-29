@@ -11,21 +11,46 @@ public class SimCLI {
 
     public static void mainMenu() {
 
-        String question = "\nMAIN MENU\n__________\nWould you like to...\n1) Create A New Vehicle\n2) Exit the Program\nInput: ";
-        int selection = CLI.numberIntQuestion(question, 1, 2);
+        String question = "\nMAIN MENU\n__________\nWould you like to...\n1) Create A New Vehicle\n2) View Simulation Entities\n3) Exit the Program\nInput: ";
+        int selection = CLI.numberIntQuestion(question, 1, 3);
 
         switch (selection) {
             case 1:
                 SimCLI.vehicleInitialization();
-                return;
+                break;
             case 2:
+                storageView();
+                break;
+            case 3:
                 System.out.println("\nThank you for using this program, now exiting...\n");
-                return;
+                break;
             default:
                 System.out.println("Something went wrong, input out of bounds");
                 mainMenu();
-                return;
+                break;
         }
+    }
+
+    private static void storageView() {
+        String question = "\nWould you like to...\n1) View All Vehicles\n2) View All Occupants\n3) Return Back To Main Menu\nInput: ";
+        int selection = CLI.numberIntQuestion(question, 1, 3);
+        switch (selection) {
+            case 1:
+                Simulation.showAllVehicleInfo();
+                break;
+            case 2:
+                Simulation.showAllOccupantInfo();
+                break;
+            case 3:
+                mainMenu();
+                return;
+            default:
+                System.out.println("Something went wrong, input out of bounds");
+                break;
+        }
+
+        storageView();
+
     }
 
     private static void vehicleInitialization() {
@@ -57,12 +82,10 @@ public class SimCLI {
 
                 break;
             case 2:
-                System.out.println("\nReturning to main menu...\n");
-                mainMenu();
+                System.out.println("\nVehicle is being placed in storage\nReturning to main menu...\n");
                 break;
             default:
                 System.out.println("Something went wrong, input out of bounds");
-                mainMenu();
                 break;
         }
     }

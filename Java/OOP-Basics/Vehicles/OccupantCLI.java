@@ -10,6 +10,7 @@ public class OccupantCLI {
         String operatorsName = CLI.stringQuestion(question);
         Operator vehicleOperator = new Operator(operatorsName);
         //add to simulation and add as operator of new vehicle
+        vehicleOperator.occupying = vehicle;
         vehicle.addOperator( vehicleOperator );
         EntityManager.addOperator( vehicleOperator );
 
@@ -28,6 +29,7 @@ public class OccupantCLI {
         String passengersName = CLI.stringQuestion(question);
         Passenger vehiclePassenger = new Passenger(passengersName);
         //add new passenger to simulation and new vehicle
+        vehiclePassenger.occupying = vehicle;
         vehicle.addPassenger( vehiclePassenger );
         EntityManager.addPassenger( vehiclePassenger );
     }
