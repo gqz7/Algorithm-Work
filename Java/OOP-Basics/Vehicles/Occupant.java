@@ -2,7 +2,7 @@ package com.company;
 
 public abstract class Occupant extends Entity {
 
-    private Vehicle occupying;
+    public Vehicle occupying;
 
     Occupant(String name ) {
         super(name);
@@ -18,4 +18,5 @@ public abstract class Occupant extends Entity {
             System.out.println("Something went wrong, Occupant needs to be Passenger or Operator");
         }
     }
+
 }

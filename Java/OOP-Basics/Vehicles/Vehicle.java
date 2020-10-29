@@ -33,4 +33,13 @@ public abstract class Vehicle extends Entity {
     public int getMaxPassengers() {
         return maxPassengers;
     }
+
+    public int countOccupants() {
+        int count = 0;
+        if (operator != null) count++;
+
+        count += this.passengers.size();
+
+        return count;
+    }
 }

@@ -6,4 +6,10 @@ public class MotorBoat extends Watercraft {
         super( name, maxPassengers);
         motorHorsePower = horsePower;
     }
+
+    public MotorBoat( String name ) {
+        super( name, 20);
+        motorHorsePower = 555;
+    }
+
 }
