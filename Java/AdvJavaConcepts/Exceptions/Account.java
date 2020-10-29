@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.Exceptions.AccountException;
+import com.company.Exceptions.InsufficientFundsException;
+
 import java.io.IOException;
 
 
@@ -19,5 +22,10 @@ public class Account {
             throw new InsufficientFundsException();
         }
 
+    }
+
+    public void withdrawWithChainedException ( int value) throws AccountException {
+        if ( value > balance)
+            throw new AccountException( new InsufficientFundsException("Not enough funds"));
     }
 }
