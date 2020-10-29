@@ -2,11 +2,11 @@ package com.company;
 
 public class GenericComparableList<E extends Comparable> {
 
-    private E[] items;
+    public E[] items;
     private int count = 0;
 
     public GenericComparableList(int length ) {
-        items = (E[]) new Object[length];
+        items = (E[]) new Comparable[length];
     }
 
     public void add( E item) {
@@ -26,4 +26,7 @@ public class GenericComparableList<E extends Comparable> {
         }
     }
 
+    public int getCount() {
+        return count;
+    }
 }
