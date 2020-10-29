@@ -8,4 +8,9 @@ public class Admin extends User {
         super(1000);
         adminID = "ID-" + ++adminsMade;
     }
+
+    @Override
+    public String toString () {
+        return username + ": " + points + ", Admin: " + adminID;
+    }
 }

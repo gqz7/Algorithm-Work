@@ -32,5 +32,21 @@ public class Main {
             System.out.println("userOne has less points");
         }
 
+        //using a utils class to create a generic method and get the user's points who has the max value
+        int maxUserPoints = Utils.max(userOne.points, userTwo.points);
+        System.out.println("The max user points is: " + maxUserPoints);
+
+        //using utils to show generic methods with more than one generic type
+        Utils.print(userTwo.username, userTwo.points);
+
+        //testing the new Utils method and the admin class
+        Admin firstAdmin = new Admin();
+
+        var allUsers = new GenericComparableList(3);
+        allUsers.add(userOne);
+        allUsers.add(userTwo);
+        allUsers.add(firstAdmin);
+
+        Utils.printUsers(allUsers);
     }
 }
