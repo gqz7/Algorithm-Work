@@ -17,6 +17,8 @@ public class OccupantCLI {
             createAndAddPassenger( vehicle, i );
         }
 
+        System.out.println("\nYour new vehicle is now in storage!\n");
+
     }
 
     private static void createAndAddPassenger(Vehicle vehicle, int passengerNum) {

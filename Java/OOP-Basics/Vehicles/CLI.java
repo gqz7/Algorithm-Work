@@ -176,7 +176,7 @@ public class CLI {
 
         return inputValue;
     };
-    
+
     private static void printDataErrMsg() {
         System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
     }
