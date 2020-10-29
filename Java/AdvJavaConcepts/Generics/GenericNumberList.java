@@ -1,12 +1,12 @@
 package com.company;
 
-public class GenericListWithConstraints<E extends Number> {
+public class GenericNumberList<E extends Number> {
 
     private E[] items;
     private int count = 0;
 
-    public GenericListWithConstraints (int length ) {
-        items = (E[]) new Object[length];
+    public GenericNumberList(int length ) {
+        items = (E[]) new Number[length];
     }
 
     public void add( E item) {
