@@ -1,6 +1,6 @@
 package com.company;
 
-public class CountingValleys implements Algorithm {
+public class HikingTracker implements Algorithm {
 
     public static int[] countingValleys(int steps, String path) {
         int elevation = 0;
@@ -42,6 +42,7 @@ public class CountingValleys implements Algorithm {
 
     @Override
     public void run() {
+        printWelcomeMsg();
 
         System.out.println("To represent up in elevation use U\nTo represent down in elevation use D\n");
 
@@ -51,11 +52,16 @@ public class CountingValleys implements Algorithm {
 
         int[] results = countingValleys(steps, path);
 
-        String valleyMsg = results[0] + (results[0] == 1 ? " valley," : " valleys,");
-        String mountainMsg = results[1] + (results[1] == 1 ? " mountain," : " mountains,");
-        String finalMessage = "The Hiker traversed " + valleyMsg + mountainMsg + " with a final elevation of " + results[2] + " units." ;
+        String valleyMsg = results[0] + (results[0] == 1 ? " valley, " : " valleys, ");
+        String mountainMsg = results[1] + (results[1] == 1 ? " mountain, " : " mountains, ");
+        String finalMessage = "The Hiker traversed " + valleyMsg + mountainMsg + "with a final elevation of " + results[2] + " units." ;
 
         System.out.println(finalMessage);
+    }
+
+    @Override
+    public void printWelcomeMsg() {
+        System.out.println("\n\n-----------------------------\nHIKE TRACKER\n_____________________________\n\n");
     }
 }
 

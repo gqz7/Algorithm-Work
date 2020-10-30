@@ -4,4 +4,5 @@ public interface Algorithm {
 
     void run();
 
+    void printWelcomeMsg();
 }

@@ -3,7 +3,7 @@ package com.company;
 import java.text.MessageFormat;
 import java.util.*;
 
-public class ApplesOranges implements Algorithm {
+public class FarFromTheTree implements Algorithm {
 
     static void countApplesAndOranges(int houseStart, int houseEnd, int appleTreePos, int orangeTreePos, int[] apples, int[] oranges) {
 
@@ -42,6 +42,8 @@ public class ApplesOranges implements Algorithm {
     @Override
     public void run() {
 
+        printWelcomeMsg();
+
         System.out.println("Fruits are falling everywhere!\nYou will enter in the 1D dimensions of the house");
         System.out.println("Where the fruit trees are, and how far the fruits are falling from the tree.");
         System.out.println("Then we will calculate how many fruits fell on the house.\n\n");
@@ -74,6 +76,11 @@ public class ApplesOranges implements Algorithm {
         countApplesAndOranges(houseStart, houseEnd, appleTreePos, orangeTreePos, apples, oranges);
 
         scanner.close();
+    }
+
+    @Override
+    public void printWelcomeMsg() {
+        System.out.println("\n\n-----------------------------\nNOT FAR FROM THE TREE\n_____________________________\n\n");
     }
 
 }
