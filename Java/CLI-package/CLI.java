@@ -10,6 +10,8 @@ public class CLI {
     public static float numberFloatQuestion(String question, int min, int max) {
         float inputValue = 0;
 
+        question += MessageFormat.format(" ({0} - {1})\nFloat: ", min, max);
+
         while (true) {
             try {
                 System.out.print(question);
@@ -30,6 +32,9 @@ public class CLI {
 
     public static float numberFloatQuestion(String question) {
         float inputValue = 0;
+
+        question += "\nFloat: ";
+
         while (true) {
             try {
                 System.out.print(question);
@@ -46,6 +51,9 @@ public class CLI {
 
     public static long numberLongQuestion(String question) {
         long inputValue = 0;
+
+        question += "\nLong: ";
+
         while (true) {
             try {
                 System.out.print(question);
@@ -62,6 +70,8 @@ public class CLI {
 
     public static long numberLongQuestion(String question, int min, int max) {
         long inputValue = 0;
+
+        question += MessageFormat.format(" ({0} - {1})\nLong: ", min, max);
 
         while (true) {
             try {
@@ -84,6 +94,8 @@ public class CLI {
     public static byte numberByteQuestion(String question, int min, int max) {
         byte inputValue = 0;
 
+        question += MessageFormat.format(" ({0} - {1})\nByte: ", min, max);
+
         while (true) {
             try {
                 System.out.print(question);
@@ -103,6 +115,9 @@ public class CLI {
     };
 
     public static byte numberByteQuestion(String question) {
+
+        question += "\nByte: ";
+
         byte inputValue = 0;
         while (true) {
             try {
@@ -120,6 +135,8 @@ public class CLI {
 
     public static int numberIntQuestion(String question, int min, int max) {
         int inputValue = 0;
+
+        question += MessageFormat.format(" ({0} - {1})\nInt: ", min, max);
 
         while (true) {
             try {
@@ -141,6 +158,9 @@ public class CLI {
 
     public static int numberIntQuestion(String question) {
         int inputValue = 0;
+
+        question += "\nInt: ";
+
         while (true) {
             try {
                 System.out.print(question);
@@ -157,6 +177,8 @@ public class CLI {
 
     public static String stringQuestion(String question) {
         String inputValue = "";
+
+        question += "\nString: ";
 
         while (true) {
             try {
@@ -176,7 +198,7 @@ public class CLI {
 
         return inputValue;
     };
-    
+
     private static void printDataErrMsg() {
         System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
     }
