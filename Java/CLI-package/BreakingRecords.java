@@ -36,6 +36,8 @@ public class BreakingRecords implements Algorithm {
 
     @Override
     public void run() {
+        printWelcomeMsg();
+
         int n = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
@@ -51,6 +53,11 @@ public class BreakingRecords implements Algorithm {
         int[] result = breakingRecords(scores);
 
         scanner.close();
+    }
+
+    @Override
+    public void printWelcomeMsg() {
+        System.out.println("\n\n-----------------------------\nBREAKING RECORDS\n_____________________________\n\n");
     }
 }
 

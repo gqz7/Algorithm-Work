@@ -8,6 +8,8 @@ public class Factorial implements Algorithm {
 
     @Override
     public void run () {
+        printWelcomeMsg();
+
         long number = CLI.numberLongQuestion( START_QUESTION, 0, 20);
         long factorial = calculate(number);
         System.out.println(MessageFormat.format( FINAL_MESSAGE, number, factorial ));
@@ -20,6 +22,11 @@ public class Factorial implements Algorithm {
             count++;
         }
         return factorial;
+    }
+
+    @Override
+    public void printWelcomeMsg() {
+        System.out.println("\n\n-----------------------------\nFACTORIAL CALCULATOR\n_____________________________\n\n");
     }
 
 }

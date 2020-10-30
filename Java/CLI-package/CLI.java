@@ -10,7 +10,7 @@ public class CLI {
     public static float numberFloatQuestion(String question, int min, int max) {
         float inputValue = 0;
 
-        question += MessageFormat.format(" ({0} - {1})\nFloat: ", min, max);
+        question += MessageFormat.format("\n\nChoices ({0} <--> {1})\nFloat: ", min, max);
 
         while (true) {
             try {
@@ -71,7 +71,7 @@ public class CLI {
     public static long numberLongQuestion(String question, int min, int max) {
         long inputValue = 0;
 
-        question += MessageFormat.format(" ({0} - {1})\nLong: ", min, max);
+        question += MessageFormat.format("\n\nChoices ({0} <--> {1})\nLong: ", min, max);
 
         while (true) {
             try {
@@ -94,7 +94,7 @@ public class CLI {
     public static byte numberByteQuestion(String question, int min, int max) {
         byte inputValue = 0;
 
-        question += MessageFormat.format(" ({0} - {1})\nByte: ", min, max);
+        question += MessageFormat.format("\n\nChoices ({0} <--> {1})\nByte: ", min, max);
 
         while (true) {
             try {
@@ -136,7 +136,7 @@ public class CLI {
     public static int numberIntQuestion(String question, int min, int max) {
         int inputValue = 0;
 
-        question += MessageFormat.format(" ({0} - {1})\nInt: ", min, max);
+        question += MessageFormat.format("\n\nChoices ({0} <--> {1})\nInt: ", min, max);
 
         while (true) {
             try {
