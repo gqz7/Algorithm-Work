@@ -33,7 +33,7 @@ public class ApplesOranges implements Algorithm {
 
         }
 
-        System.out.println("Number of apples that fell on the house: " + appleTotal + "\nNumber of oranges that fell on the house: " + orangeTotal);
+        System.out.println("\n" + appleTotal + " apples fell on the house,\nand" + orangeTotal + " oranges fell on the house.");
 
     }
 
@@ -42,47 +42,36 @@ public class ApplesOranges implements Algorithm {
     @Override
     public void run() {
 
-        System.out.println("Paste data below:");
+        System.out.println("Fruits are falling everywhere!\nYou will enter in the 1D dimensions of the house");
+        System.out.println("Where the fruit trees are, and how far the fruits are falling from the tree.");
+        System.out.println("Then we will calculate how many fruits fell on the house.\n\n");
 
-        String[] st = scanner.nextLine().split(" ");
+        int houseStart = CLI.numberIntQuestion("Where is the house's left side?", 0, 100);
 
-        int s = Integer.parseInt(st[0]);
+        int houseEnd = CLI.numberIntQuestion("Where is the house's left side?", houseStart+1, houseStart+100);
 
-        int t = Integer.parseInt(st[1]);
+        int appleTreePos = CLI.numberIntQuestion("Where is the apple tree?", -1000, 1000);
 
-        String[] ab = scanner.nextLine().split(" ");
+        int orangeTreePos = CLI.numberIntQuestion("Where is the orange tree?", -1000, 1000);
 
-        int a = Integer.parseInt(ab[0]);
 
-        int b = Integer.parseInt(ab[1]);
+        int totalApples = CLI.numberIntQuestion("How many apples fell?", 1, 77);
+        int totalOranges = CLI.numberIntQuestion("How many oranges fell?", 1, 77);
 
-        String[] mn = scanner.nextLine().split(" ");
+        int[] apples = new int[totalApples];
+        int[] oranges = new int[totalOranges];
 
-        int m = Integer.parseInt(mn[0]);
-
-        int n = Integer.parseInt(mn[1]);
-
-        int[] apples = new int[m];
-
-        String[] applesItems = scanner.nextLine().split(" ");
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-        for (int i = 0; i < m; i++) {
-            int applesItem = Integer.parseInt(applesItems[i]);
+        for (int i = 1; i <= totalApples; i++) {
+            int applesItem = CLI.numberIntQuestion("How far did apple #" + i + " fall from the tree?", -100, 100);
             apples[i] = applesItem;
         }
 
-        int[] oranges = new int[n];
-
-        String[] orangesItems = scanner.nextLine().split(" ");
-//        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-        for (int i = 0; i < n; i++) {
-            int orangesItem = Integer.parseInt(orangesItems[i]);
-            oranges[i] = orangesItem;
+        for (int i = 1; i <= totalOranges; i++) {
+            int orangeItem = CLI.numberIntQuestion("How far did orange #" + i + " fall from the tree?", -100, 100);
+            oranges[i] = orangeItem;
         }
 
-        countApplesAndOranges(s, t, a, b, apples, oranges);
+        countApplesAndOranges(houseStart, houseEnd, appleTreePos, orangeTreePos, apples, oranges);
 
         scanner.close();
     }
