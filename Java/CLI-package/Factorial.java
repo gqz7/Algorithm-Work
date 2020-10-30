@@ -3,7 +3,7 @@ import java.text.MessageFormat;
 
 public class Factorial implements Algorithm {
 
-    private String START_QUESTION = "Enter an integer to factorialize (0 - 20)\nInt: ";
+    private String START_QUESTION = "Enter an integer to factorialize";
     private String FINAL_MESSAGE = "\nThe Factorial Of {0} is {1}";
 
     @Override

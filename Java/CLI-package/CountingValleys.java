@@ -45,7 +45,7 @@ public class CountingValleys implements Algorithm {
 
         System.out.println("To represent up in elevation use U\nTo represent down in elevation use D\n");
 
-        String path = CLI.stringQuestion("Enter a string to represent the terrains topography\nString: ");
+        String path = CLI.stringQuestion("Enter a string to represent the terrains topography");
 
         int steps = path.length();
 
