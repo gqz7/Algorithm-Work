@@ -55,9 +55,20 @@ public class HikingTracker implements Algorithm {
 
     public static void showHikeRoute( int low, int high, int endElevation, String convertedPath, int[] elevation) {
 
+        int startElevation = 0;
+
+        if (convertedPath.charAt(convertedPath.length()-1) == '/') {
+            endElevation++;
+        }
+
+        if (startElevation > high)
+            high = startElevation;
+        else if ( endElevation > high )
+            high = endElevation;
+
         for (int i = high; i >= low; i--) {
             int curElev = i;
-            if (i == 0)
+            if (i == startElevation)
                 System.out.print("_");
             else
                 System.out.print(" ");
@@ -77,6 +88,11 @@ public class HikingTracker implements Algorithm {
     }
 
     private int[] calculateValleysMountains(int steps, String path) {
+
+//        for (int i = 0; i < ; i++) {
+//
+//        }
+
         return new int[] {0, 0, 0};
     }
 
@@ -86,7 +102,7 @@ public class HikingTracker implements Algorithm {
 
         System.out.println("To represent up in elevation use U\nTo represent down in elevation use D\n");
 
-        String path = "DDUUDDUDUUUD";//CLI.stringQuestion("Enter a string to represent the terrains topography");
+        String path = CLI.stringQuestion("Enter a string to represent the terrains topography");
 
         path = path.toUpperCase().replaceAll("[^UD]","");
 
@@ -100,7 +116,7 @@ public class HikingTracker implements Algorithm {
 
         System.out.println(finalMessage);
 
-        boolean showGraphic = true;//CLI.yesOrNo("\nWould you like to see a graphical depiction of the terrain hiked?");
+        boolean showGraphic = CLI.yesOrNo("\nWould you like to see a graphical depiction of the terrain hiked?");
 
         if (showGraphic) {
 
