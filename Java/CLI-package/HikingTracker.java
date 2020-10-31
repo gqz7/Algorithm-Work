@@ -55,16 +55,21 @@ public class HikingTracker implements Algorithm {
 
     public static void showHikeRoute( int low, int high, int endElevation, String convertedPath, int[] elevation) {
 
+        System.out.println("\nTERRAIN MAP\n____________\n");
+
         int startElevation = 0;
 
         if (convertedPath.charAt(convertedPath.length()-1) == '/') {
             endElevation++;
         }
+        if (convertedPath.charAt(0) == '\\' && convertedPath.charAt(1) != '\\')
+            startElevation++;
 
-        if (startElevation > high)
-            high = startElevation;
-        else if ( endElevation > high )
-            high = endElevation;
+        int maxElevation = endElevation;
+        if (startElevation > maxElevation)
+            maxElevation = startElevation;
+        if ( maxElevation > high )
+            high = maxElevation;
 
         for (int i = high; i >= low; i--) {
             int curElev = i;
@@ -88,12 +93,26 @@ public class HikingTracker implements Algorithm {
     }
 
     private int[] calculateValleysMountains(int steps, String path) {
+        int elevation = 0;
+        int valleys = 0;
+        int mountains = 0;
 
-//        for (int i = 0; i < ; i++) {
-//
-//        }
+        for (int i = 0; i < steps; i++) {
+            int prevElev = elevation;
+            if (path.charAt(i) == 'U') {
+                elevation++;
+            } else if (path.charAt(i) == 'D') {
+                elevation--;
+            }
 
-        return new int[] {0, 0, 0};
+            if (prevElev == -1 && elevation == 0) {
+                valleys++;
+            } else if (prevElev == 1 && elevation == 0) {
+                mountains++;
+            }
+        }
+
+        return new int[] {valleys, mountains, elevation}; //v, m, e
     }
 
     @Override
@@ -122,12 +141,12 @@ public class HikingTracker implements Algorithm {
 
             int[][] allResults = calculateHikeVisualData(steps, path);
 
-            int[] results = allResults[0];
+            int[] visualData = allResults[0];
             int[] elevationData = allResults[1];
 
             String convertedPath = path.replaceAll("U","/").replaceAll("D", "\\\\");
 //            System.out.println(path + "\n" + convertedPath);
-            showHikeRoute( results[0], results[1], results[2], convertedPath, elevationData);
+            showHikeRoute( visualData[0], visualData[1], visualData[2], convertedPath, elevationData);
         } else {
             System.out.println("Okay, retuning to main menu!");
         }
