@@ -5,18 +5,17 @@ import java.util.*;
 
 public class BreakingRecords implements Algorithm {
 
-    private static final Scanner scanner = new Scanner(System.in);
 
-    static int[] breakingRecords(int[] scores) {
+    static float[] breakingRecords(float[] scores) {
 
-        int highestScore = scores[0];
-        int lowestScore = scores[0];
+        float highestScore = scores[0];
+        float lowestScore = scores[0];
 
         //two ints to keep of how many times the high/low score have changed throught the series of games
-        int numberHighScoreChanged = 0;
-        int numberLowScoreChanged = 0;
+        float numberHighScoreChanged = 0;
+        float numberLowScoreChanged = 0;
 
-        for ( int gameScore: scores ) {
+        for ( float gameScore: scores ) {
             /*
                 Sudo Code
                 if the gameScore is GT highestScore, set the HS and increment the numHSChng
@@ -31,28 +30,31 @@ public class BreakingRecords implements Algorithm {
             }
         }
 
-        return new int[] {numberHighScoreChanged, numberLowScoreChanged};
+        return new float[] {numberHighScoreChanged, numberLowScoreChanged, highestScore, lowestScore};
     }
 
     @Override
     public void run() {
         printWelcomeMsg();
 
-        int n = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        System.out.println("This algorithm will count how many times your highest score and lowest score changed in a series of games/scores");
+        System.out.println("First you will enter how many scores were recorded, then you will enter each score one at a time\n");
 
-        int[] scores = new int[n];
+        int numberOfScores = CLI.numberIntQuestion("How many scores were recorded?", 2, 100);
+        float[] scores = new float[numberOfScores];
 
-        String[] scoresItems = scanner.nextLine().split(" ");
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-        for (int i = 0; i < n; i++) { int scoresItem = Integer.parseInt(scoresItems[i]);
-            scores[i] = scoresItem;
+        for (int i = 0; i < numberOfScores; i++) {
+            scores[i] = CLI.numberFloatQuestion("\nEnter score #" + (i+1), -999_999_999, 999_999_999);
         }
 
-        int[] result = breakingRecords(scores);
+        float[] result = breakingRecords(scores);
 
-        scanner.close();
+        System.out.println(
+                "\n\nRESULTS\n___________\n\nThe High-Score was broken" +
+                MessageFormat.format(" {0} times.\nThe Low-Score was broken {1} times\nFinal HS: {2}\nFinal LS: {3}",
+                result[0], result[1], result[2], result[3])
+        );
+
     }
 
     @Override
