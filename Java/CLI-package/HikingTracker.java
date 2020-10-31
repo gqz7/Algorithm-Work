@@ -48,15 +48,19 @@ public class HikingTracker implements Algorithm {
 
         }
 
-        int[][] results = {{ lowestEle, highestEle }, elevationTracker };
+        int[][] results = {{ lowestEle, highestEle, elevation }, elevationTracker };
 
         return results;
     }
 
-    public static void showHikeRoute( int low, int high, String convertedPath, int[] elevation) {
+    public static void showHikeRoute( int low, int high, int endElevation, String convertedPath, int[] elevation) {
 
         for (int i = high; i >= low; i--) {
             int curElev = i;
+            if (i == 0)
+                System.out.print("_");
+            else
+                System.out.print(" ");
             for (int j = 0; j < convertedPath.length(); j++) {
                 if ( elevation[j] == curElev) {
                     System.out.print(convertedPath.charAt(j));
@@ -64,6 +68,10 @@ public class HikingTracker implements Algorithm {
                     System.out.print(" ");
                 }
             }
+            if (i == endElevation)
+                System.out.print("_");
+            else
+                System.out.print(" ");
             System.out.println();
         }
     }
@@ -103,7 +111,7 @@ public class HikingTracker implements Algorithm {
 
             String convertedPath = path.replaceAll("U","/").replaceAll("D", "\\\\");
 //            System.out.println(path + "\n" + convertedPath);
-            showHikeRoute( results[0], results[1], convertedPath, elevationData);
+            showHikeRoute( results[0], results[1], results[2], convertedPath, elevationData);
         } else {
             System.out.println("Okay, retuning to main menu!");
         }
