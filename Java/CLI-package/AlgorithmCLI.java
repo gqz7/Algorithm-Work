@@ -20,10 +20,26 @@ public class AlgorithmCLI {
         }
     }
 
+    private static String listOptions() {
+        String opt = "\n--------------------\nAlgorithm Selection\n____________________\nMake a choice...";
+        opt += "\n1) Factorial";
+        opt += "\n2) Hike Tracker";
+        opt += "\n3) Breaking Records";
+        opt += "\n4) Not Far From The Tree";
+        opt += "\n5) Fibonacci Sequence";
+        opt += "\n6) String Reverser";
+        opt += "\n7) String Repeater";
+        opt += "\n8) String Case Converter";
+        opt += "\n9) Back To Main Menu";
+
+        return opt;
+
+}
+
     private static void algorithmSelection() {
 
-        String question = "\n--------------------\nAlgorithm Selection\n____________________\nMake a choice...\n1) Factorial\n2) Hike Tracker\n3) Breaking Records\n4) Not Far From The Tree\n5} Fibonacci Sequence\n6) Back To Main Menu";
-        int selection = CLI.numberIntQuestion(question, 1, 5);
+        String question = listOptions();
+        int selection = CLI.numberIntQuestion(question, 1, 9);
 
         switch (selection) {
 
@@ -44,6 +60,15 @@ public class AlgorithmCLI {
                 new FibonacciSequence().run();
                 break;
             case 6:
+                new StringReverser().run();
+                break;
+            case 7:
+                new StringRepeater().run();
+                break;
+            case 8:
+                new StringCaseConverter().run();
+                break;
+            case 9:
                 System.out.println("\nHeading back to main menu...\n");
                 break;
             default:

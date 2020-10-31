@@ -34,17 +34,12 @@ public class FibonacciSequence implements Algorithm {
     public void run () {
         printWelcomeMsg();
 
-        try {
-            String fibQuestion = ("Enter an integer for the number of rounds through the fibonacci sequence to calculate");
-            String processQuestion = ("Do you want to see the whole fibonacci sequence?");
-            long number = CLI.numberLongQuestion(fibQuestion, 0, 93);
-            boolean showFibProcess = CLI.yesOrNo(processQuestion);
-            String finalFib = fibCalculation(number, showFibProcess);
-            System.out.println(MessageFormat.format("\n\nThe {0} Number In The Fibonacci Sequence Is {1}", number, finalFib));
-
-        } catch (Exception e) {
-            System.out.println("An unexpected error occurred in the program!");
-        }
+        String fibQuestion = ("Enter an integer for the number of rounds through the fibonacci sequence to calculate");
+        String processQuestion = ("Do you want to see the whole fibonacci sequence?");
+        long number = CLI.numberLongQuestion(fibQuestion, 0, 93);
+        boolean showFibProcess = CLI.yesOrNo(processQuestion);
+        String finalFib = fibCalculation(number, showFibProcess);
+        System.out.println(MessageFormat.format("\n\nThe {0} Number In The Fibonacci Sequence Is {1}", number, finalFib));
 
     }
 
