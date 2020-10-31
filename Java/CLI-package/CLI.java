@@ -199,6 +199,30 @@ public class CLI {
         return inputValue;
     };
 
+    public static boolean yesOrNo (String question) {
+        question += "\n( YES / NO )\nInput: ";
+        String inputValue = "";
+
+        while (true) {
+            try {
+                System.out.print(question);
+                inputValue = scanner.nextLine();
+                if (inputValue.trim() == "") {
+                    System.out.print("\nWARNING\nYou Can Not Enter An Empty String");
+                } else if (inputValue.toLowerCase().charAt(0) == 'y'){
+                    return true;
+                } else if (inputValue.toLowerCase().charAt(0) == 'n') {
+                    return false;
+                } else {
+                    System.out.println("\nWARNING\nYou must answer Yes OR No");
+                }
+            } catch (Exception e) {
+                scanner.next();
+                printDataErrMsg();
+            }
+        }
+    }
+
     private static void printDataErrMsg() {
         System.out.println("\nWARNING\nYou must enter the correct data type, try again...\n");
     }
