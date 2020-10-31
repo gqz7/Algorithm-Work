@@ -1,19 +1,13 @@
 package com.company;
 
-import java.util.Collection;
-import java.util.List;
-
 public class HikingTracker implements Algorithm {
 
-    public static int[][] countingValleys(int steps, String path) {
+    public static int[][] calculateHikeVisualData(int steps, String path) {
         int elevation = 0;
         int lowestEle = 0;
         int highestEle = 0;
-        int valleys = 0;
-        int mountains = 0;
         int[] elevationTracker = new int[steps];
 
-        boolean aboveSea = path.charAt(0) == 'U';
         for (int i = 0; i < steps; i++) {
             //System.out.println(path.charAt(i));
             switch (path.charAt(i)) {
@@ -30,13 +24,6 @@ public class HikingTracker implements Algorithm {
                     if (elevation < lowestEle)
                         lowestEle = elevation;
 
-                    if (aboveSea && elevation == 0) {
-                        mountains++;
-                        aboveSea = false;
-                        System.out.println(i + " mount");
-
-                    }
-
                     break;
                 case 'U':
                     //System.out.println("Going up!");
@@ -51,12 +38,6 @@ public class HikingTracker implements Algorithm {
                     if (elevation > highestEle)
                         highestEle = elevation;
 
-                    if (!aboveSea && elevation == -2) {
-                        valleys++;
-                        aboveSea = true;
-                        System.out.println(i + " valley");
-                    }
-
                     break;
                 default:
                     System.out.println("Invalid Input...");
@@ -65,16 +46,9 @@ public class HikingTracker implements Algorithm {
 
             elevationTracker[i] = elevation;
 
-            if (i == steps-1) {
-                if (path.charAt(i) == 'D')
-                    elevation--;
-                else
-                    elevation++;
-            }
         }
 
-
-        int[][] results = {{valleys, mountains, elevation, lowestEle, highestEle}, elevationTracker };
+        int[][] results = {{ lowestEle, highestEle }, elevationTracker };
 
         return results;
     }
@@ -94,6 +68,10 @@ public class HikingTracker implements Algorithm {
         }
     }
 
+    private int[] calculateValleysMountains(int steps, String path) {
+        return new int[] {0, 0, 0};
+    }
+
     @Override
     public void run() {
         printWelcomeMsg();
@@ -106,23 +84,26 @@ public class HikingTracker implements Algorithm {
 
         int steps = path.length();
 
-        int[][] allResults = countingValleys(steps, path);
+        int[] hikeData = calculateValleysMountains(steps, path);
 
-        int[] results = allResults[0];
-        int[] elevationData = allResults[1];
-
-        String valleyMsg = results[0] + (results[0] == 1 ? " valley, " : " valleys, ");
-        String mountainMsg = results[1] + (results[1] == 1 ? " mountain, " : " mountains, ");
-        String finalMessage = "\nThe Hiker traversed " + valleyMsg + mountainMsg + "with a final elevation of " + results[2] + " units.\n" ;
+        String valleyMsg = hikeData[0] + (hikeData[0] == 1 ? " valley, " : " valleys, ");
+        String mountainMsg = hikeData[1] + (hikeData[1] == 1 ? " mountain, " : " mountains, ");
+        String finalMessage = "\nThe Hiker traversed " + valleyMsg + mountainMsg + "with a final elevation of " + hikeData[2] + " units.\n" ;
 
         System.out.println(finalMessage);
 
         boolean showGraphic = true;//CLI.yesOrNo("\nWould you like to see a graphical depiction of the terrain hiked?");
 
         if (showGraphic) {
+
+            int[][] allResults = calculateHikeVisualData(steps, path);
+
+            int[] results = allResults[0];
+            int[] elevationData = allResults[1];
+
             String convertedPath = path.replaceAll("U","/").replaceAll("D", "\\\\");
 //            System.out.println(path + "\n" + convertedPath);
-            showHikeRoute( results[3], results[4], convertedPath, elevationData);
+            showHikeRoute( results[0], results[1], convertedPath, elevationData);
         } else {
             System.out.println("Okay, retuning to main menu!");
         }
