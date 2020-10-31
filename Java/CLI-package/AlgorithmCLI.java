@@ -22,7 +22,7 @@ public class AlgorithmCLI {
 
     private static void algorithmSelection() {
 
-        String question = "\n--------------------\nAlgorithm Selection\n____________________\nMake a choice...\n1) Factorial\n2) Hike Tracker\n3) Breaking Records\n4) Not Far From The Tree\n5) Back To Main Menu";
+        String question = "\n--------------------\nAlgorithm Selection\n____________________\nMake a choice...\n1) Factorial\n2) Hike Tracker\n3) Breaking Records\n4) Not Far From The Tree\n5} Fibonacci Sequence\n6) Back To Main Menu";
         int selection = CLI.numberIntQuestion(question, 1, 5);
 
         switch (selection) {
@@ -41,6 +41,9 @@ public class AlgorithmCLI {
                 new FarFromTheTree().run();
                 break;
             case 5:
+                new FibonacciSequence().run();
+                break;
+            case 6:
                 System.out.println("\nHeading back to main menu...\n");
                 break;
             default:
