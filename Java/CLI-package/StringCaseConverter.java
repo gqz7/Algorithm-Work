@@ -5,12 +5,14 @@ public class StringCaseConverter implements Algorithm  {
     public void run () {
         printWelcomeMsg();
 
-        String selectionMsg = "How would you like to case your string\n1) Title Case\n2) OR Return Back To Main Menu";
+        String selectionMsg = "How would you like to case your string\n1) Title Case\n2) spinal-case\n3) OR Return Back To Main Menu";
         String inputMsg = "\nEnter a string to be transformed";
 
-        int caseOption = CLI.numberIntQuestion(selectionMsg, 1, 2);
+        int exitOption = 3;
 
-        if (caseOption == 2) return;
+        int caseOption = CLI.numberIntQuestion(selectionMsg, 1, exitOption);
+
+        if (caseOption == exitOption) return;
 
         String inputStr = CLI.stringQuestion(inputMsg);
 
@@ -19,6 +21,12 @@ public class StringCaseConverter implements Algorithm  {
                 String titleCased = titleCaseString(inputStr);
                 System.out.println("\nTITLE CASING YOUR INPUT...\n");
                 System.out.println("Your title cased string is:\n\n" + titleCased);
+
+                break;
+            case 2:
+                String spinalCased = spinalCaseString(inputStr);
+                System.out.println("\nSPINAL CASING YOUR INPUT...\n");
+                System.out.println("Your spinal cased string is:\n\n" + spinalCased);
 
                 break;
             default:
@@ -41,6 +49,26 @@ public class StringCaseConverter implements Algorithm  {
         }
         return titleCased.toString();
     }
+
+    public static String spinalCaseString (String inStr ) {
+        StringBuilder spinalCased = new StringBuilder();
+
+        //replace all the uneven amounts of space with a single space, then split into array for minipulation
+        String[] originalStr = inStr.replaceAll("\\s+", " ").split(" ");
+
+        for ( int i = 0; i < originalStr.length; i++) {
+            String word = originalStr[i];
+            String spinalCasedWord = word.toLowerCase();
+
+            if (i != 0) {
+                spinalCased.append("-");
+            }
+            spinalCased.append(spinalCasedWord);
+        }
+        String finalOutput = spinalCased.toString();
+        return finalOutput;
+    }
+
 
     @Override
     public void printWelcomeMsg() {
