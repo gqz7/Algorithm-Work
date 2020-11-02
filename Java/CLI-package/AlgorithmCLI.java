@@ -27,10 +27,8 @@ public class AlgorithmCLI {
         opt += "\n3) Breaking Records";
         opt += "\n4) Not Far From The Tree";
         opt += "\n5) Fibonacci Sequence";
-        opt += "\n6) String Reverser";
-        opt += "\n7) String Repeater";
-        opt += "\n8) String Case Converter";
-        opt += "\n9) Back To Main Menu";
+        opt += "\n6) String Converter";
+        opt += "\n7) Back To Main Menu";
 
         return opt;
 
@@ -60,15 +58,9 @@ public class AlgorithmCLI {
                 new FibonacciSequence().run();
                 break;
             case 6:
-                new StringReverser().run();
+                new StringConverter().run();
                 break;
             case 7:
-                new StringRepeater().run();
-                break;
-            case 8:
-                new StringCaseConverter().run();
-                break;
-            case 9:
                 System.out.println("\nHeading back to main menu...\n");
                 break;
             default:
