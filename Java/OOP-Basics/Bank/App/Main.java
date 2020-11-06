@@ -1,5 +1,6 @@
 package App;
 
+import Account.CDInvestment;
 import Account.InvestmentAccount;
 import Account.SavingsAccount;
 
@@ -24,10 +25,15 @@ public class Main {
 //            mySavings.getAccountBalance();
 //            System.out.println(mySavings.getBalance());
 //        }
-        var myInvestment = new InvestmentAccount("Gavin");
-        myInvestment.deposit(10000);
-        myInvestment.applyInvestment();
-        System.out.println(myInvestment);
+//        var myInvestment = new InvestmentAccount("Gavin", 10);
+//        myInvestment.deposit(10000);
+//        myInvestment.applyInvestment();
+//        System.out.println(myInvestment);
+
+        var myCD = new CDInvestment("Tim", 12);
+        myCD.deposit(10000);
+        myCD.applyInvestment();
+        System.out.println(myCD);
 
     }
 }
