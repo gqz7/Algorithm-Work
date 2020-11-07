@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.Iterator;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -24,7 +22,17 @@ public class Main {
 //            System.out.print( word +" ");
 //        }
 
-        CollectionsIntroExamples.show();
+        Collections_IntroExamples.show();
+
+        List_IntroExamples.show();
+
+        Comparable_IntroExamples.show();
+
+        Queue_IntroExamples.show();
+
+        Set_IntroExamples.show();
+
+        HashMap_IntroExamples.show();
 
     }
 }
