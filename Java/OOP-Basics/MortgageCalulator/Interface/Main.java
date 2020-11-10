@@ -1,8 +1,7 @@
-package com.astralprojection;
+package com.astralprojection.Interface;
 
-import java.text.NumberFormat;
-import java.util.Scanner;
-import java.text.MessageFormat;
+import com.astralprojection.Finaces.MortgageAccount;
+import com.astralprojection.Finaces.MortgageInterface;
 
 public class Main {
     //CONSTANTS
