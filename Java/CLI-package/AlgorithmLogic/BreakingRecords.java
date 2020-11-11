@@ -38,9 +38,6 @@ public class BreakingRecords implements Algorithm {
     public void run() {
         printWelcomeMsg();
 
-        System.out.println("This algorithm will count how many times your highest score and lowest score changed in a series of games/scores");
-        System.out.println("First you will enter how many scores were recorded, then you will enter each score one at a time\n");
-
         int numberOfScores = CLI.numberIntQuestion("How many scores were recorded?", 2, 100);
         float[] scores = new float[numberOfScores];
 
@@ -61,6 +58,9 @@ public class BreakingRecords implements Algorithm {
     @Override
     public void printWelcomeMsg() {
         System.out.println("\n\n-----------------------------\nBREAKING RECORDS\n_____________________________\n\n");
+
+        System.out.println("This algorithm will count how many times your highest score and lowest score changed in a series of games/scores");
+        System.out.println("First you will enter how many scores were recorded, then you will enter each score one at a time\n");
     }
 }
 

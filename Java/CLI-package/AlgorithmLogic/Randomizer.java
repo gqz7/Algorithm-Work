@@ -9,7 +9,6 @@ public class Randomizer implements Algorithm {
     public void run() {
         printWelcomeMsg();
 
-        System.out.println("You will enter a number of element to input, then a random selection will be made.\n");
         int numberOfElement = CLI.numberIntQuestion("How many elements will be randomized?", 2,100);
         ArrayList<String> randomList = new ArrayList<>();
 
@@ -33,5 +32,6 @@ public class Randomizer implements Algorithm {
     @Override
     public void printWelcomeMsg() {
         System.out.println("\n\n-----------------------------\nRANDOMIZER\n_____________________________\n\n");
+        System.out.println("You will enter a number of element to input, then a random selection will be made.\n");
     }
 }

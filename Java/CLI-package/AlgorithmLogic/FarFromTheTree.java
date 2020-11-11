@@ -46,10 +46,6 @@ public class FarFromTheTree implements Algorithm {
 
         printWelcomeMsg();
 
-        System.out.println("Fruits are falling everywhere!\nYou will enter in the 1D dimensions of the house");
-        System.out.println("Where the fruit trees are, and how far the fruits are falling from the tree.");
-        System.out.println("Then we will calculate how many fruits fell on the house.\n\n");
-
         int houseStart = CLI.numberIntQuestion("Where is the house's left side?", 0, 100);
 
         int houseEnd = CLI.numberIntQuestion("Where is the house's left side?", houseStart+1, houseStart+100);
@@ -83,6 +79,9 @@ public class FarFromTheTree implements Algorithm {
     @Override
     public void printWelcomeMsg() {
         System.out.println("\n\n-----------------------------\nNOT FAR FROM THE TREE\n_____________________________\n\n");
+        System.out.println("Fruits are falling everywhere!\nYou will enter in the 1D dimensions of the house");
+        System.out.println("Where the fruit trees are, and how far the fruits are falling from the tree.");
+        System.out.println("Then we will calculate how many fruits fell on the house.\n\n");
     }
 
 }

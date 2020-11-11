@@ -121,8 +121,6 @@ public class HikingTracker implements Algorithm {
     public void run() {
         printWelcomeMsg();
 
-        System.out.println("To represent up in elevation use U\nTo represent down in elevation use D\n");
-
         String path = CLI.stringQuestion("Enter a string to represent the terrains topography");
 
         path = path.toUpperCase().replaceAll("[^UD]","");
@@ -157,6 +155,7 @@ public class HikingTracker implements Algorithm {
     @Override
     public void printWelcomeMsg() {
         System.out.println("\n\n-----------------------------\nHIKE TRACKER\n_____________________________\n\n");
+        System.out.println("To represent up in elevation use U\nTo represent down in elevation use D\n");
     }
 }
 
