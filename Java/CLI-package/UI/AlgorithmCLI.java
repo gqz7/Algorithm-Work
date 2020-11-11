@@ -31,7 +31,8 @@ public class AlgorithmCLI {
         opt += "\n5) Fibonacci Sequence";
         opt += "\n6) String Converter";
         opt += "\n7) Randomizer";
-        opt += "\n8) Back To Main Menu";
+        opt += "\n8) Text Calculator";
+        opt += "\n9) Back To Main Menu";
 
         return opt;
 
@@ -40,7 +41,7 @@ public class AlgorithmCLI {
     private static void algorithmSelection() {
 
         String question = listOptions();
-        int selection = CLI.numberIntQuestion(question, 1, 8);
+        int selection = CLI.numberIntQuestion(question, 1, 9);
 
         switch (selection) {
 
@@ -67,6 +68,9 @@ public class AlgorithmCLI {
                 new Randomizer().run();
                 break;
             case 8:
+                new TextCalc().run();
+                break;
+            case 9:
                 System.out.println("\nHeading back to main menu...\n");
                 break;
             default:
