@@ -1,26 +1,33 @@
 package Account;
 
+import BankTools.Client;
+
 import java.text.NumberFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
-public class BankAccount {
+public class BankAccount implements Account{
 
     private static final int ACCOUNT_CHAR_LIMIT = 1_000_000_000;
     private static final int ACC_LENGTH = 10;
 
-    private String accountHolderName;
-    private String accountNumber;
-    private String routingNumber;
-    private String type;
+    private final String accountHolderName;
+    private final String accountNumber;
+    private final String routingNumber;
+    private final String type;
+    private final Client holder;
     protected int balance;
 
-    private static ArrayList<String>  allAccountNum = new ArrayList<>();
-    private static ArrayList<String>  allRouteNum = new ArrayList<>();
+    private static final Set<String> allAccountNum = new HashSet<>();
+    private static final Set<String>  allRouteNum = new HashSet<>();
 
-    BankAccount ( String owner, String type ) {
-        accountHolderName = owner;
+    BankAccount ( Client client, String type ) {
+        accountHolderName = client.getClientFullName();
+        holder = client;
+
         this.type = type;
 
         accountNumber = BankAccount.genAccountNumber();
