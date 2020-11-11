@@ -44,7 +44,7 @@ public class TextCalc implements Algorithm {
         for ( String data : exprChars ) {
             if ( isNumeric(data) )
                 ints++;
-            else if ( possibleOperators.contains(data))
+            else if ( possibleOperators.contains(data) && ints == 1)
                 ops++;
             else {
                 return false;
@@ -69,13 +69,27 @@ public class TextCalc implements Algorithm {
 
     private double evaluateTextExpression(String textExpression) {
 
-
         String[] chars = textExpression.split(" ");
 
-        for ( String c : chars ) {
-            System.out.println(c);
-        }
+        double num1 = Double.parseDouble(chars[0]);
 
+        double num2 = Double.parseDouble(chars[2]);
+
+        switch (chars[1]) {
+            case "+":
+                return num1 + num2;
+            case "-":
+                return num1 - num2;
+            case "*":
+            case "x":
+            case "X":
+                return num1 * num2;
+            case "/":
+                return num1 / num2;
+            case "%":
+                return num1 % num2;
+
+        }
         return 0;
     }
 
