@@ -1,4 +1,4 @@
-package com.starfield;
+package com.yahtzee;
 
 public class Player { //is a
 
