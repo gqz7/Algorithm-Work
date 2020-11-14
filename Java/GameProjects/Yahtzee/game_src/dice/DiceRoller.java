@@ -2,7 +2,7 @@ package com.yahtzee.game_src.dice;
 
 public class DiceRoller {
     //the only purpose of this class is to manipulate a collection of Die
-    private final Die[] dice;
+    private final GameDie[] dice;
 
     //this constructor is used when the dice needed all have the same number of faces
     public DiceRoller ( int numberOfDice, int numberOfFaces ) {
@@ -12,10 +12,10 @@ public class DiceRoller {
             System.out.println("Number of dice given to DiceRoller not accepted (1-1000)");
         }
 
-        dice = new Die[numberOfDice];
+        dice = new GameDie[numberOfDice];
 
         for (int i = 0; i < numberOfDice; i++) {
-            dice[i] = new Die(numberOfFaces);
+            dice[i] = new GameDie(numberOfFaces);
         }
 
     }
@@ -36,10 +36,10 @@ public class DiceRoller {
             throw new IllegalArgumentException();
         }
 
-        dice = new Die[numberOfDice];
+        dice = new GameDie[numberOfDice];
 
         for (int i = 0; i < numberOfDice; i++) {
-            dice[i] = new Die(diceFaces[i]);
+            dice[i] = new GameDie(diceFaces[i]);
         }
 
     }
@@ -47,7 +47,7 @@ public class DiceRoller {
     //randomizes each die in the dice roller
     public void rollAllDice(){
 
-        for ( Die d : dice ) {
+        for ( GameDie d : dice ) {
             d.roll();
         }
 

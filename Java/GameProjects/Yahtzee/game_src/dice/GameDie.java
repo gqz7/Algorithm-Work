@@ -1,16 +1,16 @@
 package com.yahtzee.game_src.dice;
 
-public class Die {
+public class GameDie {
     protected int currentValue;
     protected int faces;
 
-    protected Die (int faces) {
+    protected GameDie(int faces) {
         setFaces(faces);
         currentValue = 1;
     }
 
     protected void roll() {
-        currentValue = (int) (faces * Math.random());
+        currentValue = (int) (faces * Math.random() + 1);
     }
 
     private void setFaces (int numberOfFaces ) throws IllegalArgumentException {
