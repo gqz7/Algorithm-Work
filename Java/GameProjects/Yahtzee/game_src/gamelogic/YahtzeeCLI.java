@@ -6,8 +6,10 @@ public class YahtzeeCLI {
 
     private final static String numOfTurnsQuestion = "\nHow many turns would you like this game of Yahtzee to be? (a standard game is 13)";
     private final static String numOfPlayersQuestion = "\nHow many players would you like this game of Yahtzee to have?";
-    private final static String nameQuestion = "What what is your name?";
     private final static String restartQuestion = "\nThat was fun! Would you like to play another game?";
+    private final static String nameQuestion = "What what is your name?";
+    private final static String keepRollingDieQuestion = "Would you like to keep rolling ";
+
 
     private final static int maxTurns = 30;
     private final static int minTurns = 1;
@@ -33,7 +35,9 @@ public class YahtzeeCLI {
         return CLI.stringQuestion(nameQuestion);
     }
 
-    public static boolean isPlayingAgain() {
+    public static boolean playingAgain() {
         return CLI.yesOrNo(restartQuestion);
     }
+
+    public static boolean keepRollingNumber(int num ) { return CLI.yesOrNo(keepRollingDieQuestion + num + "?"); }
 }
