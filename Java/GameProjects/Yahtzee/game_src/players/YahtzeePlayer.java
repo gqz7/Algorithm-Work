@@ -9,7 +9,6 @@ import java.util.List;
 
 public class YahtzeePlayer {
 
-
     private static final int numberOfDicePerPlayer = 5;
     private static final int numberOfFacesPerDie = 6;
 
@@ -55,11 +54,17 @@ public class YahtzeePlayer {
 
         System.out.println("Your turn is over " + name);
 
-
     }
 
     private void pickTurnScore() {
         //use the current state of hand to determine this turns score and update the scorecard accordingly
+        String[] comboChoices = card.getPossibleCombosChoices( hand.getValues() );
+
+        //this needs a minus one because the index will be minus one from their selection
+        int comboIndex = YahtzeeCLI.chooseCombo(comboChoices) - 1;
+
+        card.makeChoice( comboChoices[comboIndex] );
+
     }
 
     public String getName() {
@@ -72,6 +77,6 @@ public class YahtzeePlayer {
 
     @Override
     public String toString(){
-        return name + ": " + card.getFinalScore();
+        return name;
     }
 }
