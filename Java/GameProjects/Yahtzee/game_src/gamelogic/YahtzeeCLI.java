@@ -46,10 +46,10 @@ public class YahtzeeCLI {
 
     public static boolean keepRollingNumber(int num ) { return CLI.yesOrNo(KEEP_ROLLING_DIE_QUESTION + num + "?"); }
 
-    public static int chooseCombo (String[] choices) {
+    public static int chooseCombo (String[][] choices) {
         System.out.println("\n- Select A Scoring Combination -\n");
         for (int i = 0; i < choices.length; i++) {
-            String displayText = COMBO_MAP.get( choices[i] );
+            String displayText = COMBO_MAP.get( choices[i][0] ) + choices[i][1];
             System.out.println( (i+1) + ") " + displayText);
         }
 
