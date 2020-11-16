@@ -16,15 +16,18 @@ public class YahtzeeGame {
 
     public YahtzeeGame ( ) {
 
-        printWelcomeMsg();
+        YahtzeeCLI.printWelcomeMsg();
 
         initializeGame();
-        
+
+        //if the user gets here the program will end
+        YahtzeeCLI.printExitMsg();
     }
 
     private void playGame() {
 
         for (int turn = 0; turn < numberOfTurns; turn++) {
+            System.out.println("\n\t-- TURN " + (turn+1) + " of " + numberOfTurns + " --\n");
             for (int playerNum = 0; playerNum < numberOfPlayers; playerNum++) {
 
                 players[playerNum].takeTurn();
@@ -37,8 +40,7 @@ public class YahtzeeGame {
         boolean restartGame = YahtzeeCLI.playingAgain();
 
         if (restartGame) initializeGame();
-        //if the user gets here the program will end
-        System.out.println("\nThank you for using this Yahtzee simulation, hope you enjoyed!!\n\nprogram ending...");
+        //otherwise the call stack will continue on and the program will end
     }
 
     private void initializeGame() {
@@ -72,12 +74,6 @@ public class YahtzeeGame {
             }
             players[i] = new YahtzeePlayer(playerName);
         }
-    }
-
-    private void printWelcomeMsg() {
-
-        System.out.println("\n\n----------------------------------\n|\t\t\tYAHTZEE\t\t\t\t |\n|________________________________|\n");
-        System.out.println("Welcome to this Yahtzee Java simulation\n\n");
     }
 
 }
