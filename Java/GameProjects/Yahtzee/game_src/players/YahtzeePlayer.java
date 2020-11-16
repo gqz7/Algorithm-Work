@@ -85,7 +85,7 @@ public class YahtzeePlayer {
 
     private boolean pickTurnScore() {
         //use the current state of hand to determine this turns score and update the scorecard accordingly
-        String[] comboChoices = card.getPossibleCombosChoices( hand.getValues() );
+        String[][] comboChoices = card.getPossibleCombosChoices( hand.getValues() );
 
         //if a player doesn't have any possible choices they get 0 points, ie the 'makeChoice' method doesn't need to run
         if (comboChoices.length == 0) {
@@ -95,7 +95,7 @@ public class YahtzeePlayer {
         //this needs a minus one because the index will be minus one from their selection
         int comboIndex = YahtzeeCLI.chooseCombo(comboChoices) - 1;
 
-        int turnPoints = card.makeChoice( comboChoices[comboIndex] );
+        int turnPoints = card.makeChoice( comboChoices[comboIndex][0] );
 
         //add the points earned for this round
         score += turnPoints;
