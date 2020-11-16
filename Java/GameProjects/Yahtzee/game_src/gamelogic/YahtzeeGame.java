@@ -1,6 +1,7 @@
 package com.yahtzee.game_src.gamelogic;
 
 import com.yahtzee.game_src.players.YahtzeePlayer;
+import com.yahtzee.game_src.players.YahtzeeScoring;
 
 import java.util.ArrayList;
 import java.util.List;
