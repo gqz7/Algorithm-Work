@@ -52,6 +52,10 @@ public class ScoreCard {
                 //add the possible selection to the list of choices the player can then choose from after this method runs
                 combos.add( comboKey );
             }
+
+            if ( foundNumbers.length == 5 ) {
+                //yahtzee!
+            }
         }
 
         //CHECK POSSIBLE LOWER SECTION COMBOS
@@ -68,8 +72,6 @@ public class ScoreCard {
         //check 4 of a kind
 
         //check full house
-
-        //check for yahtzee
 
         //change can always be used as long as it hasn't been used already
         Combo chanceCombo = combinations.get("cnc");
