@@ -15,15 +15,19 @@ public class YahtzeePlayer {
     private final DiceRoller hand;
     private final ScoreCard card;
     private final String name;
+    private int score;
 
     public YahtzeePlayer (String name) {
         this.name = name;
+        score = 0;
         card = new ScoreCard();
         hand = new DiceRoller(NUMBER_OF_DICE_PER_PLAYER, NUMBER_OF_FACES_PER_DIE);
     }
 
     public void takeTurn() {
         System.out.println("\n-----------------------------\n\tYour turn " + name + "!\n_____________________________\n");
+
+        System.out.println("Current Score: " + score);
 
         //store which rolls the play wants to keep and which to re-roll;
         List<Integer> keepRolling = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4));
@@ -91,7 +95,10 @@ public class YahtzeePlayer {
         //this needs a minus one because the index will be minus one from their selection
         int comboIndex = YahtzeeCLI.chooseCombo(comboChoices) - 1;
 
-        card.makeChoice( comboChoices[comboIndex] );
+        int turnPoints = card.makeChoice( comboChoices[comboIndex] );
+
+        //add the points earned for this round
+        score += turnPoints;
 
         return true;
 

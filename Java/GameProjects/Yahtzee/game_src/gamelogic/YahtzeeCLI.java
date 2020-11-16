@@ -85,7 +85,7 @@ public class YahtzeeCLI {
         put(LGST, "Large Straight");
         put(FLHO, "Full House");
         put(YATZ, "YAHTZEE");
-        put(CHNC, "Chance (sum of all dice)");
+        put(CHNC, "Chance");
         put(TOAK, "Three of a Kind");
         put(FOAK, "Four of a Kind");
     }};

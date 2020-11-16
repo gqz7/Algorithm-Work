@@ -7,13 +7,13 @@ public enum ComboKeys {
     FOURS,
     FIVES,
     SIXES,
-    TOAK,
-    FOAK,
-    FLHO,
-    CHNC,
-    SMST,
-    LGST,
-    YATZ;
+    TOAK, //Three of a Kind
+    FOAK, //Four of a Kind
+    FLHO, //Full House
+    CHNC, //Chance
+    SMST, //Small Straight
+    LGST, //Large Straight
+    YATZ; //Yahtzee
 
     @Override
     public String toString() {

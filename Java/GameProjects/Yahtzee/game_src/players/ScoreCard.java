@@ -40,6 +40,16 @@ public class ScoreCard {
     //this is also helpful because the bonuses are worth more than the first one
     private int yahtzeeBonuses;
 
+    //static point values for the combinations whose point values don't change
+    private static final int yahtzeeBonusPoints = 100;
+    private static final int yahtzeeRegularPoints = 50;
+    private static final int fullHousePoints = 25;
+    private static final int smallStraightPoints = 30;
+    private static final int largeStraightPoints = 40;
+
+    private static final int smallStraightThreshold = 4;
+    private static final int largeStraightThreshold = 5;
+
     public ScoreCard () {
         yahtzeeBonuses = 0;
         initializeComboMap();
@@ -125,10 +135,16 @@ public class ScoreCard {
 
         //Check Small Straight
         //no points need to be set since 'straights' give a static number of points
-        if (maxInARow >= 4) combos.add(SMST);
+        if (
+            maxInARow >= smallStraightThreshold
+            && !( combinations.get(SMST).getHasBeenUsed() )
+        ) combos.add(SMST);
 
         //Check Large Straight
-        if (maxInARow == 5) combos.add(LGST);
+        if (
+            maxInARow == largeStraightThreshold
+            && !( combinations.get(SMST).getHasBeenUsed() )
+        ) combos.add(LGST);
 
 
         /* Check Full House
@@ -139,9 +155,9 @@ public class ScoreCard {
             finally this can only be used once so that also needs to be checked
         */
         if (
-                !fourOfAKindPresent
-                        && Arrays.stream(numbers).distinct().count() == 2
-                        && !( combinations.get(FLHO).getHasBeenUsed() )
+             !fourOfAKindPresent
+             && Arrays.stream(numbers).distinct().count() == 2
+             && !( combinations.get(FLHO).getHasBeenUsed() )
         ) combos.add(FLHO); //full house has a static pointsValues so it just needs to be added to the HashSet
 
 
@@ -159,16 +175,19 @@ public class ScoreCard {
     }
 
     //make protected after testing
-    public void makeChoice (String key) {
+    public int makeChoice (String key) {
         //first checks if the choice was a YAHTZEE,
         // if they have already gotten a YAHTZEE the hash map should not be altered,
         // the yahtzeeBonus int should be incremented instead
         if (key.equals(YATZ) && combinations.get(YATZ).getHasBeenUsed()) {
             yahtzeeBonuses++;
-            return;
+            return yahtzeeBonusPoints;
         }
         //by running this method the current pointsValue will be locked in for this Combo and cant be changed
-        combinations.get(key).useCombo();
+        Combo comboChoice = combinations.get(key);
+        comboChoice.useCombo();
+        //return the number of points for this combo choice so it can be added to the players temp total
+        return comboChoice.getPointsValue();
     }
 
     protected int getYahtzeeBonuses() {
@@ -231,9 +250,9 @@ public class ScoreCard {
         combinations.put(CHNC, new Combo(false));
         combinations.put(TOAK, new Combo(false));
         combinations.put(FOAK, new Combo(false));
-        combinations.put(SMST, new Combo(false, 30));
-        combinations.put(LGST, new Combo(false, 40));
-        combinations.put(FLHO,  new Combo(false, 25));
-        combinations.put(YATZ, new Combo(false, 50));
+        combinations.put(SMST, new Combo(false, smallStraightPoints));
+        combinations.put(LGST, new Combo(false, largeStraightPoints));
+        combinations.put(FLHO,  new Combo(false, fullHousePoints));
+        combinations.put(YATZ, new Combo(false, yahtzeeRegularPoints));
     }
 }

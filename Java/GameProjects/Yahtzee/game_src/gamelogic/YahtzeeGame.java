@@ -27,6 +27,8 @@ public class YahtzeeGame {
     private void playGame() {
 
         for (int turn = 0; turn < numberOfTurns; turn++) {
+
+            System.out.println("\n-----------------------------\n");
             System.out.println("\n\t-- TURN " + (turn+1) + " of " + numberOfTurns + " --\n");
             for (int playerNum = 0; playerNum < numberOfPlayers; playerNum++) {
 
