@@ -5,11 +5,12 @@ public class DiceRoller {
     private final GameDie[] dice;
 
     //this constructor is used when the dice needed all have the same number of faces
-    public DiceRoller ( int numberOfDice, int numberOfFaces ) {
+    public DiceRoller ( int numberOfDice, int numberOfFaces ) throws IllegalArgumentException {
 
         if (numberOfDice < 1 || numberOfDice > 1000) {
             numberOfDice = 1;
             System.out.println("Number of dice given to DiceRoller not accepted (1-1000)");
+            throw new IllegalArgumentException();
         }
 
         dice = new GameDie[numberOfDice];
