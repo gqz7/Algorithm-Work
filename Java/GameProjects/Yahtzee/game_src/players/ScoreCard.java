@@ -116,6 +116,7 @@ public class ScoreCard {
             //the logic for handling more than one Yahtzee occurrence is in the 'makeChoice' method
             if ( foundNumbers.length == 5 ) {
                 Combo yahtzeeCombo = combinations.get(YATZ);
+                if (yahtzeeCombo.getHasBeenUsed()) yahtzeeCombo.setPointsValue(yahtzeeBonusPoints);
                 combos.add( new String[] { YATZ, yahtzeeCombo.getPointsString() }); //add the choice to choose Yahtzee
             }
 
