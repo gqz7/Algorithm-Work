@@ -34,11 +34,21 @@ public class ScoreCard {
     private static final String[] upperSectionKeys = {ACES, TWOS, THREES, FOURS, FIVES, SIXES};
 
     //this class is centered around this hash-map that is a record keeper for all the players turns and the choices they've made
-    private final Map<String, Combo> combinations = new HashMap<>();
+    private final Map<String, Combo> combinations;
+
+    //this set is used to temporarily store the possible score combinations during a turn, after every turn
+    private final Set<String[]> possibleScoreCombos;
 
     //the combinations can keep track of how many times the Yahtzee has gotten selected so after the first one this int will increment
     //this is also helpful because the bonuses are worth more than the first one
     private int yahtzeeBonuses;
+
+    //this will keep track of the total sum of all dice on a give turn,
+    // this value gets used in three of the combos, (3/4oaK & Chance) so it makes sense to only evaluate it once per turn
+    private int totalSumOfTurn;
+
+    //this will keep track of if there are 4 of a kind in a given turn, this then gets used in the Full-House check logic
+    private boolean fourOfAKindPresentInHand;
 
     //static point values for the combinations whose point values don't change
     private static final int yahtzeeBonusPoints = 100;
@@ -50,23 +60,114 @@ public class ScoreCard {
     private static final int smallStraightThreshold = 4;
     private static final int largeStraightThreshold = 5;
 
+
     public ScoreCard () {
         yahtzeeBonuses = 0;
+        combinations = new HashMap<>();
+        possibleScoreCombos = new HashSet<>();
+        fourOfAKindPresentInHand = false;
+
         initializeComboMap();
     }
 
     //make protected after testing
-    public String[][] getPossibleCombosChoices(int[] numbers ) {
+    public String[][] getPossibleCombosChoices(int[] rollNumbers ) {
 
         //it can't be known from the start of this method how many combos will be possible so its best to use a List
-        Set<String[]> combos = new HashSet<>();
+        //reset this set before the combos are calculated since this field is stored by the ScoreCard instead of locally
+        possibleScoreCombos.clear();
 
-        //this boolean get used to check for a Full-house (comments below explain further)
-        boolean fourOfAKindPresent = false;
+        calculatePossibleCombos(rollNumbers);
 
-        //total sum of number gets used by Chance, 3-of-a-Kind, and 4-of-a-Kind.
-        //that's why it makes sense to declare it here and not run the same code potentially 3 times
-        int totalSum = IntStream.of(numbers).sum();
+        return possibleScoreCombos.toArray(String[][]::new); //convert the combos from a HashSet to an Array
+    }
+
+    private void calculatePossibleCombos (int[] numbers) {
+
+        totalSumOfTurn = Arrays.stream(numbers).sum();
+
+        //CHECKS UPPER-SECTION COMBOS AND COMBOS THAT INVOLVE REPEATS (YAHTZEE, four/three-of-a-kind)
+        checkRepeatCombos(numbers);
+
+        //CHECK REMAINING POSSIBLE LOWER SECTION COMBOS
+        checkFullHouseCombo(numbers);
+
+        checkConsecutiveCombos(numbers);
+
+        checkChanceCombo(numbers);
+
+        //reset this value for the next turn
+        fourOfAKindPresentInHand = false;
+    }
+
+    private void checkChanceCombo(int[] numbers) {
+
+        //change can always be used as long as it hasn't been used already
+        Combo chanceCombo = combinations.get(CHNC);
+        if ( !chanceCombo.getHasBeenUsed() ) { //if the combo has NOT been used
+            //calculate the sum of all numbers in roll
+            //set the points value
+            chanceCombo.setPointsValue(totalSumOfTurn);
+            //add to possible selections
+            possibleScoreCombos.add( new String[] { CHNC, chanceCombo.getPointsString() } );
+        }
+
+    }
+
+    private void checkFullHouseCombo(int[] numbers ) {
+            /* Check Full House
+            this one may be possible to check Full-House in the 'num' for-loop but I thought this way was clean and pretty clever
+            essentially this uses a stream to reduces the numbers array to it unique values and count how many are present
+            for a full-house there should only be two unique values. there should also not be a 4 of a Kind present,
+            so the program just simply checks that 4 of a kind is not present
+            finally this can only be used once so that also needs to be checked
+        */
+        Combo fullHouseCombo = combinations.get(FLHO);
+        if (
+                !fourOfAKindPresentInHand
+                        && Arrays.stream(numbers).distinct().count() == 2
+                        && !fullHouseCombo.getHasBeenUsed()
+        ) possibleScoreCombos.add( new String[] { FLHO, fullHouseCombo.getPointsString() } );
+        //full house has a static pointsValues so it just needs to be added to the HashSet
+
+
+    }
+
+    private void checkConsecutiveCombos(int[] numbers) {
+
+        //Calculate the max amount of consecutive numbers in the hand, this will be used for the 'straights'
+        int[] sortedNumbers = Arrays.stream(numbers).sorted().toArray();
+        int consecutiveNumbers = 1;
+        int maxInARow = 1;
+        for (int i = 1; i < sortedNumbers.length; i++) {
+            if (sortedNumbers[i] -1 == sortedNumbers[i-1]) {
+                consecutiveNumbers++;
+                if (consecutiveNumbers > maxInARow ) maxInARow = consecutiveNumbers;
+            } else {
+                consecutiveNumbers = 1;
+            }
+        }
+
+        //Check Small Straight
+        //no points need to be set since 'straights' give a static number of points
+        Combo smallStraightCombo = combinations.get(SMST);
+        if (
+                maxInARow >= smallStraightThreshold
+                        && !smallStraightCombo.getHasBeenUsed()
+        ) possibleScoreCombos.add( new String[] { SMST, smallStraightCombo.getPointsString() } );
+
+        //Check Large Straight
+        Combo largeStraightCombo = combinations.get(LGST);
+        if (
+                maxInARow == largeStraightThreshold
+                        && !largeStraightCombo.getHasBeenUsed()
+        ) possibleScoreCombos.add( new String[] { LGST, largeStraightCombo.getPointsString() } );
+
+    }
+
+    private void checkRepeatCombos ( int[] numbers ) {
+
+        int maxRepeats = 1; //this keeps track of the maximum number of a repeated number in the roll
 
         //CHECK POSSIBLE UPPER-SECTION COMBOS (and any that revolve around repeat numbers)
         for (int num = 0; num < 6; num++) {
@@ -90,99 +191,63 @@ public class ScoreCard {
                         //IntStream.of(foundNumbers).sum() //adds all unique numbers together
                 );
                 //add the possible selection to the list of choices the player can then choose from after this method runs
-                combos.add( new String[] { comboKey, upperSectionCombo.getPointsString() });
+                possibleScoreCombos.add( new String[] { comboKey, upperSectionCombo.getPointsString() });
             }
 
-            //Check 3 of a Kind
-            Combo threeOfAKindCombo = combinations.get(TOAK);
-            if ( foundNumbers.length >= 3 && !threeOfAKindCombo.getHasBeenUsed()) {
-                threeOfAKindCombo.setPointsValue(totalSum);
-                combos.add( new String[] { TOAK, threeOfAKindCombo.getPointsString() });
-            }
-
-            //Check 4 of a Kind
-            Combo fourOfAKindCombo = combinations.get(FOAK);
-            if ( foundNumbers.length >= 4) {
-                fourOfAKindPresent = true; //set this boolean to true so the Full-House check can utilize it
-                if (!fourOfAKindCombo.getHasBeenUsed()) {
-                    fourOfAKindCombo.setPointsValue(totalSum);
-                    combos.add( new String[] { FOAK, fourOfAKindCombo.getPointsString() });
-                }
-            }
-
-            //Check YAHTZEE
-            //the length can only be 5 if all the numbers are the same, hence YAHTZEE
-            //no need to check if this combo has been used because Yahtzee can be used more than once
-            //the logic for handling more than one Yahtzee occurrence is in the 'makeChoice' method
-            if ( foundNumbers.length == 5 ) {
-                Combo yahtzeeCombo = combinations.get(YATZ);
-                if (yahtzeeCombo.getHasBeenUsed()) yahtzeeCombo.setPointsValue(yahtzeeBonusPoints);
-                combos.add( new String[] { YATZ, yahtzeeCombo.getPointsString() }); //add the choice to choose Yahtzee
-            }
+            if (foundNumbers.length > maxRepeats) maxRepeats = foundNumbers.length;
 
         }
 
-        //CHECK REMAINING POSSIBLE LOWER SECTION COMBOS
-
-        //Calculate the max amount of consecutive numbers in the hand, this will be used for the 'straights'
-        int[] sortedNumbers = Arrays.stream(numbers).sorted().toArray();
-        int consecutiveNumbers = 1;
-        int maxInARow = 1;
-        for (int i = 1; i < sortedNumbers.length; i++) {
-            if (sortedNumbers[i] -1 == sortedNumbers[i-1]) {
-                consecutiveNumbers++;
-                if (consecutiveNumbers > maxInARow ) maxInARow = consecutiveNumbers;
-            } else {
-                consecutiveNumbers = 1;
-            }
+        //Check 3 of a Kind
+        if ( maxRepeats >= 3 ) {
+            checkThreeOfAKindCombo();
         }
 
-        //Check Small Straight
-        //no points need to be set since 'straights' give a static number of points
-        Combo smallStraightCombo = combinations.get(SMST);
-        if (
-            maxInARow >= smallStraightThreshold
-            && !smallStraightCombo.getHasBeenUsed()
-        ) combos.add( new String[] { SMST, smallStraightCombo.getPointsString() } );
-
-        //Check Large Straight
-        Combo largeStraightCombo = combinations.get(LGST);
-        if (
-            maxInARow == largeStraightThreshold
-            && !largeStraightCombo.getHasBeenUsed()
-        ) combos.add( new String[] { LGST, largeStraightCombo.getPointsString() } );
-
-
-        /* Check Full House
-            this one may be possible to check Full-House in the 'num' for-loop but I thought this way was clean and pretty clever
-            essentially this uses a stream to reduces the numbers array to it unique values and count how many are present
-            for a full-house there should only be two unique values. there should also not be a 4 of a Kind present,
-            so the program just simply checks that 4 of a kind is not present
-            finally this can only be used once so that also needs to be checked
-        */
-        Combo fullHouseCombo = combinations.get(FLHO);
-        if (
-             !fourOfAKindPresent
-             && Arrays.stream(numbers).distinct().count() == 2
-             && !fullHouseCombo.getHasBeenUsed()
-        ) combos.add( new String[] { FLHO, fullHouseCombo.getPointsString() } ); //full house has a static pointsValues so it just needs to be added to the HashSet
-
-
-        //change can always be used as long as it hasn't been used already
-        Combo chanceCombo = combinations.get(CHNC);
-        if ( !chanceCombo.getHasBeenUsed() ) { //if the combo has NOT been used
-            //calculate the sum of all numbers in roll
-            //set the points value
-            chanceCombo.setPointsValue(totalSum);
-            //add to possible selections
-            combos.add( new String[] { CHNC, chanceCombo.getPointsString() } );
+        //Check 4 of a Kind
+        if ( maxRepeats >= 4) {
+            checkFourOfAKindCombo();
         }
 
-        return combos.toArray(String[][]::new); //convert the combos from a HashSet to an Array
+        //Check YAHTZEE
+        //the length can only be 5 if all the numbers are the same, hence YAHTZEE
+        //no need to check if this combo has been used because Yahtzee can be used more than once
+        //the logic for handling more than one Yahtzee occurrence is in the 'makeChoice' method
+        if ( maxRepeats == 5 ) {
+            addYahtzeeCombo();
+        }
+
     }
 
-    //make protected after testing
-    public int makeChoice (String key) {
+    private void checkThreeOfAKindCombo() {
+
+        Combo threeOfAKindCombo = combinations.get(TOAK);
+        if (!threeOfAKindCombo.getHasBeenUsed()) {
+            threeOfAKindCombo.setPointsValue(totalSumOfTurn);
+            possibleScoreCombos.add( new String[] { TOAK, threeOfAKindCombo.getPointsString() });
+        }
+    }
+
+    private void checkFourOfAKindCombo() {
+        Combo fourOfAKindCombo = combinations.get(FOAK);
+        fourOfAKindPresentInHand = true; //set this boolean to true so the Full-House check can utilize it
+        if (!fourOfAKindCombo.getHasBeenUsed()) {
+            fourOfAKindCombo.setPointsValue(totalSumOfTurn);
+            possibleScoreCombos.add( new String[] { FOAK, fourOfAKindCombo.getPointsString() });
+        }
+    }
+
+    private void addYahtzeeCombo() {
+        Combo yahtzeeCombo = combinations.get(YATZ);
+        boolean hasBeenUsed = yahtzeeCombo.getHasBeenUsed();
+        possibleScoreCombos.add( new String[] {
+                YATZ,
+                hasBeenUsed //if yahtzee has already been used then the bonus points will be greater
+                        ? Combo.createPointsString(yahtzeeBonusPoints)
+                        : Combo.createPointsString(yahtzeeRegularPoints)
+        }); //add the choice to choose Yahtzee
+    }
+
+    protected int makeChoice (String key) {
         //first checks if the choice was a YAHTZEE,
         // if they have already gotten a YAHTZEE the hash map should not be altered,
         // the yahtzeeBonus int should be incremented instead
@@ -205,7 +270,7 @@ public class ScoreCard {
         return combinations;
     }
 
-    protected class Combo {
+    protected static class Combo {
 
         ////this boolean will be important when tallying up all the combo points for the UpperSection bonus
         private final boolean isUpper;
@@ -237,11 +302,13 @@ public class ScoreCard {
             pointsValue = points;
         }
 
-        protected String getPointsString() { return " - (" + pointsValue + ")"; }
+        protected String getPointsString() { return createPointsString(pointsValue); }
 
         protected boolean getHasBeenUsed () { return hasBeenUsed; }
 
         protected void useCombo () { hasBeenUsed = true; }
+
+        protected static String createPointsString ( int points ) { return " - (" + points + ")"; }
 
     }
 
