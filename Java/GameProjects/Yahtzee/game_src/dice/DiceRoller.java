@@ -1,22 +1,24 @@
 package com.yahtzee.game_src.dice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DiceRoller {
     //the only purpose of this class is to manipulate a collection of Die
-    private final GameDie[] dice;
+    private final List<GameDie> dice;
 
     //this constructor is used when the dice needed all have the same number of faces
     public DiceRoller ( int numberOfDice, int numberOfFaces ) throws IllegalArgumentException {
 
         if (numberOfDice < 1 || numberOfDice > 1000) {
-            numberOfDice = 1;
             System.out.println("Number of dice given to DiceRoller not accepted (1-1000)");
             throw new IllegalArgumentException();
         }
 
-        dice = new GameDie[numberOfDice];
+        dice = new ArrayList<>();
 
         for (int i = 0; i < numberOfDice; i++) {
-            dice[i] = new GameDie(numberOfFaces);
+            dice.add(new GameDie(numberOfFaces));
         }
 
     }
@@ -37,10 +39,10 @@ public class DiceRoller {
             throw new IllegalArgumentException();
         }
 
-        dice = new GameDie[numberOfDice];
+        dice = new ArrayList<>();
 
         for (int i = 0; i < numberOfDice; i++) {
-            dice[i] = new GameDie(diceFaces[i]);
+            dice.add(new GameDie(diceFaces[i]));
         }
 
     }
@@ -56,17 +58,17 @@ public class DiceRoller {
 
     //roll just one die, this is important to have access to for Yahtzee
     public void rollDie(int index){
-        if (index >= 0 && index < dice.length) {
-            dice[index].roll();
+        if (index >= 0 && index < dice.size()) {
+            dice.get(index).roll();
         }
     }
 
     //get all the dice values at once
     public int[] getValues() {
-        int[] allValues = new int[dice.length];
+        int[] allValues = new int[dice.size()];
 
-        for (int i = 0; i < dice.length; i++) {
-            allValues[i] = dice[i].currentValue;
+        for (int i = 0; i < dice.size(); i++) {
+            allValues[i] = dice.get(i).currentValue;
         }
 
         return allValues;
@@ -74,10 +76,10 @@ public class DiceRoller {
 
     //get one die value by index
     public int getDieValue( int index ) throws IllegalArgumentException{
-        if (index < 0 || index >= dice.length ) {
+        if (index < 0 || index >= dice.size() ) {
             throw new IllegalArgumentException();
         }
-        return dice[index].currentValue;
+        return dice.get(index).currentValue;
     }
 
 }
