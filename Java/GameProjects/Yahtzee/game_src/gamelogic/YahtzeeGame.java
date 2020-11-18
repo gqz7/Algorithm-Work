@@ -78,7 +78,7 @@ public class YahtzeeGame {
                     break;
                 }
             }
-            players[i] = new YahtzeePlayer(playerName);
+            players[i] = new YahtzeePlayer(playerName, isDiceSelctionIndividual);
         }
     }
 

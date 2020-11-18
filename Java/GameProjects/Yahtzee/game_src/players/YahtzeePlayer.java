@@ -12,13 +12,15 @@ public class YahtzeePlayer {
     private static final int NUMBER_OF_DICE_PER_PLAYER = 5;
     private static final int NUMBER_OF_FACES_PER_DIE = 6;
 
+    private final boolean isDiceSelectionIndividual; 
     private final DiceRoller hand;
     private final ScoreCard card;
     private final String name;
     private int score;
 
-    public YahtzeePlayer (String name) {
+    public YahtzeePlayer (String name, boolean isDiceSelectionIndividual) {
         this.name = name;
+        this.isDiceSelectionIndividual = isDiceSelectionIndividual;
         score = 0;
         card = new ScoreCard();
         hand = new DiceRoller(NUMBER_OF_DICE_PER_PLAYER, NUMBER_OF_FACES_PER_DIE);
