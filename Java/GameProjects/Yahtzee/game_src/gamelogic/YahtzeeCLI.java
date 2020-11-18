@@ -15,6 +15,7 @@ public class YahtzeeCLI {
     private final static String COMBO_QUESTION = "Choose one of the scoring combinations above";
     private final static String NAME_QUESTION = "What what is your name?";
     private final static String END_TURN_QUESTION = "Would you like to end your turn now?";
+    private final static String DICE_SELECTION_QUESTION = "Throughout the game, would you like to select dice to reroll individually\n(otherwise you will have to specify rerolling dice all at once)"
 
     private final static int MAX_TURNS = 13;
     private final static int MIN_TURNS = 1;
@@ -55,6 +56,8 @@ public class YahtzeeCLI {
 
         return CLI.numberIntQuestion(COMBO_QUESTION, 1, choices.length);
     }
+
+    public boolean chooseDiceSelectionRule( ) { return CLI.yasOrNo(DICE_SELECTION_QUESTION); }
 
     private static final String ACES = ComboKeys.ACES.toString();
     private static final String TWOS = ComboKeys.TWOS.toString();
