@@ -14,6 +14,8 @@ public class YahtzeeGame {
 
     private int numberOfPlayers;
 
+    private boolean isDiceSelctionIndividual;
+
     public YahtzeeGame ( ) {
 
         YahtzeeCLI.printWelcomeMsg();
@@ -48,6 +50,8 @@ public class YahtzeeGame {
     private void initializeGame() {
         //get the basic game info from players (number of players and turns)
         int[] gameData = YahtzeeCLI.getGameData();
+
+        isDiceSelctionIndividual = YahtzeeCLI.chooseDiceSelectionRule();
 
         numberOfPlayers = gameData[0];
         numberOfTurns = gameData[1];
