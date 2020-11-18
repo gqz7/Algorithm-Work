@@ -49,12 +49,17 @@ public class DiceRoller {
 
     //randomizes each die in the dice roller
     public void rollAllDice(){
-
         for ( GameDie d : dice ) {
             d.roll();
         }
-
     };
+
+    //randomizes all dice but allows a list for dice not to roll
+    public void rollAllDice(List<Integer> keepers) {
+        for (int i = 0; i < dice.size(); i++) {
+            if (!keepers.contains(i)) rollDie(i);
+        }
+    }
 
     //roll just one die, this is important to have access to for Yahtzee
     public void rollDie(int index){
@@ -81,5 +86,6 @@ public class DiceRoller {
         }
         return dice.get(index).currentValue;
     }
+
 
 }
