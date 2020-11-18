@@ -3,19 +3,22 @@ package com.yahtzee.game_src.gamelogic;
 import com.yahtzee.game_src.ComboKeys;
 import com.yahtzee.ui.CLI;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class YahtzeeCLI {
 
+    private final static String DICE_SELECTION_QUESTION = "\nThroughout the game, would you like to select dice to re-roll individually?\n(otherwise you will have to specify re-rolling dice all at once)";
     private final static String NUM_OF_TURNS_QUESTION = "\nHow many turns would you like this game of Yahtzee to be? (13 is recommended)";
     private final static String NUM_OF_PLAYERS_QUESTION = "\nHow many players would you like this game of Yahtzee to have?";
     private final static String RESTART_QUESTION = "\nThat was fun! Would you like to play another game?";
     private final static String KEEP_ROLLING_DIE_QUESTION = "Would you like to keep rolling ";
+    private final static String KEEP_ROLLING_MULTIPLE_QUESTION = "\nEnter the numbers associated to the die/dice you would like to HOLD this roll...";
+    private final static String KEEP_ROLLING_MULTIPLE_INTRO = "\n You can select the die/dice you would like to HOLD by typing in the number to the left of die/dice roll/s you got\n";
     private final static String COMBO_QUESTION = "Choose one of the scoring combinations above";
     private final static String NAME_QUESTION = "What what is your name?";
     private final static String END_TURN_QUESTION = "Would you like to end your turn now?";
-    private final static String DICE_SELECTION_QUESTION = "Throughout the game, would you like to select dice to reroll individually\n(otherwise you will have to specify rerolling dice all at once)"
 
     private final static int MAX_TURNS = 13;
     private final static int MIN_TURNS = 1;
@@ -57,7 +60,7 @@ public class YahtzeeCLI {
         return CLI.numberIntQuestion(COMBO_QUESTION, 1, choices.length);
     }
 
-    public boolean chooseDiceSelectionRule( ) { return CLI.yasOrNo(DICE_SELECTION_QUESTION); }
+    public static boolean chooseDiceSelectionRule() { return CLI.yesOrNo(DICE_SELECTION_QUESTION); }
 
     private static final String ACES = ComboKeys.ACES.toString();
     private static final String TWOS = ComboKeys.TWOS.toString();
@@ -104,5 +107,24 @@ public class YahtzeeCLI {
 
     public static void printExitMsg() {
         System.out.println("\n\n\nThank you for using this Yahtzee simulation, hope you enjoyed!!\n\nprogram ending...");
+    }
+
+    public static String getNumbersToKeepRolling() {
+        return CLI.stringQuestion(KEEP_ROLLING_MULTIPLE_QUESTION);
+    }
+
+    public static void showDiceSelections(int[] currentRollsValues) {
+        System.out.println(KEEP_ROLLING_MULTIPLE_INTRO);
+        for (int i = 0; i < currentRollsValues.length; i++) {
+            System.out.println((i+1) + ") " + currentRollsValues[i]);
+        }
+    }
+
+    public static void displayCurrentRoll(String name, int[] currentRollsValues) {
+
+         System.out.println(name + ", you rolled: \n");
+         Arrays.stream(currentRollsValues)
+                         .forEach( diceVal -> System.out.print("[" + diceVal + "] "));
+         System.out.println("\n");
     }
 }
