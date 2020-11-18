@@ -1,4 +1,3 @@
-
 package com.company;
 
 import java.util.Arrays;
@@ -43,7 +42,20 @@ public class Stream_Intro_Examples {
                 .forEach(System.out::println);
 
         System.out.println("\nRandom Numbers Stream limited to 10");
-        randomNumberStream.limit(10).forEach(System.out::println);
+        randomNumberStream
+                .limit(10)
+                .forEach(System.out::println);
+
+        //Iterator Streams
+        //use can use a stream for simple or complex iteration
+
+        System.out.println("\nSimple Iterator Stream");
+        int iterateSeed = randomizer.nextInt(100);
+        System.out.println("Iterating 10 after " + iterateSeed);
+        Stream
+            .iterate(iterateSeed, num -> num + 1)
+            .limit(10)
+            .forEach(System.out::println);
 
 
     }
