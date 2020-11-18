@@ -136,7 +136,7 @@ public class ScoreCard {
     private void checkConsecutiveCombos(int[] numbers) {
 
         //Calculate the max amount of consecutive numbers in the hand, this will be used for the 'straights'
-        int[] sortedNumbers = Arrays.stream(numbers).sorted().toArray();
+        int[] sortedNumbers = Arrays.stream(numbers).sorted().distinct().toArray();
         int consecutiveNumbers = 1;
         int maxInARow = 1;
         for (int i = 1; i < sortedNumbers.length; i++) {
