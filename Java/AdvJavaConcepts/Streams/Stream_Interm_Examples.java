@@ -20,5 +20,19 @@ public class Stream_Interm_Examples {
                 .map(n -> n*7)
                 .forEach(System.out::println);
 
+        System.out.println("\n\nMore Methods to Explore\n");
+        System.out.println("take/dropWhile, allows filtering based on a conditional to occur until a condition is met");
+        System.out.println("peek: allow you to see/log data in a stream without terminating it, a terminating equivalent can be made with forEach");
+        System.out.println("\nReducing Methods");
+        System.out.println("\treduce()");
+        System.out.println("\tcount()");
+        System.out.println("\tany/allMatch");
+        System.out.println("\tfindFirst/Any");
+        System.out.println("\tmax/min");
+
+        System.out.println("Collectors");
+
+        System.out.println("Partitioning");
+
     }
 }
