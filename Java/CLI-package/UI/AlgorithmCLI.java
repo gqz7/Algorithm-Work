@@ -9,16 +9,12 @@ public class AlgorithmCLI {
         int selection = CLI.numberIntQuestion(question, 1, 2);
 
         switch (selection) {
-            case 1:
-                algorithmSelection();
-                break;
-            case 2:
-                System.out.println("\nThank you for using this program, now exiting...\n");
-                break;
-            default:
+            case 1 -> algorithmSelection();
+            case 2 -> System.out.println("\nThank you for using this program, now exiting...\n");
+            default -> {
                 System.out.println("Something went wrong, input out of bounds");
                 mainMenu();
-                break;
+            }
         }
     }
 
@@ -30,9 +26,10 @@ public class AlgorithmCLI {
         opt += "\n4) Not Far From The Tree";
         opt += "\n5) Fibonacci Sequence";
         opt += "\n6) String Converter";
-        opt += "\n7) Randomizer";
-        opt += "\n8) Text Calculator";
-        opt += "\n9) Back To Main Menu";
+        opt += "\n7) String Utility";
+        opt += "\n8) Randomizer";
+        opt += "\n9) Text Calculator";
+        opt += "\n10) Back To Main Menu";
 
         return opt;
 
@@ -41,41 +38,20 @@ public class AlgorithmCLI {
     private static void algorithmSelection() {
 
         String question = listOptions();
-        int selection = CLI.numberIntQuestion(question, 1, 9);
+        int selection = CLI.numberIntQuestion(question, 1, 10);
 
         switch (selection) {
-
-
-            case 1:
-                new Factorial().run();
-                break;
-            case 2:
-                new HikingTracker().run();
-                break;
-            case 3:
-                new BreakingRecords().run();
-                break;
-            case 4:
-                new FarFromTheTree().run();
-                break;
-            case 5:
-                new FibonacciSequence().run();
-                break;
-            case 6:
-                new StringConverter().run();
-                break;
-            case 7:
-                new Randomizer().run();
-                break;
-            case 8:
-                new TextCalc().run();
-                break;
-            case 9:
-                System.out.println("\nHeading back to main menu...\n");
-                break;
-            default:
-                System.out.println("Something went wrong, input out of bounds");
-                break;
+            case 1 -> new Factorial().run();
+            case 2 -> new HikingTracker().run();
+            case 3 -> new BreakingRecords().run();
+            case 4 -> new FarFromTheTree().run();
+            case 5 -> new FibonacciSequence().run();
+            case 6 -> new StringConverter().run();
+            case 7 -> new StringUtilsAlg().run();
+            case 8 -> new Randomizer().run();
+            case 9 -> new TextCalc().run();
+            case 10 -> System.out.println("\nHeading back to main menu...\n");
+            default -> System.out.println("Something went wrong, input out of bounds");
         }
 
         mainMenu();
