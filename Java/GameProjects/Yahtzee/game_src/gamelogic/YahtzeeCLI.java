@@ -97,6 +97,10 @@ public class YahtzeeCLI {
         put(FOAK, "Four of a Kind");
     }};
 
+    public static String getComboPhrase(String key) {
+        return COMBO_MAP.get(key);
+    }
+
     public static boolean endTurn() {
         return CLI.yesOrNo(END_TURN_QUESTION);
     }

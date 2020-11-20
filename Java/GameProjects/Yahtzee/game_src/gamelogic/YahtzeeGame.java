@@ -10,7 +10,7 @@ import java.util.List;
 
 public class YahtzeeGame {
 
-    private YahtzeePlayer[] players;
+    private List<YahtzeePlayer> players;
 
     private int numberOfTurns;
 
@@ -22,10 +22,14 @@ public class YahtzeeGame {
 
         YahtzeeCLI.printWelcomeMsg();
 
+        players = new ArrayList<>();
         initializeGame();
+//        initializeAITesting(10);
+        playGame();
 
         //if the user gets here the program will end
         YahtzeeCLI.printExitMsg();
+
     }
 
     private void playGame() {
@@ -36,11 +40,13 @@ public class YahtzeeGame {
             System.out.println("\n\t-- TURN " + (turn+1) + " of " + numberOfTurns + " --\n");
             for (int playerNum = 0; playerNum < numberOfPlayers; playerNum++) {
 
-                players[playerNum].takeTurn();
+                players.get(playerNum).takeTurn();
             }
         }
 
-        YahtzeeScoring.endGameReport(players);
+        var playersAsArray = players.toArray(new YahtzeePlayer[0]);
+
+        YahtzeeScoring.endGameReport(playersAsArray);
 
         //ask players if they would like to play again, if they do the program will re-initialize the game
         boolean restartGame = YahtzeeCLI.playingAgain();
@@ -50,23 +56,18 @@ public class YahtzeeGame {
     }
 
     private void initializeGame() {
-//        //get the basic game info from players (number of players and turns)
-//        int[] gameData = YahtzeeCLI.getGameData();
-//
-//        isDiceSelectionIndividual = YahtzeeCLI.chooseDiceSelectionRule();
-//
-//        numberOfPlayers = gameData[0];
-//        numberOfTurns = gameData[1];
-//        initializePlayers();
-//
-        AiTesting();
+        //get the basic game info from players (number of players and turns)
+        int[] gameData = YahtzeeCLI.getGameData();
 
-        playGame();
+        isDiceSelectionIndividual = YahtzeeCLI.chooseDiceSelectionRule();
+
+        numberOfPlayers = gameData[0];
+        numberOfTurns = gameData[1];
+        initializePlayers();
 
     }
 
     private void initializePlayers() {
-        players = new YahtzeePlayer[numberOfPlayers];
 
         List<String> playerNames = new ArrayList<>();
         //setup the players array and allow the players to enter their name
@@ -85,23 +86,24 @@ public class YahtzeeGame {
 
             boolean isHuman = YahtzeeCLI.isHumanPlayer();
 
-            players[i] = isHuman
+            players.add(
+                isHuman
                     ? new HumanPlayer(playerName, isDiceSelectionIndividual)
-                    : new AIPlayer(playerName);
+                    : new AIPlayer(playerName)
+            );
         }
     }
 
-    private void AiTesting() {
-
+    //preforms an AI vs AI regular 13 turn game. just for testing
+    private void initializeAITesting(int totalAIPlayers) {
 
         isDiceSelectionIndividual = true;
+        numberOfPlayers = totalAIPlayers;
+        numberOfTurns = 13;
 
-        numberOfPlayers = 2;
-        numberOfTurns = 3;
-
-        players = new YahtzeePlayer[2];
-        players[0] = new AIPlayer("player1");
-        players[1] = new AIPlayer("player2");
+        for (int i = 0; i < numberOfPlayers; i++) {
+            players.add(  new AIPlayer("player" + (i+1)));
+        }
     }
 
 }
