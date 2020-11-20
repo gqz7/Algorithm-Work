@@ -37,8 +37,9 @@ public class YahtzeeScoring {
 
         //PRINT OUT THE WINNERS
         System.out.println("\n______________________________________\n");
-        System.out.println( "\nThe " + ( winners.size() > 1 ? "Winners Are" : "Winner Is" ) + "...\n");
+        System.out.println( "\n\tThe " + ( winners.size() > 1 ? "Winners Are" : "Winner Is" ) + "...\n");
         for ( YahtzeePlayer name : winners) System.out.println("\t" + name);
+        System.out.println("\n\tWith a total of " + highestScore + " points!!");
         System.out.println("\n\n______________________________________\n");
 
     }
