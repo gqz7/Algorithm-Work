@@ -16,10 +16,10 @@ public class YahtzeeCLI {
     private final static String KEEP_ROLLING_DIE_QUESTION = "Would you like to keep rolling ";
     private final static String KEEP_ROLLING_MULTIPLE_QUESTION = "\nEnter the numbers associated to the die/dice you would like to HOLD this roll...";
     private final static String KEEP_ROLLING_MULTIPLE_INTRO = "\n You can select the die/dice you would like to HOLD by typing in the number to the left of die/dice roll/s you got\n";
+    private final static String IS_HUMAN_PLAYER_QUESTION = "\nIs this a human controlled player?";
     private final static String COMBO_QUESTION = "Choose one of the scoring combinations above";
     private final static String NAME_QUESTION = "What what is your name?";
     private final static String END_TURN_QUESTION = "Would you like to end your turn now?";
-    private final static String IS_HUMAN_PLAYER_QUESTION = "Is this a human controlled player?";
 
     private final static int MAX_TURNS = 13;
     private final static int MIN_TURNS = 1;

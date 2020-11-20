@@ -1,9 +1,9 @@
 package com.yahtzee.game_src.gamelogic;
 
-import com.yahtzee.game_src.players.AIPlayer;
-import com.yahtzee.game_src.players.HumanPlayer;
-import com.yahtzee.game_src.players.YahtzeePlayer;
-import com.yahtzee.game_src.players.YahtzeeScoring;
+import com.yahtzee.game_src.scorelogic.player.AIPlayer;
+import com.yahtzee.game_src.scorelogic.player.HumanPlayer;
+import com.yahtzee.game_src.scorelogic.player.YahtzeePlayer;
+import com.yahtzee.game_src.scorelogic.YahtzeeScoring;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,14 +50,16 @@ public class YahtzeeGame {
     }
 
     private void initializeGame() {
-        //get the basic game info from players (number of players and turns)
-        int[] gameData = YahtzeeCLI.getGameData();
-
-        isDiceSelectionIndividual = YahtzeeCLI.chooseDiceSelectionRule();
-
-        numberOfPlayers = gameData[0];
-        numberOfTurns = gameData[1];
-        initializePlayers();
+//        //get the basic game info from players (number of players and turns)
+//        int[] gameData = YahtzeeCLI.getGameData();
+//
+//        isDiceSelectionIndividual = YahtzeeCLI.chooseDiceSelectionRule();
+//
+//        numberOfPlayers = gameData[0];
+//        numberOfTurns = gameData[1];
+//        initializePlayers();
+//
+        AiTesting();
 
         playGame();
 
@@ -87,6 +89,19 @@ public class YahtzeeGame {
                     ? new HumanPlayer(playerName, isDiceSelectionIndividual)
                     : new AIPlayer(playerName);
         }
+    }
+
+    private void AiTesting() {
+
+
+        isDiceSelectionIndividual = true;
+
+        numberOfPlayers = 2;
+        numberOfTurns = 3;
+
+        players = new YahtzeePlayer[2];
+        players[0] = new AIPlayer("player1");
+        players[1] = new AIPlayer("player2");
     }
 
 }
