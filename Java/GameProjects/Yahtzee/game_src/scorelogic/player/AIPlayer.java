@@ -1,5 +1,8 @@
 package com.yahtzee.game_src.scorelogic.player;
 
+import com.yahtzee.game_src.gamelogic.YahtzeeCLI;
+
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -14,7 +17,8 @@ public class AIPlayer extends YahtzeePlayer {
     @Override
     public void turnSequence(List<Integer> keepRolling) {
 
-        for (int rolls = 1; rolls <= MAX_ROLLS; rolls++) {
+        boolean endTurnEarly = false;
+        for (int rolls = 1; rolls <= MAX_ROLLS && !endTurnEarly; rolls++) {
             hand.rollAllDice(keepRolling);
 
             int[] currentRollsValues = hand.getValues();
@@ -26,11 +30,16 @@ public class AIPlayer extends YahtzeePlayer {
             int maxPoints = Integer.parseInt(bestCombo[1]);
 
             if (maxPoints >= 20 || rolls == 3 && maxPoints != 0) {
+                //The AI has a choice that can end the turn
+                String comboPhrase = YahtzeeCLI.getComboPhrase(bestCombo[0]);
+                System.out.println(MessageFormat.format("\n{0} chose {1} for {2} points!", name, comboPhrase, maxPoints));
+
+                endTurnEarly = true;
                 aiComboChoice = bestCombo[0];
                 pickTurnScore();
 
-            } else {
-                System.out.println("You got 0 points this round " + name);
+            } else if (rolls == 3) {
+                System.out.println( name + " got 0 points this round");
             }
 
         }
@@ -39,12 +48,12 @@ public class AIPlayer extends YahtzeePlayer {
 
     private String[] getHighestCombo(String[][] comboChoices) {
             //calculate the highest score one can get with the current rollm
-//        int highestPointsCombo =
-//        OptionalInt max = Arrays
-//                .stream(comboChoices)
-//                .map(str -> str[1].replaceAll("\\D+", ""))
-//                .mapToInt(Integer::parseInt)
-//                .max();
+            //        int highestPointsCombo =
+            //        OptionalInt max = Arrays
+            //                .stream(comboChoices)
+            //                .map(str -> str[1].replaceAll("\\D+", ""))
+            //                .mapToInt(Integer::parseInt)
+            //                .max();
 
         List<String[]>
             comboList =
@@ -61,7 +70,9 @@ public class AIPlayer extends YahtzeePlayer {
 
     @Override
     public boolean pickTurnScore() {
-        return false;
+        int rollPoints = card.makeChoice(aiComboChoice);
+        score += rollPoints;
+        return true;
     }
 
 }

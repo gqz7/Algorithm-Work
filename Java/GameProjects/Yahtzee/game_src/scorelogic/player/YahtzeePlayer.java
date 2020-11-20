@@ -35,7 +35,7 @@ public abstract class YahtzeePlayer {
     public List<Integer> startTurn() {
         System.out.println("\n-----------------------------\n\tYour turn " + name + "!\n_____________________________\n");
 
-        System.out.println("Current Score: " + score);
+        System.out.println("Current Score: " + score + "\n");
 
         //store which rolls the play wants to keep and which to re-roll;
         return new ArrayList<>();
