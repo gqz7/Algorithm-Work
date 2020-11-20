@@ -19,6 +19,7 @@ public class YahtzeeCLI {
     private final static String COMBO_QUESTION = "Choose one of the scoring combinations above";
     private final static String NAME_QUESTION = "What what is your name?";
     private final static String END_TURN_QUESTION = "Would you like to end your turn now?";
+    private final static String IS_HUMAN_PLAYER_QUESTION = "Is this a human controlled player?";
 
     private final static int MAX_TURNS = 13;
     private final static int MIN_TURNS = 1;
@@ -126,5 +127,9 @@ public class YahtzeeCLI {
          Arrays.stream(currentRollsValues)
                          .forEach( diceVal -> System.out.print("[" + diceVal + "] "));
          System.out.println("\n");
+    }
+
+    public static boolean isHumanPlayer() {
+        return CLI.yesOrNo(IS_HUMAN_PLAYER_QUESTION);
     }
 }

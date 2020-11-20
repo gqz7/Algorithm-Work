@@ -1,5 +1,7 @@
 package com.yahtzee.game_src.gamelogic;
 
+import com.yahtzee.game_src.players.AIPlayer;
+import com.yahtzee.game_src.players.HumanPlayer;
 import com.yahtzee.game_src.players.YahtzeePlayer;
 import com.yahtzee.game_src.players.YahtzeeScoring;
 
@@ -14,7 +16,7 @@ public class YahtzeeGame {
 
     private int numberOfPlayers;
 
-    private boolean isDiceSelctionIndividual;
+    private boolean isDiceSelectionIndividual;
 
     public YahtzeeGame ( ) {
 
@@ -51,7 +53,7 @@ public class YahtzeeGame {
         //get the basic game info from players (number of players and turns)
         int[] gameData = YahtzeeCLI.getGameData();
 
-        isDiceSelctionIndividual = YahtzeeCLI.chooseDiceSelectionRule();
+        isDiceSelectionIndividual = YahtzeeCLI.chooseDiceSelectionRule();
 
         numberOfPlayers = gameData[0];
         numberOfTurns = gameData[1];
@@ -78,7 +80,12 @@ public class YahtzeeGame {
                     break;
                 }
             }
-            players[i] = new YahtzeePlayer(playerName, isDiceSelctionIndividual);
+
+            boolean isHuman = YahtzeeCLI.isHumanPlayer();
+
+            players[i] = isHuman
+                    ? new HumanPlayer(playerName, isDiceSelectionIndividual)
+                    : new AIPlayer(playerName);
         }
     }
 
