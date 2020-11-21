@@ -11,7 +11,7 @@ public class Stream_Interm_Examples {
 
         System.out.println("More Examples of Stream Methods");
 
-        String[] strNumbers = new String[] {"2", "3", "4", "7"};
+        String[] strNumbers = new String[] {"2", "23", "4", "7", "1", "32", "5"};
 
         //Mapping and filtering with Streams
         System.out.println("\nMapping and Filtering with Streams\n");
@@ -34,8 +34,13 @@ public class Stream_Interm_Examples {
         if (sumOfNumsBelowFour.isPresent())
             System.out.println("Sum of numbers in array below 4: " + sumOfNumsBelowFour.getAsInt());
 
+        System.out.println("\nStream Sorting\nsorted numbers array: ");
+        Arrays.stream(strNumbers)
+                .sorted(String::compareTo)
+                .forEach(n -> System.out.print(n + ", "));
 
-        System.out.println("\nReducing Methods");
+
+        System.out.println("\n\nReducing Methods");
         System.out.println("\treduce()");
         System.out.println("\tcount()");
         System.out.println("\tany/allMatch");
