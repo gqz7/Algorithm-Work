@@ -43,6 +43,14 @@ public class Stream_Interm_Examples {
         System.out.println("\n\nReducing Methods");
         System.out.println("\treduce()");
         System.out.println("\tcount()");
+
+        System.out.println("\nusing count\n");
+        int count = Arrays.stream(strNumbers)
+                .map(Integer::parseInt)
+                .filter(n -> n > 3)
+                .count();
+
+        System.out.println("\tThere are a total of " + count + " numbers above 3 in the array.")
         System.out.println("\tany/allMatch");
         System.out.println("\tfindFirst/Any");
         System.out.println("\tmax/min");
