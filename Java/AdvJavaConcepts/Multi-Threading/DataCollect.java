@@ -7,13 +7,14 @@ public class DataCollect implements Runnable {
     }
     public void run() {
         try {
-            System.out.println("\tCollecting Data...");
+//            System.out.println("\tCollecting Data...");
             System.out.println("\tdata collection running on thread: " + Thread.currentThread().getName());
             //Pause a thread with the sleep method
             Thread.sleep(1000);
-            System.out.println("Completed Downloading " + filename);
+                System.out.println("\tCompleted Downloading " + filename);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("\n\tCollecting data interrupted");
+//            e.printStackTrace();
         }
     }
 
