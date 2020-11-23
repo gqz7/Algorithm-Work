@@ -75,15 +75,29 @@ public class Stream_Interm_Examples {
         numsProduce.ifPresent(integer -> System.out.println("\tProduct of unique values: " + integer));
 
         System.out.println("\nUsing Collectors With Streams");
-        System.out.println("\tCreating an int summary...");
+        System.out.println("\n\tCreating an int summary...");
         IntSummaryStatistics intSummary = Arrays.stream(strNumbers)
                 .collect(Collectors.summarizingInt(Integer::parseInt));
         System.out.println("\t\tSummary of Data: " + intSummary);
 
+        System.out.println("\n\tGrouping data with Collectors ( using joining, groupingBy, and mapping methods of 'Collectors' )");
+        Map<String, String> oddEvenReport = Arrays.stream(strNumbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.groupingBy(
+                        n-> n % 2 == 0 ? "Even " : "Odd", Collectors.mapping(Object::toString, Collectors.joining(", "))
+                        //Collectors.counting can be used to get the total size of a given collection using this process
+                ));
+        System.out.println("\t\tOdd Even Report: " + oddEvenReport);
+        //The example below can be used for multiple groups, but another way to split data into groups is with partitioning
+        System.out.println("\n\tGroup by Partitioning");
+        var oddEvenPartition = Arrays.stream(strNumbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.partitioningBy(n->n%2==0));
+        System.out.println("\t\t" + oddEvenPartition);
+        System.out.println("\nWith Partitioning you can achive the same results but some of the Collectors methods give your more control");
         System.out.println("\nOther Collectors methods: \njoining - add all elements to join in one string (optional delimiter)");
-        System.out.println("\ntoList\\Set\\Map - converts stream to Object List\\Set\\Map (can be casted to other List<>)");
+        System.out.println("toList\\Set\\Map - converts stream to Object List\\Set\\Map (can be casted to other List<>)");
         System.out.println("\nThere are also reducing oriented methods like summingInt that provide another way to reduce a stream to a single value");
-        System.out.println("\n\nPartitioning");
 
     }
 }
