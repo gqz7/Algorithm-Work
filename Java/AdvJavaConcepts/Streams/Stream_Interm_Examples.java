@@ -12,7 +12,7 @@ public class Stream_Interm_Examples {
 
         System.out.println("More Examples of Stream Methods");
 
-        String[] strNumbers = new String[] {"2", "23", "4", "7", "1", "32", "5"};
+        String[] strNumbers = new String[] {"4", "2", "23", "4", "7", "1", "32", "7", "5"};
 
         //Mapping and filtering with Streams
         System.out.println("\nMapping and Filtering with Streams\n");
@@ -24,7 +24,7 @@ public class Stream_Interm_Examples {
 
         System.out.println("\n\nMore Methods to Explore\n");
         System.out.println("take/dropWhile, allows filtering based on a conditional to occur until a condition is met");
-        System.out.println("peek: allow you to see/log data in a stream without terminating it, a terminating equivalent can be made with forEach");
+        System.out.println("peek: allow you to see/log data in a stream without terminating it (this is used in testing),\nterminating equivalent can be made with forEach");
 
         OptionalInt sumOfNumsBelowFour = Arrays.stream(strNumbers)
                 .takeWhile(numStr -> Integer.parseInt(numStr) < 4)
@@ -45,16 +45,18 @@ public class Stream_Interm_Examples {
 
 
         System.out.println("\n\nReducing Methods");
-        System.out.println("\treduce()");
-        System.out.println("\tcount()");
+        System.out.println("\treduce(), combine multiple stream values to produce one");
+        System.out.println("\tcount(), count how many items are in a stream at a give moment");
+        System.out.println("\tdistinct(), reduce a stream down to only its unique value");
 
         System.out.println("\nusing count() and filter() in tandem\n");
         int count = (int) Arrays.stream(strNumbers)
                 .map(Integer::parseInt)
                 .filter(n -> n > 3)
+                .distinct()
                 .count();
 
-        System.out.println("\tThere are a total of " + count + " numbers above 3 in the array.");
+        System.out.println("\tThere are a total of " + count + " unique numbers above 3 in the array.");
         System.out.println("\tany/allMatch");
         System.out.println("\tfindFirst/Any");
         System.out.println("\tmax/min");
