@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.OptionalInt;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -34,9 +35,12 @@ public class Stream_Interm_Examples {
         if (sumOfNumsBelowFour.isPresent())
             System.out.println("Sum of numbers in array below 4: " + sumOfNumsBelowFour.getAsInt());
 
-        System.out.println("\nStream Sorting\nsorted numbers array: ");
+        System.out.println("\nStream Sorting\nsorted numbers array reverse order: ");
         Arrays.stream(strNumbers)
-                .sorted(String::compareTo)
+                .map(Integer::parseInt)
+                //.sorted(String::compareTo) using sorted this way limits the sorting to one direction
+                //a better way is to use the Comparator interface that gives more control of sorting
+                .sorted(Comparator.comparing(Integer::doubleValue).reversed())
                 .forEach(n -> System.out.print(n + ", "));
 
 
@@ -44,13 +48,13 @@ public class Stream_Interm_Examples {
         System.out.println("\treduce()");
         System.out.println("\tcount()");
 
-        System.out.println("\nusing count\n");
-        int count = Arrays.stream(strNumbers)
+        System.out.println("\nusing count() and filter() in tandem\n");
+        int count = (int) Arrays.stream(strNumbers)
                 .map(Integer::parseInt)
                 .filter(n -> n > 3)
                 .count();
 
-        System.out.println("\tThere are a total of " + count + " numbers above 3 in the array.")
+        System.out.println("\tThere are a total of " + count + " numbers above 3 in the array.");
         System.out.println("\tany/allMatch");
         System.out.println("\tfindFirst/Any");
         System.out.println("\tmax/min");
