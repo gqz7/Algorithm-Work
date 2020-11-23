@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -73,9 +74,16 @@ public class Stream_Interm_Examples {
         System.out.println("\tThe Min Value: " + minValue);
         numsProduce.ifPresent(integer -> System.out.println("\tProduct of unique values: " + integer));
 
-        System.out.println("Collectors");
+        System.out.println("\nUsing Collectors With Streams");
+        System.out.println("\tCreating an int summary...");
+        IntSummaryStatistics intSummary = Arrays.stream(strNumbers)
+                .collect(Collectors.summarizingInt(Integer::parseInt));
+        System.out.println("\t\tSummary of Data: " + intSummary);
 
-        System.out.println("Partitioning");
+        System.out.println("\nOther Collectors methods: \njoining - add all elements to join in one string (optional delimiter)");
+        System.out.println("\ntoList\\Set\\Map - converts stream to Object List\\Set\\Map (can be casted to other List<>)");
+        System.out.println("\nThere are also reducing oriented methods like summingInt that provide another way to reduce a stream to a single value");
+        System.out.println("\n\nPartitioning");
 
     }
 }
