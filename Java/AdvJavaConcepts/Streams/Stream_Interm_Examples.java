@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.OptionalInt;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -48,18 +45,33 @@ public class Stream_Interm_Examples {
         System.out.println("\treduce(), combine multiple stream values to produce one");
         System.out.println("\tcount(), count how many items are in a stream at a give moment");
         System.out.println("\tdistinct(), reduce a stream down to only its unique value");
-
+        System.out.println("\tany/all/noneMatch, return booleans based on a predicate given to each element in a stream");
+        System.out.println("\tfindFirst/Any, returns element/s that return true on a given predicate");
+        System.out.println("\tmax/min, return the largest or smallest element of a stream based on a comparator given");
         System.out.println("\nusing count() and filter() in tandem\n");
+
         int count = (int) Arrays.stream(strNumbers)
                 .map(Integer::parseInt)
                 .filter(n -> n > 3)
                 .distinct()
                 .count();
+        int maxValue = (int) Arrays.stream(strNumbers)
+                .map(Integer::parseInt)
+                .max(Comparator.comparing(Integer::intValue))
+                .get();
+        int minValue = (int) Arrays.stream(strNumbers)
+                .map(Integer::parseInt)
+                .min(Comparator.comparing(Integer::intValue))
+                .get();
+        Optional<Integer> numsProduce = Arrays.stream(strNumbers)
+                .map(Integer::parseInt)
+                .distinct()
+                .reduce((a,b) -> a*b);
 
         System.out.println("\tThere are a total of " + count + " unique numbers above 3 in the array.");
-        System.out.println("\tany/allMatch");
-        System.out.println("\tfindFirst/Any");
-        System.out.println("\tmax/min");
+        System.out.println("\tThe Max Value: " + maxValue);
+        System.out.println("\tThe Min Value: " + minValue);
+        numsProduce.ifPresent(integer -> System.out.println("\tProduct of unique values: " + integer));
 
         System.out.println("Collectors");
 
