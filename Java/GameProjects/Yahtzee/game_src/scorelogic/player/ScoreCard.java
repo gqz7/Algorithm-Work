@@ -39,6 +39,9 @@ public class ScoreCard {
     //this set is used to temporarily store the possible score combinations during a turn, after every turn
     private final Set<String[]> possibleScoreCombos;
 
+    //currentRoll holds the players current roll to pass around to the different 'check' methods
+    private int[] currentRoll;
+
     //the combinations can keep track of how many times the Yahtzee has gotten selected so after the first one this int will increment
     //this is also helpful because the bonuses are worth more than the first one
     private int yahtzeeBonuses;
@@ -52,10 +55,10 @@ public class ScoreCard {
 
     //static point values for the combinations whose point values don't change
     private static final int yahtzeeBonusPoints = 100;
-    private static final int yahtzeeRegularPoints = 50;
-    private static final int fullHousePoints = 25;
-    private static final int smallStraightPoints = 30;
-    private static final int largeStraightPoints = 40;
+    private static final int YAHTZEE_REGULAR_POINTS = 50;
+    private static final int FULL_HOUSE_POINTS = 25;
+    private static final int SMALL_STRAIGHT_POINTS = 30;
+    private static final int LARGE_STRAIGHT_POINTS = 40;
 
     private static final int smallStraightThreshold = 4;
     private static final int largeStraightThreshold = 5;
@@ -73,34 +76,36 @@ public class ScoreCard {
     //make protected after testing
     public String[][] getPossibleCombosChoices(int[] rollNumbers ) {
 
+        currentRoll = rollNumbers;
+
         //it can't be known from the start of this method how many combos will be possible so its best to use a List
         //reset this set before the combos are calculated since this field is stored by the ScoreCard instead of locally
         possibleScoreCombos.clear();
 
-        calculatePossibleCombos(rollNumbers);
+        calculatePossibleCombos();
 
         return possibleScoreCombos.toArray(String[][]::new); //convert the combos from a HashSet to an Array
     }
 
-    private void calculatePossibleCombos (int[] numbers) {
+    private void calculatePossibleCombos () {
 
-        totalSumOfTurn = Arrays.stream(numbers).sum();
+        totalSumOfTurn = Arrays.stream(currentRoll).sum();
 
         //CHECKS UPPER-SECTION COMBOS AND COMBOS THAT INVOLVE REPEATS (YAHTZEE, four/three-of-a-kind)
-        checkRepeatCombos(numbers);
+        checkRepeatCombos();
 
         //CHECK REMAINING POSSIBLE LOWER SECTION COMBOS
-        checkFullHouseCombo(numbers);
+        checkFullHouseCombo();
 
-        checkConsecutiveCombos(numbers);
+        checkConsecutiveCombos();
 
-        checkChanceCombo(numbers);
+        checkChanceCombo();
 
         //reset this value for the next turn
         fourOfAKindPresentInHand = false;
     }
 
-    private void checkChanceCombo(int[] numbers) {
+    private void checkChanceCombo() {
 
         //change can always be used as long as it hasn't been used already
         Combo chanceCombo = combinations.get(CHNC);
@@ -114,7 +119,7 @@ public class ScoreCard {
 
     }
 
-    private void checkFullHouseCombo(int[] numbers ) {
+    private void checkFullHouseCombo() {
             /* Check Full House
             this one may be possible to check Full-House in the 'num' for-loop but I thought this way was clean and pretty clever
             essentially this uses a stream to reduces the numbers array to it unique values and count how many are present
@@ -125,7 +130,7 @@ public class ScoreCard {
         Combo fullHouseCombo = combinations.get(FLHO);
         if (
                 !fourOfAKindPresentInHand
-                        && Arrays.stream(numbers).distinct().count() == 2
+                        && Arrays.stream(currentRoll).distinct().count() == 2
                         && !fullHouseCombo.getHasBeenUsed()
         ) possibleScoreCombos.add( new String[] { FLHO, fullHouseCombo.getPointsString() } );
         //full house has a static pointsValues so it just needs to be added to the HashSet
@@ -133,10 +138,10 @@ public class ScoreCard {
 
     }
 
-    private void checkConsecutiveCombos(int[] numbers) {
+    private void checkConsecutiveCombos() {
 
         //Calculate the max amount of consecutive numbers in the hand, this will be used for the 'straights'
-        int[] sortedNumbers = Arrays.stream(numbers).sorted().distinct().toArray();
+        int[] sortedNumbers = Arrays.stream(currentRoll).sorted().distinct().toArray();
         int consecutiveNumbers = 1;
         int maxInARow = 1;
         for (int i = 1; i < sortedNumbers.length; i++) {
@@ -165,7 +170,7 @@ public class ScoreCard {
 
     }
 
-    private void checkRepeatCombos ( int[] numbers ) {
+    private void checkRepeatCombos () {
 
         int maxRepeats = 1; //this keeps track of the maximum number of a repeated number in the roll
 
@@ -174,7 +179,7 @@ public class ScoreCard {
 
             int lookingFor = num+1;
             //create an array of just a single int (1-6) in the given hand
-            int[] foundNumbers = IntStream.of(numbers).filter(x -> x == lookingFor).toArray();
+            int[] foundNumbers = IntStream.of(currentRoll).filter(x -> x == lookingFor).toArray();
 
             //get the Combo key from the static array in this class
             String comboKey = upperSectionKeys[num];
@@ -243,7 +248,7 @@ public class ScoreCard {
                 YATZ,
                 hasBeenUsed //if yahtzee has already been used then the bonus points will be greater
                         ? Combo.createPointsString(yahtzeeBonusPoints)
-                        : Combo.createPointsString(yahtzeeRegularPoints)
+                        : Combo.createPointsString(YAHTZEE_REGULAR_POINTS)
         }); //add the choice to choose Yahtzee
     }
 
@@ -326,10 +331,10 @@ public class ScoreCard {
         combinations.put(CHNC, new Combo(false));
         combinations.put(TOAK, new Combo(false));
         combinations.put(FOAK, new Combo(false));
-        combinations.put(SMST, new Combo(false, smallStraightPoints));
-        combinations.put(LGST, new Combo(false, largeStraightPoints));
-        combinations.put(FLHO,  new Combo(false, fullHousePoints));
-        combinations.put(YATZ, new Combo(false, yahtzeeRegularPoints));
+        combinations.put(SMST, new Combo(false, SMALL_STRAIGHT_POINTS));
+        combinations.put(LGST, new Combo(false, LARGE_STRAIGHT_POINTS));
+        combinations.put(FLHO,  new Combo(false, FULL_HOUSE_POINTS));
+        combinations.put(YATZ, new Combo(false, YAHTZEE_REGULAR_POINTS));
     }
 
     public int tallyScore() {
