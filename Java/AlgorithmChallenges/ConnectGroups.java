@@ -24,49 +24,49 @@ class Result {
     
     //first attempt: solves 5/10
     // // Write your code here
-    //     int groups = 1;
-    //     for (int i = 0; i < related.size()-1; i++) {
-    //         String curRel = related.get(i);
-    //         String nxtRel = related.get(i+1);
-    //         boolean isRelated = false;
-    //         System.out.println(curRel);
-    //         for (int j = 0; j < curRel.length(); j++) {
-                
-    //             char c1 = curRel.charAt(j);
-    //             char c2 = nxtRel.charAt(j);
-    //             if (c1 != '0' && c1 == c2) isRelated = true;
-    //         }
-    //         if (!isRelated) groups++;
-    //     }
-    //     return groups;
-    // }
-    //second attempt: solves 3/10
-        // Map<Integer, Integer> groupMap = new HashMap<>();
-        // int groupNum = 0;
-        // groupMap.put( 0, 0);
+        // int groups = 1;
         // for (int i = 0; i < related.size()-1; i++) {
         //     String curRel = related.get(i);
-        //     boolean foundRel = false;
-        //     for (int j = i+1; j < related.size()-1; j++) {
-        //         String checkRel = related.get(j);
-        //         if (isRelated(curRel, checkRel)) {
-        //             foundRel = true;
-        //             System.out.println("1: " +curRel);
-        //             System.out.println("2: " +checkRel);
-        //             if (groupMap.get(i) != null) {
-        //                 groupMap.put(j, groupMap.get(i));
-        //             } else {
-        //                 groupNum++;
-        //                 groupMap.put(i, groupNum);
-        //                 groupMap.put(j, groupNum);
-        //             }
-        //         }
+        //     String nxtRel = related.get(i+1);
+        //     boolean isRelated = false;
+        //     System.out.println(curRel);
+        //     for (int j = 0; j < curRel.length(); j++) {
+                
+        //         char c1 = curRel.charAt(j);
+        //         char c2 = nxtRel.charAt(j);
+        //         if (c1 != '0' && c1 == c2) isRelated = true;
         //     }
-        //     if (!foundRel) groupMap.put(i, groupNum++);
-            
-            
+        //     if (!isRelated) groups++;
         // }
-        // return groupNum+1;
+        // return groups;
+    // }
+    //second attempt: solves 3/10
+        Map<Integer, Integer> groupMap = new HashMap<>();
+        int groupNum = 0;
+        groupMap.put( 0, 0);
+        for (int i = 0; i < related.size()-1; i++) {
+            String curRel = related.get(i);
+            boolean foundRel = false;
+            for (int j = i+1; j < related.size()-1; j++) {
+                String checkRel = related.get(j);
+                if (isRelated(curRel, checkRel)) {
+                    foundRel = true;
+                    System.out.println("1: " +curRel);
+                    System.out.println("2: " +checkRel);
+                    if (groupMap.get(i) != null) {
+                        groupMap.put(j, groupMap.get(i));
+                    } else {
+                        groupNum++;
+                        groupMap.put(i, groupNum);
+                        groupMap.put(j, groupNum);
+                    }
+                }
+            }
+            if (!foundRel) groupMap.put(i, groupNum++);
+            
+            
+        }
+        return groupNum+1;
 
         //third attemps solves ALL 10 test cases!!!
         Map<Integer, List<Integer>> groupMap = new HashMap<>();
@@ -106,24 +106,20 @@ class Result {
                         
                         //itterate groupNum
                         groupNum++;
-                    } else if (curPersonGroup == null && foundPersonGroup != null ) {//check if 'check' has no relation (but other does)
+                    } else if (
                         
+                        (curPersonGroup == null && foundPersonGroup != null) 
+                        || (curPersonGroup != null && foundPersonGroup == null) ) 
+
+                    {//check if 'check' has no relation (but other does)
+                        int personIndex = curPersonGroup == null ? i : j;
                         //add personGroup relations
-                        personsGroup.put(i, foundPersonGroup);
+                        personsGroup.put(personIndex, foundPersonGroup);
                         //add groupMap relations
                         List<Integer> newGroup = groupMap.get(foundPersonGroup);
-                        newGroup.add(i);
+                        newGroup.add(personIndex);
                         groupMap.put(foundPersonGroup, newGroup);
                         
-                    } else if (curPersonGroup != null && foundPersonGroup == null ) { //check if 'cur' has no relation (but other does)
-                    
-                        //add personGroup relations
-                        personsGroup.put(j, curPersonGroup);
-                        //add groupMap relations
-                        List<Integer> newGroup = groupMap.get(curPersonGroup);
-                        newGroup.add(j);
-                        groupMap.put(curPersonGroup, newGroup);
-                         
                     } else if (foundPersonGroup != curPersonGroup) { //they must both have relations but only run if they are not the same group
                         
                         int newGroupNum = foundPersonGroup;
