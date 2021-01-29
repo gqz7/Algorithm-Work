@@ -1,5 +1,5 @@
 
-Algorithms worked on in the pursuit of algorithmic mastery
+Algorithms in Java, Python, JS
 
 basic algorithms are taken from websites such as HackerRank and FreeCodeCamp
 
